@@ -18,6 +18,7 @@ public abstract class Persona{
 	 */
 	public Persona(String codFiscale){
 		this.codFiscale = Objects.requireNonNull(codFiscale);
+		
 	}
 
 	/**
