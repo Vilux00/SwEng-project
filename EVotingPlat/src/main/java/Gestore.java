@@ -18,6 +18,7 @@ public class Gestore extends Persona{
 	 */
 	public void creaSessione(String id, String mod, String nome/* Parametri presi dall'interfaccia utente */) {
 		new SessioneDiVoto(Objects.requireNonNull(id), Objects.requireNonNull(mod), Objects.requireNonNull(nome)).inserisciSessione();
+		//
 	}
 	
 	/**
