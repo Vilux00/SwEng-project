@@ -22,7 +22,6 @@ public class homeController {
 	}
 	
 	public void switchToLoginElettoreScene(ActionEvent event) throws IOException {
-		System.out.println(1);
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginElettoreScene.fxml"));
 		root = loader.load();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -33,7 +32,6 @@ public class homeController {
 	}
 	
 	public void switchToLoginScrutatoreScene(ActionEvent event) throws IOException {
-		System.out.println(2);
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginScrutatoreScene.fxml"));
 		root = loader.load();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -44,7 +42,6 @@ public class homeController {
 	}
 
 	public void switchToLoginAdminScene(ActionEvent event) throws IOException {
-		System.out.println(3);
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("loginGestoreSistemaScene.fxml"));
 		root = loader.load();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
