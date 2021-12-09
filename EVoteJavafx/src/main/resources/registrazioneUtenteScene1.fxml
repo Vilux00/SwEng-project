@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.registrazioneUtente1Controller">
+   <children>
+   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0" layoutY="361.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@home-button.png" />
+         </image>
+      </ImageView>
+      
+      <VBox layoutX="25.0" layoutY="27.0" prefHeight="358.0" prefWidth="550.0">
+         <children>
+            <HBox prefWidth="600.0" />
+            <HBox prefWidth="600.0" />
+            <HBox prefHeight="12.0" prefWidth="583.0">
+               <children>
+                  <Label text="L'utente si e' identificato?">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <CheckBox mnemonicParsing="false" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Nome:">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField promptText="Mario" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" right="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Cognome: ">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField promptText="Rossi">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Codice fiscale">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField promptText="xxxxxxxxxxxxxxxxxx" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Data nascita">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox prefHeight="25.0" prefWidth="74.0">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <ChoiceBox prefHeight="25.0" prefWidth="74.0">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Paese nascita">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField promptText="Roma" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Nazione nascita">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField promptText="Italia" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Sesso">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Privilegio">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="600.0">
+               <children>
+                  <Label text="Conferma per andare alla generazione della password" underline="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#confermaDatiRegistrazione" style="-fx-font-size: 12;" text="Conferma" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="574.0" layoutY="5.0" opacity="0.47" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Delete-Red-X-Button-PNG-Images.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="571.0" layoutY="-2.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="0.0" prefWidth="31.0" text="Button" />
+   </children>
+</AnchorPane>
