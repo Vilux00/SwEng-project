@@ -3,7 +3,6 @@ package main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -17,7 +16,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Home");
 			primaryStage.setResizable(false);
-			//primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
