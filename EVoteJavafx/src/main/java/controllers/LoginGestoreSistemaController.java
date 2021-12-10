@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class loginGestoreSistemaController extends classicSceneControllerClass{
+public class LoginGestoreSistemaController extends DefaultSceneController{
 	private Parent root;
 	private Stage stage;
 	private Scene scene;

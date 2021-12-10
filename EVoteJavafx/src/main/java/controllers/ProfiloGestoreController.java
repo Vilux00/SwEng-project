@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class profiloGestoreController  extends profiloScrutatoreController{
+public class ProfiloGestoreController  extends ProfiloScrutatoreController{
 	private Parent root;
 	private Stage stage;
 	private Scene scene;

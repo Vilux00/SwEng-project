@@ -15,7 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class modificaPasswordController extends classicSceneControllerClass{
+public class ModificaPasswordController extends DefaultSceneController{
 	@FXML
 	PasswordField vecchiaPassword;
 	@FXML

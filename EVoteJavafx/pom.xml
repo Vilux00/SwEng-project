@@ -8,6 +8,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>11</javafx.version>
         <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
+        <commons.version>3.4</commons.version>
     </properties>
     <dependencies>
         <dependency>
@@ -23,7 +24,7 @@
         <dependency>
     		<groupId>org.apache.commons</groupId>
     		<artifactId>commons-lang3</artifactId>
-    		<version>3.4</version>
+    		<version>${commons.version}</version>
 		</dependency>
     </dependencies>
     <build>

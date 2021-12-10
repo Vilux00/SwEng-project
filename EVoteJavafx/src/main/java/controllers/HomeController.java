@@ -10,13 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class homeController {
+public class HomeController {
 	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
-
 	public void exit(ActionEvent event) {
 		 Platform.exit();
 	}

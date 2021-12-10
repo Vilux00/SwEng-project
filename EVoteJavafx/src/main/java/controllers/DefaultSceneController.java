@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class classicSceneControllerClass {
+public class DefaultSceneController {
 	private Parent root;
 	private Stage stage;
 	private Scene scene;

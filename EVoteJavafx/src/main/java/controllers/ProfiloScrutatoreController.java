@@ -1,4 +1,4 @@
 package controllers;
 
-public class profiloScrutatoreController extends profiloElettoreController{
+public class ProfiloScrutatoreController extends ProfiloElettoreController{
 }

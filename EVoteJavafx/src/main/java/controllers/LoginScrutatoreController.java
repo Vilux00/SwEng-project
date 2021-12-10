@@ -9,12 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class loginScrutatoreController extends classicSceneControllerClass{
+public class LoginScrutatoreController extends DefaultSceneController{
 	private Parent root;
 	private Stage stage;
 	private Scene scene;
-	
-	
+
 	public void login(ActionEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getClassLoader().getResource("profiloScrutatoreScene.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();

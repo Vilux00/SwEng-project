@@ -11,7 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
-public class registrazioneUtente1Controller  extends classicSceneControllerClass{
+public class RegistrazioneUtente1Controller  extends DefaultSceneController{
 	private Parent root;
 	private Stage stage;
 	private Scene scene;

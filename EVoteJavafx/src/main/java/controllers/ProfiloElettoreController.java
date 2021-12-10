@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class profiloElettoreController  extends classicSceneControllerClass{
+public class ProfiloElettoreController  extends DefaultSceneController{
 	private Parent root;
 	private Stage stage;
 	private Scene scene;

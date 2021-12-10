@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class loginElettoreController extends classicSceneControllerClass{
+public class LoginElettoreController extends DefaultSceneController{
 	
 	private Parent root;
 	private Stage stage;
