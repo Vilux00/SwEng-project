@@ -17,7 +17,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Home");
 			primaryStage.setResizable(false);
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			//primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

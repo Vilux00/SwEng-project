@@ -24,7 +24,4 @@ public class DefaultSceneController {
 		stage.show();
 	}
 	
-	public void exit(ActionEvent event) {
-		 Platform.exit();
-	}
 }

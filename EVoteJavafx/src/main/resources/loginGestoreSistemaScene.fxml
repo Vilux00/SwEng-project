@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginGestoreSistemaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginGestoreSistemaController">
    <children>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0" layoutY="361.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,11 +41,5 @@
          </children>
       </VBox>
       <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="574.0" layoutY="5.0" opacity="0.47" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Delete-Red-X-Button-PNG-Images.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="571.0" layoutY="-2.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="0.0" prefWidth="31.0" text="Button" />
    </children>
 </AnchorPane>
