@@ -18,6 +18,6 @@ public class RegistrazioneUtente2Controller  extends DefaultSceneController{
 	}
 	
 	public void registraUtenteDB() {
-		//chiamata al db
+		//chiamata al database
 	}
 }
