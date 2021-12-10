@@ -14,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import main.Password;
 
 public class ModificaPasswordController extends DefaultSceneController{
 	@FXML
@@ -30,7 +31,7 @@ public class ModificaPasswordController extends DefaultSceneController{
 	public void modificaPassword(ActionEvent event) throws IOException {
 		if(!vecchiaPassword.getText().isEmpty() && checkOldPassword() == true){
 			if(nuovaPassword1.getText().equals(nuovaPassword2.getText())) {
-				if(checkNewPassword(nuovaPassword1.getText())) {
+				if(Password.checkPassword((nuovaPassword1.getText()))) {
 					changeToNewPassword();
 				}
 				changeScene(event);
@@ -62,11 +63,6 @@ public class ModificaPasswordController extends DefaultSceneController{
 			alert.show();
 		}else {
 		}
-	}
-	
-	private boolean checkNewPassword(String pwd) {
-		if (pwd.length() > 8 && pwd.replaceAll("[a-zA-Z-,.;_@%&*]", "").length() > 0 && pwd.replaceAll("[a-zA-Z1-9]", "").length() > 0) return true;
-		return false;
 	}
 	
 	private void changeScene(ActionEvent event) throws IOException{
