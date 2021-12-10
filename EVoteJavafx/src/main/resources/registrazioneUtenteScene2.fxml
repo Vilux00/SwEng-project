@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistrazioneUtente2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistrazioneUtente2Controller">
    <children>
    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0" layoutY="361.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,10 +20,10 @@
          </image>
       </ImageView>
    
-      <VBox prefHeight="407.0" prefWidth="607.0">
+      <VBox layoutX="7.0" layoutY="-4.0" prefHeight="407.0" prefWidth="607.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="577.0">
+            <Pane prefHeight="175.0" prefWidth="607.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="643.0">
                <children>
                   <Label text="Genera passoword random">
                      <font>
@@ -33,7 +33,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#generaPassword" text="Genera">
+                  <Button fx:id="btnGeneraPassword" mnemonicParsing="false" onAction="#generaPassword" text="Genera">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
@@ -44,7 +44,37 @@
                   <Insets left="30.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox fx:id="boxCreaAccount" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="577.0" visible="false">
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Crea account con la password appena generata">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#registraUtenteDB" text="Crea account" />
+               </children></HBox>
+            <HBox fx:id="stampaPdfAccount" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="577.0" visible="false">
+               <children>
+                  <Label text="Crea documento PDF con i dati utente">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#stampaCredenzialiUtente" text="Crea PDF" />
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
         <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
