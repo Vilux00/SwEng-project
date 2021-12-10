@@ -15,11 +15,14 @@ public class LoginGestoreSistemaController extends DefaultSceneController{
 	private Scene scene;
 	
 	public void login(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getClassLoader().getResource("profiloGestoreScene.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("profiloGestoreScene.fxml"));
+		root = loader.load();
+		DefaultSceneController.scenaPrecedente.add("loginGestoreSistemaScene.fxml");
+		DefaultSceneController.scenaPrecedenteTitolo.add("Login gestore di sistema");
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Home");
+		stage.setTitle("Profilo gestore di sistema");
 		stage.show();
 	}
 }

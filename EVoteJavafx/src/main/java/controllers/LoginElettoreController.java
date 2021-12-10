@@ -16,12 +16,16 @@ public class LoginElettoreController extends DefaultSceneController{
 	private Scene scene;
 		
 	public void login(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getClassLoader().getResource("profiloElettoreScene.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("profiloElettoreScene.fxml"));
+		root = loader.load();
+		DefaultSceneController.scenaPrecedente.add("loginElettoreScene.fxml");
+		DefaultSceneController.scenaPrecedenteTitolo.add("Login Elettore");
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Home");
+		stage.setTitle("Profilo elettore");
 		stage.show();
 	}
+	
 	
 }
