@@ -23,6 +23,9 @@ public class RegistrazioneUtente2Controller  extends DefaultSceneController{
 	@FXML
 	private Button btnGeneraPassword;
 	
+	@FXML
+	private Button btnCreaAccount;
+	
 	public void generaPassword(ActionEvent event) {
 		password = Password.generateRandomPassword();
 		visualizzaPassword.setText(password);
@@ -30,8 +33,9 @@ public class RegistrazioneUtente2Controller  extends DefaultSceneController{
 	}
 	
 	public void registraUtenteDB(ActionEvent event) {
-		btnGeneraPassword.setDisable(false);   //da sistemare
+		btnGeneraPassword.setDisable(true);
 		//chiamata al database
+		btnCreaAccount.setDisable(true);
 		stampaPdfAccount.setVisible(true);
 	}
 	

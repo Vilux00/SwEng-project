@@ -57,7 +57,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#registraUtenteDB" text="Crea account" />
+                  <Button fx:id="btnCreaAccount" mnemonicParsing="false" onAction="#registraUtenteDB" text="Crea account" />
                </children></HBox>
             <HBox fx:id="stampaPdfAccount" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="577.0" visible="false">
                <children>
