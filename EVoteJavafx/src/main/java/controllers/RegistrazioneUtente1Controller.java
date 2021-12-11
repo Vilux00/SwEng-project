@@ -18,10 +18,12 @@ import javafx.scene.control.ComboBox;
 
 public class RegistrazioneUtente1Controller  extends DefaultSceneController implements Initializable{
 		
-	ObservableList list = FXCollections.observableArrayList();
+	private ObservableList<Integer> ol = FXCollections.observableArrayList();
+	private ObservableList<String> ol2 = FXCollections.observableArrayList();
 	
  	@FXML
     private ComboBox<Integer> comboBoxAnno;
+
     @FXML
     private ComboBox<Integer> comboBoxGiorno;
 
@@ -53,22 +55,22 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 	
 	private void loadData() {
 		for (int i = 1; i <= 31; i++) {
-			list.add(i);
+			ol.add(i);
 		}
-		comboBoxGiorno.getItems().addAll(list);
-		list.clear();
+		comboBoxGiorno.getItems().addAll(ol);
+		ol.clear();
 		for (int i = 1900; i <= 2021; i++) {
-			list.add(i);
+			ol.add(i);
 		}
-		comboBoxAnno.getItems().addAll(list);
-		list.clear();
-		list.addAll("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre");
-		comboBoxMese.getItems().addAll(list);
-		list.clear();
-		list.addAll("Maschio", "Femmina");
-		choiceBoxSesso.getItems().addAll(list);
-		list.clear();
-		list.addAll("Elettore", "Scrutatore", "Gestore di sistema");
-		choiceBoxPrivilegio.getItems().addAll(list);
+		comboBoxAnno.getItems().addAll(ol);
+		//list.clear();
+		ol2.addAll("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre");
+		comboBoxMese.getItems().addAll(ol2);
+		ol2.clear();
+		ol2.addAll("Maschio", "Femmina");
+		choiceBoxSesso.getItems().addAll(ol2);
+		ol2.clear();
+		ol2.addAll("Elettore", "Scrutatore", "Gestore di sistema");
+		choiceBoxPrivilegio.getItems().addAll(ol2);
 	}
 }
