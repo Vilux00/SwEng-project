@@ -63,7 +63,6 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 			ol.add(i);
 		}
 		comboBoxAnno.getItems().addAll(ol);
-		//list.clear();
 		ol2.addAll("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre");
 		comboBoxMese.getItems().addAll(ol2);
 		ol2.clear();
