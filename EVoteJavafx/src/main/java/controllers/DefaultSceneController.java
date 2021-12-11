@@ -29,14 +29,16 @@ public class DefaultSceneController {
 	
 	public void backToHomeScene(ActionEvent event) throws IOException {
 		changeScene(event, "homeScene.fxml", "Home");
+		DefaultSceneController.scenaPrecedente.clear();
+		DefaultSceneController.scenaPrecedenteTitolo.clear();
 	}
 	
 	public void setScenaPrecedente(String fxml, String titolo) {
-		scenaPrecedente.add(fxml);
-		scenaPrecedenteTitolo.add(titolo);
+		DefaultSceneController.scenaPrecedente.add(fxml);
+		DefaultSceneController.scenaPrecedenteTitolo.add(titolo);
 	}
 	
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+		changeScene(event, DefaultSceneController.scenaPrecedente.pop(), DefaultSceneController.scenaPrecedenteTitolo.pop());
 	}
 }

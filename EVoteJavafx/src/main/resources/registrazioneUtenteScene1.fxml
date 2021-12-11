@@ -103,17 +103,17 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ChoiceBox prefHeight="25.0" prefWidth="74.0">
+                  <ChoiceBox fx:id="choiceBoxGiorno" prefHeight="25.0" prefWidth="74.0">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <ChoiceBox prefHeight="25.0" prefWidth="74.0">
+                  <ChoiceBox fx:id="choiceBoxMese" prefHeight="25.0" prefWidth="74.0">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+                  <ChoiceBox fx:id="choiceBoxAnno" prefHeight="25.0" prefWidth="74.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -161,7 +161,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+                  <ChoiceBox fx:id="choiceBoxSesso" prefHeight="25.0" prefWidth="74.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -177,7 +177,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ChoiceBox prefHeight="25.0" prefWidth="74.0" />
+                  <ChoiceBox fx:id="choiceBoxPrivilegio" prefHeight="25.0" prefWidth="74.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
