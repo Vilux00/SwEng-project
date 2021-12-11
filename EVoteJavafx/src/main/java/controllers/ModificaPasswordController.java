@@ -32,7 +32,10 @@ public class ModificaPasswordController extends DefaultSceneController{
 				if(Password.checkPassword((nuovaPassword1.getText()))) {
 					changeToNewPassword();
 				}
-				changeScene(event);
+				/*
+				 * In base al privilegio si torna indietro
+				 * changeScene(event);
+				 */
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Le nuove password che hai inserito non sono uguali");
@@ -63,6 +66,7 @@ public class ModificaPasswordController extends DefaultSceneController{
 		}
 	}
 	
+	/*
 	private void changeScene(ActionEvent event) throws IOException{
 		root = FXMLLoader.load(getClass().getClassLoader().getResource("modificaPasswordScene.fxml"));  //devo andare indietro in base al chiamante
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -71,4 +75,5 @@ public class ModificaPasswordController extends DefaultSceneController{
 		stage.setTitle("Modifica password");
 		stage.show();	
 	}
+	*/
 }

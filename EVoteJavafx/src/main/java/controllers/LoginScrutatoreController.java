@@ -15,11 +15,14 @@ public class LoginScrutatoreController extends DefaultSceneController{
 	private Scene scene;
 
 	public void login(ActionEvent event) throws IOException {
+		/*
 		root = FXMLLoader.load(getClass().getClassLoader().getResource("profiloScrutatoreScene.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Home");
 		stage.show();
+		*/
+		changeScene(event, "profiloScrutatoreScene.fxml", "Home profilo");
 	}
 }

@@ -15,12 +15,14 @@ public class ProfiloGestoreController  extends ProfiloScrutatoreController{
 	private Scene scene;
 	
 	public void goToRegistrazioneUtente(ActionEvent event) throws IOException {
+		/*
 		root = FXMLLoader.load(getClass().getClassLoader().getResource("registrazioneUtenteScene1.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Registrazione utente");
 		stage.show();
-		
+		*/
+		changeScene(event, "registrazioneUtenteScene1.fxml", "Registrazione utente");
 	}
 }
