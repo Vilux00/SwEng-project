@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class DefaultSceneController {
 	private Parent root;
 	private Stage stage;
-	private Scene scene;
+	protected Scene scene;
 	
 	protected static Stack<String> scenaPrecedente = new Stack<>();
 	protected static Stack<String> scenaPrecedenteTitolo = new Stack<>();
@@ -28,12 +28,6 @@ public class DefaultSceneController {
 	}
 	
 	public void backToHomeScene(ActionEvent event) throws IOException {
-		/*root = FXMLLoader.load(getClass().getClassLoader().getResource("homeScene.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Home");
-		stage.show();*/
 		changeScene(event, "homeScene.fxml", "Home");
 	}
 	
@@ -43,11 +37,6 @@ public class DefaultSceneController {
 	}
 	
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		root = FXMLLoader.load(getClass().getClassLoader().getResource(scenaPrecedente.pop()));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle(scenaPrecedenteTitolo.pop());
-		stage.show();
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 }

@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import main.Password;
 
-public class RegistrazioneUtente2Controller  extends DefaultSceneController{
+public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	
 	private String password;
 	

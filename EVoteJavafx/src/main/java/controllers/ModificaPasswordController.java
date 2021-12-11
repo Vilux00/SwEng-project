@@ -4,14 +4,9 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
 import main.Password;
 
 public class ModificaPasswordController extends DefaultSceneController{
@@ -21,10 +16,6 @@ public class ModificaPasswordController extends DefaultSceneController{
 	PasswordField nuovaPassword1;
 	@FXML
 	PasswordField nuovaPassword2;
-	
-	private Parent root;
-	private Stage stage;
-	private Scene scene;
 	
 	public void modificaPassword(ActionEvent event) throws IOException {
 		if(!vecchiaPassword.getText().isEmpty() && checkOldPassword() == true){
@@ -66,15 +57,5 @@ public class ModificaPasswordController extends DefaultSceneController{
 			//aggiungi 
 		}
 	}
-	
-	/*
-	private void changeScene(ActionEvent event) throws IOException{
-		root = FXMLLoader.load(getClass().getClassLoader().getResource("modificaPasswordScene.fxml"));  //devo andare indietro in base al chiamante
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Modifica password");
-		stage.show();	
-	}
-	*/
+
 }
