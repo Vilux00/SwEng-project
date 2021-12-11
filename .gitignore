@@ -56,3 +56,6 @@ local.properties
 
 # Eclipse Core
 .project
+
+# VSCode
+.vscode
