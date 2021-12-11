@@ -104,17 +104,17 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxGiorno" maxWidth="1.7976931348623157E308" prefWidth="74.0">
+                  <ComboBox fx:id="comboBoxGiorno" maxWidth="1.7976931348623157E308">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="comboBoxMese" maxWidth="1.7976931348623157E308" prefWidth="74.0">
+                  <ComboBox fx:id="comboBoxMese" maxWidth="1.7976931348623157E308">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="comboBoxAnno" maxWidth="1.7976931348623157E308" prefWidth="74.0" />
+                  <ComboBox fx:id="comboBoxAnno" maxWidth="1.7976931348623157E308" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
