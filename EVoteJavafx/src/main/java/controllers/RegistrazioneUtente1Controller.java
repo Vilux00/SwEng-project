@@ -12,9 +12,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class RegistrazioneUtente1Controller  extends DefaultSceneController{
-	private Parent root;
+	/*private Parent root;
 	private Stage stage;
-	private Scene scene;
+	private Scene scene;*/
 	
 	public void confermaDatiRegistrazione(ActionEvent event) throws IOException{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -23,12 +23,15 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController{
 		alert.setTitle("Conferma dati");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
+			/*
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("registrazioneUtenteScene2.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle("Registrazione utente");
 			stage.show();
+			*/
+			changeScene(event, "registrazioneUtenteScene2.fxml", "Registrazione utente");
 		}
 	}
 }

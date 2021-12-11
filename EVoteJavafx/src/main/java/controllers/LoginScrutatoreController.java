@@ -15,14 +15,8 @@ public class LoginScrutatoreController extends DefaultSceneController{
 	private Scene scene;
 
 	public void login(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("profiloScrutatoreScene.fxml"));
-		root = loader.load();
 		DefaultSceneController.scenaPrecedente.add("loginScrutatoreScene.fxml");
 		DefaultSceneController.scenaPrecedenteTitolo.add("Login scrutatore");	
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Profilo scrutatore");
-		stage.show();
+		changeScene(event, "profiloScrutatoreScene.fxml", "Home profilo");
 	}
 }

@@ -10,21 +10,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class LoginElettoreController extends DefaultSceneController{
-	
+	/*
 	private Parent root;
 	private Stage stage;
 	private Scene scene;
-		
+	*/
+	
 	public void login(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("profiloElettoreScene.fxml"));
-		root = loader.load();
 		DefaultSceneController.scenaPrecedente.add("loginElettoreScene.fxml");
 		DefaultSceneController.scenaPrecedenteTitolo.add("Login Elettore");
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Profilo elettore");
-		stage.show();
+		changeScene(event, "profiloElettoreScene.fxml", "Home profilo");
 	}
 	
 	
