@@ -33,8 +33,7 @@ public class DefaultSceneController {
 		stage.show();
 	}
 	
-	public void backToHomeScene(ActionEvent event) throws IOException {
-		
+	public void backToHomeScene(ActionEvent event) throws IOException {	
 		if (isLogged == true) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setContentText("Sicuro di fare logout?");
@@ -43,22 +42,38 @@ public class DefaultSceneController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				changeScene(event, "homeScene.fxml", "Home");
-				DefaultSceneController.scenaPrecedente.clear();
-				DefaultSceneController.scenaPrecedenteTitolo.clear();
+				scenaPrecedente.clear();
+				scenaPrecedenteTitolo.clear();
+				isLogged = false;
 			}
 		}else {
 			changeScene(event, "homeScene.fxml", "Home");
-			DefaultSceneController.scenaPrecedente.clear();
-			DefaultSceneController.scenaPrecedenteTitolo.clear();
+			scenaPrecedente.clear();
+			scenaPrecedenteTitolo.clear();
 		}
 	}
 	
 	public void setScenaPrecedente(String fxml, String titolo) {
-		DefaultSceneController.scenaPrecedente.add(fxml);
-		DefaultSceneController.scenaPrecedenteTitolo.add(titolo);
+		scenaPrecedente.add(fxml);
+		scenaPrecedenteTitolo.add(titolo);
 	}
 	
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		changeScene(event, DefaultSceneController.scenaPrecedente.pop(), DefaultSceneController.scenaPrecedenteTitolo.pop());
+		String str = scenaPrecedente.lastElement();
+		System.out.println(str);
+		if (str.contains("login") == true) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setContentText("Sicuro di fare logout?");
+			alert.setHeaderText("Conferma logout");
+			alert.setTitle("Logout");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+				isLogged = false;
+			}
+		}else {
+			changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+		}
+		
 	}
 }
