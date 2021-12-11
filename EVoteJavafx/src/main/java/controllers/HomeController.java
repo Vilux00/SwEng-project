@@ -21,9 +21,4 @@ public class HomeController extends DefaultSceneController{
 		changeScene(event, "loginGestoreSistemaScene.fxml", "Login gestore");
 	}
 	
-	/*
-	public void exit(ActionEvent event) {
-		 Platform.exit();
-	}
-	*/
 }

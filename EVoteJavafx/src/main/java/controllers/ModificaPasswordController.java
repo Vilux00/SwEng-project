@@ -23,10 +23,6 @@ public class ModificaPasswordController extends DefaultSceneController{
 				if(Password.checkPassword((nuovaPassword1.getText()))) {
 					changeToNewPassword();
 				}
-				/*
-				 * In base al privilegio si torna indietro
-				 * changeScene(event);
-				 */
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Le nuove password che hai inserito non sono uguali");

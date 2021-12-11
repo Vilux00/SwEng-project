@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	@Override
 	public void cambiaPassword(ActionEvent event) throws IOException {
-		System.out.println(DefaultSceneController.scenaPrecedente);
 		setScenaPrecedente("profiloGestoreScene.fxml", "Home profilo");
 		changeScene(event, "modificaPasswordScene.fxml", "Modifica password");
 	}
