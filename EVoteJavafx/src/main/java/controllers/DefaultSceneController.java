@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.util.Stack;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,13 +18,23 @@ public class DefaultSceneController {
 	protected static Stack<String> scenaPrecedente = new Stack<>();
 	protected static Stack<String> scenaPrecedenteTitolo = new Stack<>();
 		
+	public void changeScene(ActionEvent event, String sceneName, String title) throws IOException{
+		root = FXMLLoader.load(getClass().getClassLoader().getResource(sceneName));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle(title);
+		stage.show();
+	}
+	
 	public void backToHomeScene(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getClassLoader().getResource("homeScene.fxml"));
+		/*root = FXMLLoader.load(getClass().getClassLoader().getResource("homeScene.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Home");
-		stage.show();
+		stage.show();*/
+		changeScene(event, "homeScene.fxml", "Home");
 	}
 	
 	public void setScenaPrecedente(String fxml, String titolo) {
