@@ -60,7 +60,6 @@ public class DefaultSceneController {
 	
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
 		String str = scenaPrecedente.lastElement();
-		System.out.println(str);
 		if (str.contains("login") == true) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setContentText("Sicuro di fare logout?");
