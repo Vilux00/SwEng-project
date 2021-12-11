@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,16 +13,20 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+
 
 public class RegistrazioneUtente1Controller  extends DefaultSceneController implements Initializable{
 		
+	ObservableList list = FXCollections.observableArrayList();
+	
  	@FXML
-    private ChoiceBox<Integer> choiceBoxAnno;
+    private ComboBox<Integer> comboBoxAnno;
     @FXML
-    private ChoiceBox<Integer> choiceBoxGiorno;
+    private ComboBox<Integer> comboBoxGiorno;
 
     @FXML
-    private ChoiceBox<Integer> choiceBoxMese;
+    private ComboBox<String> comboBoxMese;
 
     @FXML
     private ChoiceBox<String> choiceBoxPrivilegio;
@@ -42,7 +48,27 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		loadData();
+	}
+	
+	private void loadData() {
+		for (int i = 1; i <= 31; i++) {
+			list.add(i);
+		}
+		comboBoxGiorno.getItems().addAll(list);
+		list.clear();
+		for (int i = 1900; i <= 2021; i++) {
+			list.add(i);
+		}
+		comboBoxAnno.getItems().addAll(list);
+		list.clear();
+		list.addAll("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre");
+		comboBoxMese.getItems().addAll(list);
+		list.clear();
+		list.addAll("Maschio", "Femmina");
+		choiceBoxSesso.getItems().addAll(list);
+		list.clear();
+		list.addAll("Elettore", "Scrutatore", "Gestore di sistema");
+		choiceBoxPrivilegio.getItems().addAll(list);
 	}
 }
