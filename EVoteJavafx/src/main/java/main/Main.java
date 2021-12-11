@@ -1,5 +1,6 @@
 package main;
-	
+
+import data.DbManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		DbManager.getInstance().testDB();
 		launch(args);
 	}
 }
