@@ -9,4 +9,9 @@ public class ProfiloScrutatoreController extends ProfiloElettoreController{
 		setScenaPrecedente("profiloScrutatoreScene.fxml", "Profilo scrutatore");
 		changeScene(event, "modificaPasswordScene.fxml", "Modifica password");
 	}
+	
+	public void registraElettoreASessione(ActionEvent event)  throws IOException {
+		setScenaPrecedente("profiloScrutatoreScene.fxml", "Profilo scrutatore");
+		changeScene(event, "registraElettoreASessioneScene.fxml", "Registra utente a sessione");
+	}
 }

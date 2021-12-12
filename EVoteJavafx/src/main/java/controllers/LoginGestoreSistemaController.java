@@ -6,8 +6,8 @@ import javafx.event.ActionEvent;
 public class LoginGestoreSistemaController extends DefaultSceneController{
 
 	public void login(ActionEvent event) throws IOException {
-		setScenaPrecedente("loginGestoreSistemaScene.fxml", "Home profilo"); 
-		changeScene(event, "profiloGestoreScene.fxml", "Home profilo");
+		setScenaPrecedente("loginGestoreSistemaScene.fxml", "Login gestore"); 
+		changeScene(event, "profiloGestoreScene.fxml", "Profilo gestore di sistema");
 		DefaultSceneController.isLogged = true;
 	}
 }
