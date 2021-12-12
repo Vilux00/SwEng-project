@@ -62,7 +62,7 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Selezionare il tipo di voto");
 			alert.show();
-			//pop
+			rimuoviScenaPrecedente();
 		}else {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setHeaderText("Conferma dati");

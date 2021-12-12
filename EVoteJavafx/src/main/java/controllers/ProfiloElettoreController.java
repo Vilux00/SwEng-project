@@ -10,4 +10,9 @@ public class ProfiloElettoreController extends DefaultSceneController{
 		changeScene(event, "modificaPasswordScene.fxml", "Modifica password");
 	}
 	
+	public void vota(ActionEvent event) throws IOException {
+		setScenaPrecedente("profiloElettoreScene.fxml", "Profilo elettore");
+		changeScene(event, "selezioneSessioneScene.fxml", "Selezione sessione");
+	}
+	
 }

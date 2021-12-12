@@ -34,7 +34,7 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 		alert.setTitle("Conferma dati");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			//pop
+			rimuoviScenaPrecedente(2);
 			changeScene(event, "profiloGestoreScene.fxml", "Profilo gestore di sistema"); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
 		}
 	}

@@ -60,14 +60,9 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" style="-fx-font-size: 13;" text="Vota">
+                        <Button mnemonicParsing="false" onAction="#vota" style="-fx-font-size: 13;" text="Vota">
                            <VBox.margin>
                               <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" style="-fx-font-size: 13;" text="Votazioni precedenti">
-                           <VBox.margin>
-                              <Insets />
                            </VBox.margin>
                         </Button>
                      </children>

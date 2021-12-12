@@ -73,6 +73,17 @@ public class DefaultSceneController {
 		}else {
 			changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 		}
-		
+	}
+	
+	public void rimuoviScenaPrecedente() {
+		scenaPrecedente.pop();
+		scenaPrecedenteTitolo.pop();
+	}
+	
+	public void rimuoviScenaPrecedente(int n) {
+		for (int i = 0; i < n; i++) {
+			scenaPrecedente.pop();
+			scenaPrecedenteTitolo.pop();
+		}
 	}
 }
