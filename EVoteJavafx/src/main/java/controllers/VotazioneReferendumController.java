@@ -6,15 +6,17 @@ import javafx.event.ActionEvent;
 
 public class VotazioneReferendumController extends DefaultSceneController{
 	public void setFavorevole(ActionEvent event) throws IOException{
+		//aggiorna db
+		//output visivo
 		rimuoviScenaPrecedente();
 		goToScenaPrecedente(event);
-		//output visivo
 	}
 	
 	public void setContrario(ActionEvent event) throws IOException{
+		//aggiorna db
+		//output visivo
 		rimuoviScenaPrecedente();
 		goToScenaPrecedente(event);
-		//output visivo
 	}
 	
 	
