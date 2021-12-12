@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -9,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 
 public class CreazioneSessioneController extends DefaultSceneController implements Initializable{
 	
@@ -28,12 +33,6 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
     @FXML
     private ComboBox<String> comboBoxVoto;
     
-    @FXML
-    private ComboBox<String> comboBoxVincitore;
-    
-	public void confermaVotazione(ActionEvent event) throws IOException{
-		
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -55,20 +54,27 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 		ol2.clear();
 		ol2.addAll("Voto ordinale", "Voto categorico", "Voto categorico con preferenze", "Referendum");
 		comboBoxVoto.getItems().addAll(ol2);
-		ol2.clear();
-		ol2.addAll("Maggioranza", "Maggioranza assoluta", "Referendum senza quorum", "Referendum con quorum");
-		comboBoxVoto.getItems().addAll(ol2);
-		
-		//aggiungi candidati
-		
-		
 	}
 	
-	public void aggiungiCandidato(ActionEvent event) {
-		if (comboBoxVincitore.)
-	}
-	
-	public void rimuoviCandidato(ActionEvent event) {
-		
+	public void conferma(ActionEvent event) throws IOException{
+		setScenaPrecedente("creazioneSessioneScene.fxml", "Creazione sessione di voto");
+		if(Objects.isNull(comboBoxVoto.getValue()) == true) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Selezionare il tipo di voto");
+			alert.show();
+			//pop
+		}else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText("Conferma dati");
+			alert.setTitle("Conferma dati");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				if(comboBoxVoto.getValue().contains("Voto") == true) {
+					changeScene(event, "votazioneClassicaScene.fxml", "Creazione sessione di voto");
+				}else {
+					changeScene(event, "referendumScene.fxml", "Creazione sessione di voto");
+				}
+			}
+		}		
 	}
 }
