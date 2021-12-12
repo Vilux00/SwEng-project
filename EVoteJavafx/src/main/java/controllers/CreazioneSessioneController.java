@@ -65,7 +65,7 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 	}
 	
 	public void aggiungiCandidato(ActionEvent event) {
-		
+		if (comboBoxVincitore.)
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {
