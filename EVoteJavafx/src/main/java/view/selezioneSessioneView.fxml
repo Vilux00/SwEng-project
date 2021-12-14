@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:Handler="controllers.SelezioneSessioneHandler">
+   <children>
+      <VBox layoutX="28.0" layoutY="92.0" prefHeight="316.0" prefWidth="579.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Selezione Sessione">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="comboBoxSessione" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToSessione" text="Conferma sessione" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label text="Soluzione momentanea" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0" layoutY="361.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@home-button.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
+        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="361.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Back_Arrow.svg.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0" prefWidth="17.0" text="Button" />
+   </children>
+</AnchorPane>
