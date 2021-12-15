@@ -80,7 +80,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" style="-fx-font-size: 13;" text="Inserisci voto cartaceo">
+                        <Button mnemonicParsing="false" onAction="#vota" style="-fx-font-size: 13;" text="Inserisci voto cartaceo">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
