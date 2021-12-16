@@ -22,7 +22,7 @@ public class ProfiloGestoreHandler extends ProfiloScrutatoreHandler{
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}
 	
-	public void goToRegistrazioneUtente(ActionEvent event) throws IOException {
+	public void registrazioneUtente(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
 		changeScene(event, "registrazioneUtenteView1.fxml", "Registrazione utente");
 	}

@@ -70,9 +70,9 @@ public class DefaultSceneHandler {
 				changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 				isLogged = false;
 			}
-		}else {
-			changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+			return;
 		}
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 	
 	public void rimuoviScenaPrecedente() {
@@ -82,8 +82,7 @@ public class DefaultSceneHandler {
 	
 	public void rimuoviScenaPrecedente(int n) {
 		for (int i = 0; i < n; i++) {
-			scenaPrecedente.pop();
-			scenaPrecedenteTitolo.pop();
+			rimuoviScenaPrecedente();
 		}
 	}
 }

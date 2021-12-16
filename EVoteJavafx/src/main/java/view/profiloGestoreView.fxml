@@ -101,7 +101,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#goToRegistrazioneUtente" style="-fx-font-size: 13;" text="Crea Account">
+                        <Button mnemonicParsing="false" onAction="#registrazioneUtente" style="-fx-font-size: 13;" text="Crea Account">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
