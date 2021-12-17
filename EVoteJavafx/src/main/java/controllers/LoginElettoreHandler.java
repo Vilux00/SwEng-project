@@ -30,7 +30,6 @@ public class LoginElettoreHandler extends DefaultSceneHandler{
 			return;
 		}
 		Elettore e = new Elettore(codFisc, pwd);
-		System.out.println(e.getCodF());
 		if(new ElettoreDaoImpl().login(e)){
 			setScenaPrecedente("loginElettoreView.fxml", "Login elettore"); 
 			changeScene(event, "profiloElettoreView.fxml", "Home profilo", e);
