@@ -19,17 +19,28 @@ public class DefaultSceneHandler {
 	private Stage stage;
 	protected Scene scene;
 	
-	private Object data;
+	protected Object data;
 	
 	protected static Stack<String> scenaPrecedente = new Stack<>();
 	protected static Stack<String> scenaPrecedenteTitolo = new Stack<>();
 	
 	protected static boolean isLogged = false;
 		
-	public void changeScene(ActionEvent event, String sceneName, String title) throws IOException{
+	public void changeScene(ActionEvent event, String sceneName, String title, Object o) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
 		root = loader.load();
 		DefaultSceneHandler c = loader.getController();
+		c.passParameter(o);
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle(title);
+		stage.show();
+	}
+
+	public void changeScene(ActionEvent event, String sceneName, String title) throws IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
+		root = loader.load();
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

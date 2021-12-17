@@ -1,6 +1,5 @@
 package main;
 
-import data.DbManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

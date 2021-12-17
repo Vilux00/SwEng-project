@@ -7,8 +7,8 @@ import data.DbManager;
 public class ElettoreDaoImpl implements ElettoreDao{
 
 	@Override
-	public void login(Elettore e) {
-		DbManager.getInstance().login(e.getCodF(), e.getPassword());
+	public boolean login(Elettore e) {
+		return DbManager.getInstance().login(e.getCodF(), e.getPassword());
 	}
 
 	@Override

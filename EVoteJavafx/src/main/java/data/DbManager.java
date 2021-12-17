@@ -1,6 +1,9 @@
 package data;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class DbManager {
@@ -31,20 +34,10 @@ public class DbManager {
 		}
     }
 
-    public void testDB(){
-        String query = "SELECT * FROM eVoting.elettore";
-        try{
-            ResultSet r = open().createStatement().executeQuery(query);
-            if(r.next()) System.out.println(r.getString(1) + " " + r.getString(2));
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-
 	public boolean login(String codF, String password) {
 		Connection conn = open();
 		try {
-	        PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE username = ? AND password = ?");
+	        PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ? AND password = ?");
 	        stm.setString(1, codF);
 	        stm.setString(2, DigestUtils.sha256Hex(password));
 	        ResultSet r = stm.executeQuery();
@@ -56,6 +49,29 @@ public class DbManager {
 			close(conn);
 		}
 	}
+
+    public List<String> getInfoElettoreByCodF(String codF){
+        Connection conn = open();
+        try{
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ?");
+            stm.setString(1, codF);
+            ResultSet r = stm.executeQuery();
+            if(r.next()){
+                List<String> l = new ArrayList<>();
+                l.add(r.getString("nome"));
+                l.add(r.getString("cognome"));
+                l.add(r.getString("data_nascita"));
+                return l;
+            }
+            return null;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        } finally{
+            close(conn);
+        }
+    }
 
 
 }

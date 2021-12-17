@@ -1,7 +1,5 @@
 package model;
 
-import data.DbManager;
-
 public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 
 	@Override
