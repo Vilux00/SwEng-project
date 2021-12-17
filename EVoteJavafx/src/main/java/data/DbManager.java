@@ -39,7 +39,7 @@ public class DbManager {
 		try {
 	        PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ? AND password = ?");
 	        stm.setString(1, codF);
-	        stm.setString(2, DigestUtils.sha256Hex(password));
+	        stm.setString(2, DigestUtils.sha256Hex(password).toUpperCase());
 	        ResultSet r = stm.executeQuery();
 	        return r.next();
 		} catch(SQLException ex){
@@ -51,11 +51,13 @@ public class DbManager {
 	}
 
     public List<String> getInfoElettoreByCodF(String codF){
+    	System.out.println(1);
         Connection conn = open();
         try{
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ?");
             stm.setString(1, codF);
             ResultSet r = stm.executeQuery();
+            
             if(r.next()){
                 List<String> l = new ArrayList<>();
                 l.add(r.getString("nome"));
