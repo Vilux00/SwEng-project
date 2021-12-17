@@ -21,7 +21,7 @@ public class ProfiloElettoreHandler extends DefaultSceneHandler implements Initi
 
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
-		changeScene(event, "modificaPasswordView.fxml", "Modifica password");
+		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
 	}
 	
 	public void vota(ActionEvent event) throws IOException {
