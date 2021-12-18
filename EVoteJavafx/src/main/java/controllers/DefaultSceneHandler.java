@@ -30,7 +30,7 @@ public class DefaultSceneHandler {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
 		root = loader.load();
 		DefaultSceneHandler c = loader.getController();
-		c.passParameter(o);
+		c.passParameter(o); 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
