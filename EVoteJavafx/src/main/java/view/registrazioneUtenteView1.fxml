@@ -52,7 +52,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField promptText="Mario" />
+                  <TextField fx:id="nome" promptText="Mario" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" right="15.0" />
@@ -68,7 +68,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField promptText="Rossi">
+                  <TextField fx:id="cognome" promptText="Rossi">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
@@ -88,7 +88,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField promptText="xxxxxxxxxxxxxxxxxx" />
+                  <TextField fx:id="codF" promptText="xxxxxxxxxxxxxxxxxx" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -130,7 +130,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField promptText="Roma" />
+                  <TextField fx:id="paese" promptText="Roma" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -146,7 +146,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField promptText="Italia" />
+                  <TextField fx:id="nazione" promptText="Italia" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
