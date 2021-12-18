@@ -58,9 +58,15 @@ public class ModificaPasswordHandler extends DefaultSceneHandler{
 		}
 		else{
 			if(changePasswordDB()){
-				Alert alert = new Alert(AlertType.ERROR);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setHeaderText("Password modificata con successo");
 				alert.setTitle("Password modificata");
+				alert.show();
+				goToScenaPrecedente(event, e);
+			}else{
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Qualcosa è andato storto, riavviare la applicazione");
+				alert.setTitle("Ops...");
 				alert.show();
 			}
 		}
