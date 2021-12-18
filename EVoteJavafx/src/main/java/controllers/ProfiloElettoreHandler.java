@@ -31,8 +31,6 @@ public class ProfiloElettoreHandler extends DefaultSceneHandler implements Initi
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(data);
-		//DbManager.getInstance().getInfoElettoreByCodF(e.getCodF());
 		/*List<String> props = DbManager.getInstance().getInfoElettoreByCodF(e.getCodF());
 		gener.setText(gener.getText() + props.get(0) + " " + props.get(1));
 		id.setText("Nato a: " + props.get(2));
