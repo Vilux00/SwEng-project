@@ -1,15 +1,13 @@
 package data;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 public class DbManager {
     private static DbManager dbMgr;
     private String connString = "jdbc:postgresql://localhost/eVoting-platform?user=user_1&password=password&ssl=false"; //Not working with ssl=true
     
+    private DbManager(){}
+
     public static DbManager getInstance(){
         if(dbMgr == null) {
             dbMgr = new DbManager();
