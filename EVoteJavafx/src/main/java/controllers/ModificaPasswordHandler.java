@@ -7,9 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
-import main.Password;
 import model.Elettore;
 import model.ElettoreDaoImpl;
+import model.Password;
 
 public class ModificaPasswordHandler extends DefaultSceneHandler{
 	@FXML
