@@ -10,15 +10,12 @@ import model.Elettore;
 import model.ElettoreDaoImpl;
 
 public class LoginElettoreHandler extends DefaultSceneHandler{	
-	
 	@FXML
 	private TextField codF;
-	
 	@FXML
 	private TextField password;
 
 	public void login(ActionEvent event) throws IOException {
-		
 		String codFisc = codF.getText();
 		String pwd = password.getText();
 
@@ -35,8 +32,11 @@ public class LoginElettoreHandler extends DefaultSceneHandler{
 			changeScene(event, "profiloElettoreView.fxml", "Home profilo", e);
 			DefaultSceneHandler.isLogged = true;
 		}else {
-			new Alert(AlertType.INFORMATION).show();
-		}		
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Credenziali non corrette");
+			alert.setTitle("Autenticazione fallita");
+			alert.show();
+		}			
 	}
 	
 	

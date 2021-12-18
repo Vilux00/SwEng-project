@@ -17,6 +17,8 @@ public class DaoFactory {
 				return new ElettoreDaoImpl();
 			case "Scrutatore":
 				return new ScrutatoreDaoImpl();
+			case "Gestore":
+				return new GestoreDaoImpl();
 			case "SessioneDiVoto":
 				return new SessioneDiVotoDaoImpl();
 			case "Voto":

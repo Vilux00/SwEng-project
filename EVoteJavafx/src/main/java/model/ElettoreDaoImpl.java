@@ -17,7 +17,7 @@ public class ElettoreDaoImpl implements ElettoreDao{
 		try {
 	        PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ? AND password = ? AND privilegio = 'E'");
 	        stm.setString(1, e.getCodF());
-	        stm.setString(2, DigestUtils.sha256Hex(e.getPassword()).toUpperCase());
+	        stm.setString(2, DigestUtils.sha256Hex(e.getPassword()));
 	        return stm.executeQuery().next();
 		} catch(SQLException ex){
 			ex.printStackTrace();

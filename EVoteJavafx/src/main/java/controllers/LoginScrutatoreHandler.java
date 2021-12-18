@@ -1,13 +1,43 @@
 package controllers;
-
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import model.DaoFactory;
+import model.Elettore;
+import model.Scrutatore;
+import model.ScrutatoreDaoImpl;
 
 public class LoginScrutatoreHandler extends DefaultSceneHandler{
+	@FXML
+	private TextField codF;
+	@FXML
+	private TextField password;
 	
 	public void login(ActionEvent event) throws IOException {
-		setScenaPrecedente("loginScrutatoreView.fxml", "Login scrutatore"); 
-		changeScene(event, "profiloScrutatoreView.fxml", "Home profilo");
-		DefaultSceneHandler.isLogged = true;
+		String codFisc = codF.getText();
+		String pwd = password.getText();
+
+		if(codFisc.equals("") || pwd.equals("")){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Alcuni campi non sono compilati");
+			alert.setTitle("Campi mancanti");
+			alert.show();
+			return;
+		}
+		Elettore e = new Scrutatore(codFisc, pwd);
+		ScrutatoreDaoImpl sc = (ScrutatoreDaoImpl) DaoFactory.getInstance().getDao("Scrutatore");
+		if(sc.login(e)){
+			setScenaPrecedente("loginScrutatoreView.fxml", "Login scrutatore"); 
+			changeScene(event, "profiloScrutatoreView.fxml", "Home profilo", e);
+			DefaultSceneHandler.isLogged = true;
+		}else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Credenziali non corrette");
+			alert.setTitle("Autenticazione fallita");
+			alert.show();
+		}			
 	}
 }
