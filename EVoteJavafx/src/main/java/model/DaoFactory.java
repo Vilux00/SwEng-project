@@ -3,8 +3,10 @@ package model;
 public class DaoFactory {
 	
 	private static DaoFactory df;
+
+	private DaoFactory(){}
 	
-	public DaoFactory getInstance() {
+	public static DaoFactory getInstance() {
 		if(df == null) df = new DaoFactory();
 		return df;
 	}
