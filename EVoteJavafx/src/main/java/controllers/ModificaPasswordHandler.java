@@ -65,25 +65,6 @@ public class ModificaPasswordHandler extends DefaultSceneHandler{
 			}
 		}
 	}
-		/*
-		if(!vecchiaPassword.getText().isEmpty() && checkOldPassword() == true){
-			if(nuovaPassword1.getText().equals(nuovaPassword2.getText())) {
-				if(Password.checkPassword((nuovaPassword1.getText()))) {
-					changeToNewPassword();
-				}
-			}else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Le nuove password che hai inserito non sono uguali");
-				alert.setTitle("Password non uguali");
-				alert.show();
-			}
-		}else {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("La vecchia password inserita e' incorretta");
-			alert.setTitle("Vecchia password incorretta");
-			alert.show();
-		}
-		*/
 	
 	private boolean checkOldPassword() {
 		Elettore e = (Elettore)data;
