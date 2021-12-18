@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
 import main.Password;
 import model.Elettore;
+import model.ElettoreDaoImpl;
 
 public class ModificaPasswordHandler extends DefaultSceneHandler{
 	@FXML
@@ -44,14 +45,15 @@ public class ModificaPasswordHandler extends DefaultSceneHandler{
 	}
 	
 	private void changeToNewPassword() {
-		//chiamata al db
-		if(true/*password gia presente*/) {
+		Elettore e = (Elettore)data;
+		if(e.getPassword() == nuovaPassword1.getText()) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("La nuova password e' identica alla precedente");
 			alert.setTitle("Password identiche");
 			alert.show();
 		}else {
-			//aggiungi 
+			e.setPassword(nuovaPassword1.getText());
+			new ElettoreDaoImpl().updatePassword(e);
 		}
 	}
 

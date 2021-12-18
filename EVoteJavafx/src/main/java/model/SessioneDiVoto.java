@@ -40,7 +40,7 @@ public class SessioneDiVoto {
 	}
 	
 	public int getMinuti() {
-		return 1;
+		return scadenza.getMinute();
 	}
 
 	public void setScadenza(int giorno, int mese, int anno, int ore, int minuti) {

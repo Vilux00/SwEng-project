@@ -1,8 +1,6 @@
 package model;
 
-import java.util.List;
-
-public interface ElettoreDao {
+public interface ElettoreDao extends DaoInterface{
 	public boolean login(Elettore e);
-	public List<String> getInfoByCodF(Elettore e);
+	public void updatePassword(Elettore e);
 }
