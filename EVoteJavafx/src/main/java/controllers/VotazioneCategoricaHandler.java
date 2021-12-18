@@ -18,8 +18,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class VotazioneCategoricaHandler extends DefaultSceneHandler implements Initializable{
 	
-	ObservableList<String> candidati = FXCollections.observableArrayList();
-	ObservableList<String> partiti = FXCollections.observableArrayList();
+	private ObservableList<String> candidati = FXCollections.observableArrayList();
+	private ObservableList<String> partiti = FXCollections.observableArrayList();
 	@FXML
     private ComboBox<String> comboBoxCandidatiPartiti;
 

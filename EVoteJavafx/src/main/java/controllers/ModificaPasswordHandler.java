@@ -14,11 +14,11 @@ import model.Password;
 
 public class ModificaPasswordHandler extends DefaultSceneHandler{
 	@FXML
-	PasswordField vecchiaPassword;
+	private PasswordField vecchiaPassword;
 	@FXML
-	PasswordField nuovaPassword1;
+	private PasswordField nuovaPassword1;
 	@FXML
-	PasswordField nuovaPassword2;
+	private PasswordField nuovaPassword2;
 	
 	public void modificaPassword(ActionEvent event) throws IOException {
 		String oldPw = vecchiaPassword.getText();
