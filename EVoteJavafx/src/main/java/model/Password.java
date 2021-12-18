@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import java.security.SecureRandom;
 import org.apache.commons.lang3.RandomStringUtils;

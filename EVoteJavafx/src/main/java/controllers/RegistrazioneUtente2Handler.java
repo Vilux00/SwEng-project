@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import main.Password;
+import model.Password;
 
 public class RegistrazioneUtente2Handler extends DefaultSceneHandler{
 	

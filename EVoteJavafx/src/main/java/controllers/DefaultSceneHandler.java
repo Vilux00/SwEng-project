@@ -77,6 +77,23 @@ public class DefaultSceneHandler {
 		scenaPrecedenteTitolo.add(titolo);
 	}
 	
+	public void goToScenaPrecedente(ActionEvent event, Object data) throws IOException{
+		String str = scenaPrecedente.lastElement();
+		if (str.contains("login") == true) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setContentText("Sicuro di fare logout?");
+			alert.setHeaderText("Conferma logout");
+			alert.setTitle("Logout");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+				isLogged = false;
+			}
+			return;
+		}
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+	}
+
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
 		String str = scenaPrecedente.lastElement();
 		if (str.contains("login") == true) {

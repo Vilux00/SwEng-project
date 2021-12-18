@@ -1,5 +1,5 @@
 package model;
 
-public interface SessioneDiVotoDao {
+public interface SessioneDiVotoDao extends DaoInterface{
 	public void inserisciSessione(SessioneDiVoto s);
 }

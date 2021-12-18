@@ -1,8 +1,8 @@
 package model;
 
 public class Elettore {
-	private String codF;
-	private String password;
+	protected String codF;
+	protected String password;
 	
 	public Elettore(String codF, String password) {
 		this.setCodF(codF);

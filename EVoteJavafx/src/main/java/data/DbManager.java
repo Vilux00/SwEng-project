@@ -1,15 +1,13 @@
 package data;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 public class DbManager {
     private static DbManager dbMgr;
     private String connString = "jdbc:postgresql://localhost/eVoting-platform?user=user_1&password=password&ssl=false"; //Not working with ssl=true
     
+    private DbManager(){}
+
     public static DbManager getInstance(){
         if(dbMgr == null) {
             dbMgr = new DbManager();
@@ -17,7 +15,7 @@ public class DbManager {
         return dbMgr;
     }
 
-    private Connection open(){
+    public Connection open(){
         try{
             return DriverManager.getConnection(connString);
         }catch(SQLException e){
@@ -26,7 +24,7 @@ public class DbManager {
         }
     }
     
-    private void close(Connection c) {
+    public void close(Connection c) {
     	try {
 			c.close();
 		} catch (SQLException e) {
@@ -34,22 +32,7 @@ public class DbManager {
 		}
     }
 
-	public boolean login(String codF, String password) {
-		Connection conn = open();
-		try {
-	        PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ? AND password = ?");
-	        stm.setString(1, codF);
-	        stm.setString(2, DigestUtils.sha256Hex(password).toUpperCase());
-	        ResultSet r = stm.executeQuery();
-	        return r.next();
-		} catch(SQLException ex){
-			ex.printStackTrace();
-			return false;
-		} finally {
-			close(conn);
-		}
-	}
-
+    /*
     public List<String> getInfoElettoreByCodF(String codF){
     	System.out.println(1);
         Connection conn = open();
@@ -74,5 +57,6 @@ public class DbManager {
             close(conn);
         }
     }
+    */
 
 }
