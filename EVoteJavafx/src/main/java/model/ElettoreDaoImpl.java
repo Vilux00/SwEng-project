@@ -3,7 +3,6 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -29,15 +28,17 @@ public class ElettoreDaoImpl implements ElettoreDao{
 	}
 
 	@Override
-	public void updatePassword(Elettore e) {
+	public boolean updatePassword(Elettore e) {
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
 	        PreparedStatement stm = conn.prepareStatement("UPDATE evoting.elettore SET password = ? WHERE codice_fiscale = ?");
 	        stm.setString(1, DigestUtils.sha256Hex(e.getPassword()).toUpperCase());
 	        stm.setString(2, e.getCodF());
+			return stm.executeUpdate() > 0; 
 		} catch(SQLException ex){
 			ex.printStackTrace();
+			return false;
 		} finally {
 			dbM.close(conn);
 		}
