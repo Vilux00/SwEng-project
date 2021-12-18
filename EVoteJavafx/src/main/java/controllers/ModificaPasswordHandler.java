@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
 import main.Password;
+import model.Elettore;
 
 public class ModificaPasswordHandler extends DefaultSceneHandler{
 	@FXML
@@ -38,8 +39,8 @@ public class ModificaPasswordHandler extends DefaultSceneHandler{
 	}
 	
 	private boolean checkOldPassword() {
-		//controllo nel db
-		return false;
+		Elettore e = (Elettore)data;
+		return e.getPassword() == vecchiaPassword.getText();
 	}
 	
 	private void changeToNewPassword() {
