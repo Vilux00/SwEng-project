@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.postgresql.util.PSQLException;
+
 import data.DbManager;
 
 public class NuovoUtenteDaoImpl implements NuovoUtenteDao{
@@ -23,10 +25,9 @@ public class NuovoUtenteDaoImpl implements NuovoUtenteDao{
 			ps.setString(8, DigestUtils.sha256Hex(n.getPassword()));
 			ps.setString(9, n.getPrivilegio() + "");
 			return ps.executeUpdate() > 0;
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
 			return false;
-		} finally {
+		}finally {
 			dbM.close(c);
 		}
 	}

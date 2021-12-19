@@ -1,9 +1,13 @@
 package controllers;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import model.DaoFactory;
 import model.Elettore;
@@ -30,12 +34,19 @@ public class RegistrazioneUtente2Handler extends DefaultSceneHandler{
 		boxCreaAccount.setVisible(true);
 	}
 	
-	public void registraUtenteDB(ActionEvent event) {
+	public void registraUtenteDB(ActionEvent event) throws IOException {
 		NuovoUtente n = (NuovoUtente)data;
 		n.setPassword(password);
 		btnGeneraPassword.setDisable(true);
 		NuovoUtenteDaoImpl nu = (NuovoUtenteDaoImpl)DaoFactory.getInstance().getDao("NuovoUtente");
-		if(nu.register(n));
+		if(!nu.register(n)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Utente gia' registrato");
+			alert.setTitle("Errore");
+			alert.show();
+			rimuoviScenaPrecedente();
+			goToScenaPrecedente(event);
+		};
 		btnCreaAccount.setDisable(true);
 		stampaPdfAccount.setVisible(true);
 	}

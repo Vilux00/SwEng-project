@@ -76,10 +76,12 @@ public class CreazioneSessioneHandler extends DefaultSceneHandler implements Ini
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				SessioneDiVoto s = new SessioneDiVoto(nome.getText(), StringUtils.substringBetween(v, "(", ")"));
 				s.setScadenza(gg, mm, yy, hh, 0);
-				if(comboBoxVoto.getValue().contains("Voto") == true) {
-					changeScene(event, "votazioneClassicaView.fxml", "Creazione sessione di voto", s);
+				if(comboBoxVoto.getValue().contains("categorico") == true) {
+					changeScene(event, "creaVotazioneCategoricaView.fxml", "Creazione sessione di voto", s);
+				}else if (comboBoxVoto.getValue().contains("Referendum") == true){
+					changeScene(event, "creaReferendumView.fxml", "Creazione sessione di voto", s);
 				}else {
-					changeScene(event, "referendumView.fxml", "Creazione sessione di voto", s);
+					changeScene(event, "creaVotazioneOrdinaleView.fxml", "Creazione sessione di voto", s);
 				}
 			}
 		}		

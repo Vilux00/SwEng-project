@@ -98,8 +98,9 @@ public class NuovoUtente {
 	}
 	
 	public boolean checkCodFisc(){
-		char []codFisc = codF.toCharArray();
+		char []codFisc = codF.toUpperCase().toCharArray();
         // Lunghezza non corretta
+		
         if(codFisc.length != 16) return false;
 
         String cognomeLettere = cognome.replaceAll("[AEIOUaeiou,]", "").concat(cognome.replaceAll("[B-DF-HJ-NP-TV-Zb-df-hj-np-tv-z,]", "")).toUpperCase();
@@ -121,20 +122,30 @@ public class NuovoUtente {
         if(dataNascita.getYear() % 100 != (codFisc[6] - '0') * 10 + (codFisc[7] - '0')) return false;
         
         // Check nono carattere
-        //if(dataNascita.getMonthValue() != (int)codFisc[8] - 64) return false;
+        if(dataNascita.getMonthValue() == 1 && codFisc[8] != 'A') return false;
+        if(dataNascita.getMonthValue() == 2 && codFisc[8] != 'B') return false;
+        if(dataNascita.getMonthValue() == 3 && codFisc[8] != 'C') return false;
+        if(dataNascita.getMonthValue() == 4 && codFisc[8] != 'D') return false; 
+        if(dataNascita.getMonthValue() == 5 && codFisc[8] != 'E') return false;
+        if(dataNascita.getMonthValue() == 6 && codFisc[8] != 'H') return false;
+        if(dataNascita.getMonthValue() == 7 && codFisc[8] != 'L') return false;
+        if(dataNascita.getMonthValue() == 8 && codFisc[8] != 'M') return false;
+        if(dataNascita.getMonthValue() == 9 && codFisc[8] != 'P') return false;
+        if(dataNascita.getMonthValue() == 10 && codFisc[8] != 'R') return false;
+        if(dataNascita.getMonthValue() == 11 && codFisc[8] != 'S') return false;
+        if(dataNascita.getMonthValue() == 12 && codFisc[8] != 'T') return false;
         
         // Check decimo e undicesimo carattere
         int giorno = (codFisc[9] - '0') * 10 + (codFisc[10] - '0');
         if(giorno - (sesso == 'F' ? 40 : 0) != dataNascita.getDayOfMonth()) return false;
-        
         /* Da qui il controllo è semplificato */
+        
         // Check dodicesimo carattere
-        if(Character.isDigit(codFisc[11]) || (nazioneNascita != "Italia" && codFisc[11] != 'Z')) return false;
-        System.out.println("Ciao");
+        if(Character.isDigit(codFisc[11]) || (!nazioneNascita.equals("Italia") && codFisc[11] != 'Z')) return false;
         
         // Check tredicesimo, quattordicesimo e quindicesimo carattere
         for(int i = 12; i < 15; i++) if(Character.isLetter(codFisc[i])) return false;
-
+        
         // Check sedicesimo carattere
         if(Character.isDigit(codFisc[15])) return false;
         
