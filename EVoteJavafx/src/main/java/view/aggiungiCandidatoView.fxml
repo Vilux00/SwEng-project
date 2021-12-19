@@ -31,11 +31,11 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField promptText="Nome">
+                  <TextField fx:id="nome" promptText="Nome">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin></TextField>
-                  <TextField promptText="Cognome" />
+                  <TextField fx:id="cognome" promptText="Cognome" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="583.0">
@@ -51,7 +51,7 @@
                         <Insets right="30.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="partito"/>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#inserimentoCandidato" text="Conferma inserimento">
