@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import data.DbManager;
 
@@ -17,7 +18,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			ps.setString(1, s.getNome());
 			ps.setString(2, s.getModalitaVoto());
 			ps.setString(3, s.getModVincitore());
-			ps.setString(4, "B");
+			ps.setNull(4, Types.NULL);
 			ps.setString(5, s.getQuesito());
 			ps.setObject(6, s.getScadenza());
 			return ps.executeUpdate() > 0;
