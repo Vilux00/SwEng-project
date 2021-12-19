@@ -25,7 +25,7 @@
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Label>
-                  <TextField promptText="Nome" />
+                  <TextField fx:id="nome" promptText="Nome" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="525.0">

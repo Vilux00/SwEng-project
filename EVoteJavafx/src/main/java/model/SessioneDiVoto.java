@@ -1,11 +1,22 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SessioneDiVoto {
 	private String nome;
-	private String modalita;
+	private String modalitaVoto;
+	private String modVincitore;
 	private LocalDateTime scadenza;
+	private char pOrC;
+	private String quesito;
+	private List<Candidato> candidati;
+	
+	public SessioneDiVoto(String nome, String modalitaVoto) {
+		this.nome = nome;
+		this.modalitaVoto = modalitaVoto;
+		this.quesito = null;
+	}
 	
 	public String getNome() {
 		return nome;
@@ -15,35 +26,52 @@ public class SessioneDiVoto {
 		this.nome = nome;
 	}
 	
-	public String getModalita() {
-		return modalita;
+	public String getModalitaVoto() {
+		return modalitaVoto;
 	}
 	
-	public void setModalita(String modalita) {
-		this.modalita = modalita;
-	}
-
-	public int getGiorno() {
-		return scadenza.getDayOfMonth();
+	public void setModalitaVoto(String modalitaVoto) {
+		this.modalitaVoto = modalitaVoto;
 	}
 	
-	public int getMese() {
-		return scadenza.getMonthValue();
+	public void setModVincitore(String modalitaVincitore) {
+		this.modVincitore = modalitaVincitore;
 	}
 	
-	public int getAnno() {
-		return scadenza.getYear();
+	public String getModVincitore() {
+		return this.modVincitore;
 	}
 	
-	public int getOre() {
-		return scadenza.getHour();
-	}
-	
-	public int getMinuti() {
-		return scadenza.getMinute();
+	public LocalDateTime getScadenza() {
+		return this.scadenza;
 	}
 
 	public void setScadenza(int giorno, int mese, int anno, int ore, int minuti) {
-		this.scadenza = LocalDateTime.of(giorno, mese, anno, ore, minuti);
+		this.scadenza = LocalDateTime.of(anno, mese, giorno, ore, minuti);
 	}
+
+	public String getQuesito() {
+		return quesito;
+	}
+
+	public void setQuesito(String quesito) {
+		this.quesito = quesito;
+	}
+
+	public List<Candidato> getCandidati() {
+		return candidati;
+	}
+	
+	public boolean addCandidato(Candidato c) {
+		return candidati.add(c);
+	}
+
+	public char getPOrC() {
+		return pOrC;
+	}
+
+	public void setPOrC(char pOrC) {
+		this.pOrC = pOrC;
+	}
+	
 }

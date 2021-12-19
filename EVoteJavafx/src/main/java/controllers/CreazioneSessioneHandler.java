@@ -2,9 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import model.SessioneDiVoto;
 import javafx.scene.control.Alert.AlertType;
 
 public class CreazioneSessioneHandler extends DefaultSceneHandler implements Initializable{
@@ -21,17 +24,12 @@ public class CreazioneSessioneHandler extends DefaultSceneHandler implements Ini
 	private ObservableList<Integer> ol = FXCollections.observableArrayList();
 	private ObservableList<String> ol2 = FXCollections.observableArrayList();
 	
- 	@FXML
-    private ComboBox<Integer> comboBoxAnno;
-
-    @FXML
-    private ComboBox<Integer> comboBoxGiorno;
-
-    @FXML
-    private ComboBox<String> comboBoxMese;
-    
-    @FXML
-    private ComboBox<String> comboBoxVoto;
+	@FXML private TextField nome;
+ 	@FXML private ComboBox<Integer> comboBoxAnno;
+    @FXML private ComboBox<Integer> comboBoxGiorno;
+    @FXML private ComboBox<Integer> comboBoxMese;
+    @FXML private ComboBox<String> comboBoxVoto;
+    @FXML private ComboBox<Integer> comboBoxOrario;
     
 
 	@Override
@@ -40,39 +38,48 @@ public class CreazioneSessioneHandler extends DefaultSceneHandler implements Ini
 	}
 	
 	private void loadData() {
-		for (int i = 1; i <= 31; i++) {
-			ol.add(i);
-		}
+		for (int i = 1; i <= 31; i++) ol.add(i);
 		comboBoxGiorno.getItems().addAll(ol);
 		ol.clear();
-		for (int i = 2021; i <= 2050; i++) {
-			ol.add(i);
-		}
+		for (int i = 2021; i <= 2050; i++) ol.add(i);
 		comboBoxAnno.getItems().addAll(ol);
-		ol2.addAll("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre");
-		comboBoxMese.getItems().addAll(ol2);
+		ol.clear();
+		for(int i = 1; i < 13; i++) ol.add(i);
+		comboBoxMese.getItems().addAll(ol);
+		ol.clear();
+		for(int i = 0; i < 23; i+=2) ol.add(i);
+		comboBoxOrario.getItems().addAll(ol);
 		ol2.clear();
-		ol2.addAll("Voto ordinale", "Voto categorico", "Voto categorico con preferenze", "Referendum");
+		ol2.addAll("Voto ordinale(ORD)", "Voto categorico(CAT)", "Voto categorico con preferenze(CATP)", "Referendum(REF)");
 		comboBoxVoto.getItems().addAll(ol2);
 	}
 	
 	public void conferma(ActionEvent event) throws IOException{
+		String n = nome.getText();
+		String v = comboBoxVoto.getValue();
+		Integer gg = comboBoxGiorno.getValue();
+		Integer mm = comboBoxMese.getValue();
+		Integer yy = comboBoxAnno.getValue();
+		Integer hh = comboBoxOrario.getValue();
 		setScenaPrecedente("creazioneSessioneView.fxml", "Creazione sessione di voto");
-		if(Objects.isNull(comboBoxVoto.getValue()) == true) {
+		if(v == null || n == null || gg == null || mm == null || yy == null || hh == null) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Selezionare il tipo di voto");
+			alert.setTitle("Campi mancanti");
+			alert.setHeaderText("Alcuni campi non sono stati compilati");
 			alert.show();
 			rimuoviScenaPrecedente();
 		}else {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setHeaderText("Conferma dati");
+			alert.setHeaderText("Conferma i dati inseriti");
 			alert.setTitle("Conferma dati");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
+				SessioneDiVoto s = new SessioneDiVoto(nome.getText(), StringUtils.substringBetween(v, "(", ")"));
+				s.setScadenza(gg, mm, yy, hh, 0);
 				if(comboBoxVoto.getValue().contains("Voto") == true) {
-					changeScene(event, "votazioneClassicaView.fxml", "Creazione sessione di voto");
+					changeScene(event, "votazioneClassicaView.fxml", "Creazione sessione di voto", s);
 				}else {
-					changeScene(event, "referendumView.fxml", "Creazione sessione di voto");
+					changeScene(event, "referendumView.fxml", "Creazione sessione di voto", s);
 				}
 			}
 		}		

@@ -35,7 +35,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="98.0" prefWidth="450.0" promptText="Quesito" />
+                  <TextArea fx:id="quesito" prefHeight="98.0" prefWidth="450.0" promptText="Quesito" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
