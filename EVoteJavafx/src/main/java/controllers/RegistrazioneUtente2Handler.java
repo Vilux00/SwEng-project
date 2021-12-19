@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import model.DaoFactory;
+import model.Elettore;
 import model.NuovoUtente;
 import model.Password;
 import model.NuovoUtenteDaoImpl;
@@ -34,12 +35,13 @@ public class RegistrazioneUtente2Handler extends DefaultSceneHandler{
 		n.setPassword(password);
 		btnGeneraPassword.setDisable(true);
 		NuovoUtenteDaoImpl nu = (NuovoUtenteDaoImpl)DaoFactory.getInstance().getDao("NuovoUtente");
-		nu.register(n);
+		if(nu.register(n));
 		btnCreaAccount.setDisable(true);
 		stampaPdfAccount.setVisible(true);
 	}
 	
 	public void stampaCredenzialiUtente(ActionEvent event) {
-		System.out.println("Stampa credenziali utente");
+		Elettore e = (Elettore)data;
+		System.out.println("Codice fiscale: " + e.getCodF() + ", password: " + e.getPassword());
 	}
 }
