@@ -33,7 +33,7 @@ public class ElettoreDaoImpl implements ElettoreDao{
 		Connection conn = dbM.open();
 		try {
 	        PreparedStatement stm = conn.prepareStatement("UPDATE evoting.elettore SET password = ? WHERE codice_fiscale = ?");
-	        stm.setString(1, DigestUtils.sha256Hex(e.getPassword()).toUpperCase());
+	        stm.setString(1, DigestUtils.sha256Hex(e.getPassword()));
 	        stm.setString(2, e.getCodF());
 			return stm.executeUpdate() > 0; 
 		} catch(SQLException ex){

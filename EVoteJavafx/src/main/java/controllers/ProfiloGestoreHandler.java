@@ -7,7 +7,7 @@ public class ProfiloGestoreHandler extends ProfiloScrutatoreHandler{
 	@Override
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "modificaPasswordView.fxml", "Modifica password");
+		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
 	}
 	
 	@Override
