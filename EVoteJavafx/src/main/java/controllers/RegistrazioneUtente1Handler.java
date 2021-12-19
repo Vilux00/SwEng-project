@@ -52,13 +52,12 @@ public class RegistrazioneUtente1Handler  extends DefaultSceneHandler implements
 			alert.show();
 		} else {
 			NuovoUtente n = new NuovoUtente(nome, cognome, codF, LocalDate.of(anno, mese, giorno), paese, nazione, sesso.charAt(0), null, privilegio.charAt(0));
-			/*if(!n.checkCodFisc()) {
-			 	=(
+			if(!n.checkCodFisc()) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setHeaderText("Errore codice fiscale inserito");
 				alert.setTitle("Errore");
 				alert.show();
-			}else {*/
+			}else {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setContentText("Conferma i dati inseriti per procedere");
 				alert.setHeaderText("Conferma dati");
@@ -68,7 +67,7 @@ public class RegistrazioneUtente1Handler  extends DefaultSceneHandler implements
 					setScenaPrecedente("registrazioneUtenteView1.fxml", "Registrazione utente");
 					changeScene(event, "registrazioneUtenteView2.fxml", "Registrazione utente", n);
 				}
-			//}
+			}
 		}
 	}
 	
