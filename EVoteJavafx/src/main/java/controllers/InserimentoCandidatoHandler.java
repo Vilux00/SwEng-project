@@ -22,7 +22,7 @@ public class InserimentoCandidatoHandler  extends DefaultSceneHandler{
 		String p = partito.getText();
 		Candidato ca = new Candidato(n, c);
 		CandidatoDao cd = (CandidatoDaoImpl) DaoFactory.getInstance().getDao("Candidato");
-		if(cd.inserisciCandidato(ca, new Partito(nome.getText()))) {
+		if(cd.inserisciCandidato(ca, new Partito(p))) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Inserimento candidato");
 			alert.setHeaderText("Candidato inserito correttamente");

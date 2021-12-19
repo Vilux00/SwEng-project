@@ -14,16 +14,13 @@ public class PartitoDaoImpl implements PartitoDao{
 	public boolean insertPartito(Partito p) {
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
-		CandidatoDaoImpl ca = (CandidatoDaoImpl) DaoFactory.getInstance().getDao("Candidato");
 		try {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM evoting.partito WHERE nome = ?");
 			ps.setString(1, p.getNome());
 			if(ps.executeQuery().next()) return false;
-			ps = conn.prepareStatement("INSERT INTO evoting.partito(nome) VALUES ? ");
+			ps = conn.prepareStatement("INSERT INTO evoting.partito(nome) VALUES(?) ");
 			ps.setString(1, p.getNome());
 			if(ps.executeUpdate() == 0) return false;
-			for(Candidato c : p.getCandidati()) 
-				if(!ca.inserisciCandidato(c, p)) return false;
 			return true;
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -56,7 +53,7 @@ public class PartitoDaoImpl implements PartitoDao{
 		List<Candidato> candidati = new ArrayList<>();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT c.id FROM evoting.candidato AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT c.id FROM evoting.candidato_partito AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
 			ps.setString(1, p.getNome());
 			ResultSet r = ps.executeQuery();
 			while(r.next()) candidati.add(ca.getCandidatoById(r.getString(1)));
@@ -74,7 +71,7 @@ public class PartitoDaoImpl implements PartitoDao{
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT c.id FROM evoting.partito WHERE nome = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT id FROM evoting.partito WHERE nome = ?");
 			ps.setString(1, p.getNome());
 			ResultSet r = ps.executeQuery();
 			if(r.next()) return r.getInt(1);
