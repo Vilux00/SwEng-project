@@ -17,7 +17,7 @@ public class LoginScrutatoreHandler extends DefaultSceneHandler{
 	private TextField password;
 	
 	public void login(ActionEvent event) throws IOException {
-		String codFisc = codF.getText();
+		String codFisc = codF.getText().replaceAll(" ", "");;
 		String pwd = password.getText();
 
 		if(codFisc.equals("") || pwd.equals("")){
