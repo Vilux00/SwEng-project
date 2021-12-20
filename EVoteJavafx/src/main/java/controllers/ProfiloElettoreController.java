@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import model.Elettore;
 
 public class ProfiloElettoreController extends DefaultSceneController implements Initializable{
 	
@@ -17,21 +18,19 @@ public class ProfiloElettoreController extends DefaultSceneController implements
 	private Label id;
 	@FXML
 	private Label codF;
-	
+
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
 	}
 	
 	public void vota(ActionEvent event) throws IOException {
-		
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		/*List<String> props = DbManager.getInstance().getInfoElettoreByCodF(e.getCodF());
 		gener.setText(gener.getText() + props.get(0) + " " + props.get(1));
 		id.setText("Nato a: " + props.get(2));
