@@ -77,12 +77,13 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				SessioneDiVoto s = new SessioneDiVoto(nome.getText(), StringUtils.substringBetween(v, "(", ")"));
 				s.setScadenza(gg, mm, yy, hh, 0);
+				Object []objArray = new Object[] {s, data};
 				if(comboBoxVoto.getValue().contains("categorico") == true) {
-					changeScene(event, "creaVotazioneCategorica.fxml", "Creazione sessione di voto", s);
+					changeScene(event, "creaVotazioneCategorica.fxml", "Creazione sessione di voto", objArray);
 				}else if (comboBoxVoto.getValue().contains("Referendum") == true){
-					changeScene(event, "creaReferendumView.fxml", "Creazione sessione di voto", s);
+					changeScene(event, "creaReferendumView.fxml", "Creazione sessione di voto", objArray);
 				}else {
-					changeScene(event, "creaVotazioneOrdinaleView.fxml", "Creazione sessione di voto", s);
+					changeScene(event, "creaVotazioneOrdinaleView.fxml", "Creazione sessione di voto", objArray);
 				}
 			}
 		}		
