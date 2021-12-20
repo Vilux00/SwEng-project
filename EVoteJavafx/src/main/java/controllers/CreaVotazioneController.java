@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import org.apache.commons.lang3.StringUtils;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,8 @@ import model.Candidato;
 import model.DaoFactory;
 import model.Partito;
 import model.PartitoDao;
+import model.SessioneDiVoto;
+import model.SessioneDiVotoDao;
 
 public class CreaVotazioneController extends DefaultSceneController implements Initializable{
 	
@@ -30,13 +35,24 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
 	public void conferma(ActionEvent event) throws IOException{
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma i dati inseriti");
-		alert.setTitle("Conferma dati");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			rimuoviScenaPrecedente(2);
-			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema"); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+		SessioneDiVoto s = (SessioneDiVoto) data;
+		s.setModVincitore(StringUtils.substringBetween(comboBoxVincitore.getValue(), "(", ")"));
+		for(Candidato c : candidatiScelti) s.addCandidato(c);
+		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		if(!se.inserisciSessioneNonReferendum(s)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore creazione sessione");
+			alert.setTitle("Qualcosa è andato storto");
+			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema");
+		}else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText("Conferma dati");
+			alert.setTitle("Conferma dati");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				rimuoviScenaPrecedente(2);
+				changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema"); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+			}
 		}
 	}
 
@@ -66,7 +82,7 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	}
 	
 	private void loadData() {
-		comboBoxVincitore.getItems().addAll("Maggioranza", "Maggioranza assoluta");
+		comboBoxVincitore.getItems().addAll("Maggioranza(MAG)", "Maggioranza assoluta(MAGA)");
 		PartitoDao pa = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
 		List<Partito> l = pa.getPartiti();
 		for(Partito p : l) {

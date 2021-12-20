@@ -52,11 +52,12 @@ public class PartitoDaoImpl implements PartitoDao{
 		List<Candidato> candidati = new ArrayList<>();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT c.nome, c.cognome FROM evoting.candidato_partito AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT c.id, c.nome, c.cognome FROM evoting.candidato_partito AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
 			ps.setString(1, p.getNome());
 			ResultSet r = ps.executeQuery();
 			while(r.next()) {
-				Candidato c = new Candidato(r.getString(1), r.getString(2));
+				Candidato c = new Candidato(r.getString(2), r.getString(3));
+				c.setId(r.getInt(1));
 				c.setPartito(p);
 				candidati.add(c);
 			}

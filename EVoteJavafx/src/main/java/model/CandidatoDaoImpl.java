@@ -67,4 +67,21 @@ public class CandidatoDaoImpl implements CandidatoDao{
 		}
 	}
 
+	@Override
+	public boolean inserisciCandidatoSessione(Candidato c, int id) {
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+			PreparedStatement s = conn.prepareStatement("INSERT INTO evoting.candidato_per VALUES(?, ?)");
+			s.setInt(1, c.getId());
+			s.setInt(2, id);
+			return s.executeUpdate() > 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			dbM.close(conn);
+		}
+	}
+
 }
