@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface CandidatoDao extends DaoInterface{
 	public boolean inserisciCandidato(Candidato c, Partito p);
-	public Candidato getCandidatoById(String id);
+	public Candidato getCandidatoById(int id);
 	public List<Candidato> getCandidati();
 }

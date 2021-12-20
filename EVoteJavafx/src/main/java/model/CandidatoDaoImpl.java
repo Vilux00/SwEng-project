@@ -32,12 +32,12 @@ public class CandidatoDaoImpl implements CandidatoDao{
 	}
 	
 	@Override
-	public Candidato getCandidatoById(String id) {
+	public Candidato getCandidatoById(int id) {
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT nome, cognome FROM evoting.candidato_partito c.id = ?");
-			ps.setString(1, id);
+			PreparedStatement ps = conn.prepareStatement("SELECT nome, cognome FROM evoting.candidato_partito WHERE id = ?");
+			ps.setInt(1, id);
 			ResultSet r = ps.executeQuery();
 			if(r.next()) return new Candidato(r.getString(1), r.getString(2));
 			return null;

@@ -49,14 +49,13 @@ public class PartitoDaoImpl implements PartitoDao{
 	@Override
 	public List<Candidato> getCandidati(Partito p){
 		DbManager dbM = DbManager.getInstance();
-		CandidatoDaoImpl ca = (CandidatoDaoImpl) DaoFactory.getInstance().getDao("Candidato");
 		List<Candidato> candidati = new ArrayList<>();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT c.id FROM evoting.candidato_partito AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT c.nome, c.cognome FROM evoting.candidato_partito AS c JOIN evoting.partito AS p ON c.id_partito = p.id WHERE p.nome = ?");
 			ps.setString(1, p.getNome());
 			ResultSet r = ps.executeQuery();
-			while(r.next()) candidati.add(ca.getCandidatoById(r.getString(1)));
+			while(r.next()) candidati.add(new Candidato(r.getString(1), r.getString(2)));
 			return candidati;
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -97,7 +96,7 @@ public class PartitoDaoImpl implements PartitoDao{
 				p.setCandidati(getCandidati(p));
 				l.add(p);
 			}
-			return null;
+			return l;
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;

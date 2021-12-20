@@ -57,6 +57,7 @@ public class CreaVotazioneHandler extends DefaultSceneHandler implements Initial
 		PartitoDao pa = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
 		List<Partito> l = pa.getPartiti();
 		for(Partito p : l) {
+			System.out.println(p);
 			for(Candidato c : p.getCandidati()) {
 				list.add("(" + p.getNome() + ")" + c.getNome() + " " + c.getCognome());
 			}
