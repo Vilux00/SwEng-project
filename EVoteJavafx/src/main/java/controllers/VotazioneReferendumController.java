@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
-public class VotazioneReferendumHandler extends DefaultSceneHandler{
+public class VotazioneReferendumController extends DefaultSceneController{
 	public void setFavorevole(ActionEvent event) throws IOException{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Conferma dati");
