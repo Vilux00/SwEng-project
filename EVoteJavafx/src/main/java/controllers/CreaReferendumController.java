@@ -42,7 +42,8 @@ public class CreaReferendumController extends DefaultSceneController implements 
 			alert.setContentText("Quesito: " + quesito.getText() + "\nModalita' di voto: " + comboBoxVincitore.getValue());
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
-				SessioneDiVoto s = (SessioneDiVoto) data;
+				Object []obj = (Object [])data;
+				SessioneDiVoto s = (SessioneDiVoto) obj[0];
 				s.setModVincitore(StringUtils.substringBetween(comboBoxVincitore.getValue(), "(", ")"));
 				s.setQuesito(quesito.getText());
 				SessioneDiVotoDaoImpl se = (SessioneDiVotoDaoImpl) DaoFactory.getInstance().getDao("SessioneDiVoto");
@@ -52,7 +53,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 					alert.setTitle("Sessione creata");
 					alert.show();
 					rimuoviScenaPrecedente(2);
-					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema"); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
 				}
 				else {
 					alert = new Alert(AlertType.ERROR);

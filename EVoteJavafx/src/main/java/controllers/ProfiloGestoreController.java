@@ -29,7 +29,7 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	
 	public void creaSessioneVoto(ActionEvent event) throws IOException{
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "creazioneSessioneView.fxml", "Creazione sessione di voto");
+		changeScene(event, "creazioneSessioneView.fxml", "Creazione sessione di voto", data);
 	}
 	
 	public void visualizzaSessioni(ActionEvent event) throws IOException{

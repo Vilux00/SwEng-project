@@ -19,6 +19,8 @@ import model.Candidato;
 import model.DaoFactory;
 import model.Partito;
 import model.PartitoDao;
+import model.SessioneDiVoto;
+import model.SessioneDiVotoDao;
 
 public class CreaVotazioneOrdinaleController extends DefaultSceneController implements Initializable{
 	
@@ -30,13 +32,24 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
 	public void conferma(ActionEvent event) throws IOException{
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma dati");
-		alert.setTitle("Conferma dati");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			rimuoviScenaPrecedente(2);
-			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema"); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+		Object []obj = (Object [])data;
+		SessioneDiVoto s = (SessioneDiVoto) obj[1];
+		for(Candidato c : candidatiScelti) s.addCandidato(c);
+		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		if(!se.inserisciSessioneNonReferendum(s)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore creazione sessione");
+			alert.setTitle("Qualcosa è andato storto");
+			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]);
+		}else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText("Conferma dati");
+			alert.setTitle("Conferma dati");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				rimuoviScenaPrecedente(2);
+				changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+			}
 		}
 	}
 

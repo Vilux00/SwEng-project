@@ -1,6 +1,7 @@
 package model;
 
 public class Candidato {
+	private int id;
 	private String nome;
 	private String cognome;
 	private Partito partito;
@@ -34,6 +35,14 @@ public class Candidato {
 		return partito;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
 		return "(" + partito.toString() + ") " + nome + " " + cognome;
@@ -44,6 +53,5 @@ public class Candidato {
 		Candidato c = (Candidato) o;
 		return nome == c.nome && cognome == c.cognome && partito.equals(c.partito);
 	}
-
 
 }

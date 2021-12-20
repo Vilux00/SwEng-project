@@ -1,9 +1,11 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class SessioneDiVoto {
+public class SessioneDiVoto implements Iterable<Candidato>{
 	private String nome;
 	private String modalitaVoto;
 	private String modVincitore;
@@ -16,6 +18,7 @@ public class SessioneDiVoto {
 		this.nome = nome;
 		this.modalitaVoto = modalitaVoto;
 		this.quesito = null;
+		candidati = new ArrayList<>();
 	}
 	
 	public String getNome() {
@@ -72,6 +75,11 @@ public class SessioneDiVoto {
 
 	public void setPOrC(char pOrC) {
 		this.pOrC = pOrC;
+	}
+
+	@Override
+	public Iterator<Candidato> iterator() {
+		return candidati.iterator();
 	}
 	
 }
