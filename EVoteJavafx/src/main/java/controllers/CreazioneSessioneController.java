@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.SessioneDiVoto;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Region;
 
 public class CreazioneSessioneController extends DefaultSceneController implements Initializable{
 	
@@ -72,6 +73,8 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setHeaderText("Conferma i dati inseriti");
 			alert.setTitle("Conferma dati");
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.setContentText("Nome sessione: " + n +"\nTipologia sessione: " + v + "\nScadenza: "+ gg + "-" + mm + "-" + yy +  " Orario:" + hh);
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				SessioneDiVoto s = new SessioneDiVoto(nome.getText(), StringUtils.substringBetween(v, "(", ")"));
