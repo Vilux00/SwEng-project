@@ -36,13 +36,7 @@ public class DefaultSceneController {
 	}
 
 	public void changeScene(ActionEvent event, String sceneName, String title) throws IOException{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
-		root = loader.load();
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle(title);
-		stage.show();
+		changeScene(event, sceneName, title, null);
 	}
 	
 	public void sendData(Object o) {
@@ -92,20 +86,7 @@ public class DefaultSceneController {
 	}
 
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		String str = scenaPrecedente.lastElement();
-		if (str.contains("login") == true) {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Sicuro di fare logout?");
-			alert.setHeaderText("Conferma logout");
-			alert.setTitle("Logout");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.isPresent() && result.get() == ButtonType.OK) {
-				changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
-				isLogged = false;
-			}
-			return;
-		}
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
+		goToScenaPrecedente(event, null);
 	}
 	
 	public void rimuoviScenaPrecedente() {
@@ -114,8 +95,6 @@ public class DefaultSceneController {
 	}
 	
 	public void rimuoviScenaPrecedente(int n) {
-		for (int i = 0; i < n; i++) {
-			rimuoviScenaPrecedente();
-		}
+		for (int i = 0; i < n; i++) rimuoviScenaPrecedente();
 	}
 }
