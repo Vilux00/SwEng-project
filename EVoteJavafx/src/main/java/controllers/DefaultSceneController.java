@@ -18,19 +18,16 @@ public class DefaultSceneController {
 	private Parent root;
 	private Stage stage;
 	protected Scene scene;
-	
 	protected Object data;
-	
 	protected static Stack<String> scenaPrecedente = new Stack<>();
 	protected static Stack<String> scenaPrecedenteTitolo = new Stack<>();
-	
 	protected static boolean isLogged = false;
 		
 	public void changeScene(ActionEvent event, String sceneName, String title, Object o) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
 		root = loader.load();
 		DefaultSceneController c = loader.getController();
-		c.passParameter(o); 
+		c.sendData(o); 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -48,7 +45,7 @@ public class DefaultSceneController {
 		stage.show();
 	}
 	
-	public void passParameter(Object o) {
+	public void sendData(Object o) {
 		this.data = o;
 	}
 	

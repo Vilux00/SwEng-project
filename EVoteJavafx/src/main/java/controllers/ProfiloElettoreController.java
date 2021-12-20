@@ -1,25 +1,20 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import model.DaoFactory;
 import model.Elettore;
+import model.ElettoreDao;
 
-public class ProfiloElettoreController extends DefaultSceneController implements Initializable{
-	
-	protected boolean infoMostrate = false;
-	
-	@FXML
-	private Label gener;
-	@FXML
-	private Label id;
-	@FXML
-	private Label codF;
+public class ProfiloElettoreController extends DefaultSceneController{
+	private boolean infoMostrate = false;
+	@FXML private Label codF;
+	@FXML private Label nc;
+	@FXML private Label nascita;
 
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
@@ -30,27 +25,20 @@ public class ProfiloElettoreController extends DefaultSceneController implements
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		/*List<String> props = DbManager.getInstance().getInfoElettoreByCodF(e.getCodF());
-		gener.setText(gener.getText() + props.get(0) + " " + props.get(1));
-		id.setText("Nato a: " + props.get(2));
-		codF.setText(codF.getText() + props.get(3));*/
-	}
 	
 	public void mostraInfo(ActionEvent event) throws IOException{
 		Elettore e = (Elettore)data;
+		ElettoreDao el = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
+		List<String> info = el.getInfoByCodF(e);
 		if (!infoMostrate) {
-			gener.setText(gener.getText().replace("***********", "Nome e cognome"));
-			id.setText(id.getText().replace("***********", "data di nascita"));
-			codF.setText(codF.getText().replace("***********", e.getCodF()));
-			infoMostrate = true;
+			nc.setText(nc.getText().replace("*", "") + ": " + info.get(0) + ", " + info.get(1));
+			nascita.setText(nascita.getText().replace("*", "") + info.get(2) + ", " + info.get(4) + ", " + info.get(3));
+			codF.setText(codF.getText().replace("*", "") + e.getCodF());
 		}else {
-			gener.setText("Nome, Cognome: ************");
-			id.setText("ID: ************");
-			codF.setText("Codice Fiscale: ************");
-			infoMostrate = false;
+			nc.setText("Nome, Cognome: ***************");
+			nascita.setText("Data di nascita, luogo: ***************");
+			codF.setText("Codice fiscale: ***************");
 		}
+		infoMostrate = !infoMostrate;
 	}
 }

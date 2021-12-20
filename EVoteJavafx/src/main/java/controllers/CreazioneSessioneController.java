@@ -22,23 +22,21 @@ import javafx.scene.layout.Region;
 
 public class CreazioneSessioneController extends DefaultSceneController implements Initializable{
 	
-	private ObservableList<Integer> ol = FXCollections.observableArrayList();
-	private ObservableList<String> ol2 = FXCollections.observableArrayList();
-	
 	@FXML private TextField nome;
  	@FXML private ComboBox<Integer> comboBoxAnno;
     @FXML private ComboBox<Integer> comboBoxGiorno;
     @FXML private ComboBox<Integer> comboBoxMese;
     @FXML private ComboBox<String> comboBoxVoto;
-    @FXML private ComboBox<Integer> comboBoxOrario;
-    
+    @FXML private ComboBox<Integer> comboBoxOrario;   
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadData();
 	}
 	
-	private void loadData() {
+	private void loadData() {	
+		ObservableList<Integer> ol = FXCollections.observableArrayList();
+		ObservableList<String> ol2 = FXCollections.observableArrayList();
 		for (int i = 1; i <= 31; i++) ol.add(i);
 		comboBoxGiorno.getItems().addAll(ol);
 		ol.clear();

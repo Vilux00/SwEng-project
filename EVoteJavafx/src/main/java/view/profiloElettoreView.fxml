@@ -27,17 +27,17 @@
                   <Insets left="30.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="gener" text="Nome, Cognome: ************">
+            <Label fx:id="codF" text="Codice fiscale: ***************">
                <VBox.margin>
                   <Insets left="30.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="id" text="ID:************">
+			<Label fx:id="nc" text="Nome, Cognome: ***************">
                <VBox.margin>
                   <Insets left="30.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="codF" text="Codice Fiscale:************">
+            <Label fx:id="nascita" text="Data e luogo di nascita: ***************">
                <VBox.margin>
                   <Insets left="30.0" top="5.0" />
                </VBox.margin>

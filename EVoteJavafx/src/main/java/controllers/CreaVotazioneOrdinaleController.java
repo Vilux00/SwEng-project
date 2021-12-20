@@ -16,17 +16,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 
 public class CreaVotazioneOrdinaleController extends DefaultSceneController implements Initializable{
-	
-	private ObservableList<String> list = FXCollections.observableArrayList();
-	
-	@FXML
-    private ComboBox<String> comboBoxVincitore;
-
-	@FXML
-    private ComboBox<String> comboBoxCandidati;
-	
-	@FXML
-    private ComboBox<String> comboBoxCandidatiScelti;
+	@FXML private ComboBox<String> comboBoxVincitore;
+	@FXML private ComboBox<String> comboBoxCandidati;
+	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
 	public void conferma(ActionEvent event) throws IOException{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -52,6 +44,6 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	}
 	
 	private void loadData() {
-		//aggiunta candidati da db
+		ObservableList<String> list = FXCollections.observableArrayList();
 	}
 }
