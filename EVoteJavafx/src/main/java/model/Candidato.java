@@ -3,6 +3,7 @@ package model;
 public class Candidato {
 	private String nome;
 	private String cognome;
+	private Partito partito;
 	
 	public Candidato(String nome, String cognome) {
 		this.nome = nome;
@@ -23,6 +24,25 @@ public class Candidato {
 	
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+	
+	public void setPartito(Partito partito) {
+		this.partito = partito;
+	}
+	
+	public Partito getPartito() {
+		return partito;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + partito.toString() + ") " + nome + " " + cognome;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Candidato c = (Candidato) o;
+		return nome == c.nome && cognome == c.cognome && partito.equals(c.partito);
 	}
 
 

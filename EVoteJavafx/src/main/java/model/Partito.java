@@ -30,4 +30,15 @@ public class Partito {
 	public List<Candidato> getCandidati() {
 		return Collections.unmodifiableList(l);
 	}
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Partito p = (Partito)o;
+		return nome == p.nome;
+	}
 }

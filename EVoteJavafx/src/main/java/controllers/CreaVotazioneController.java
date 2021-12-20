@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -22,7 +23,10 @@ import model.PartitoDao;
 
 public class CreaVotazioneController extends DefaultSceneController implements Initializable{
 	
-	private ObservableList<String> list = FXCollections.observableArrayList();
+	private ObservableList<Candidato> candidatiSceglibili = FXCollections.observableArrayList();
+	private ObservableList<Candidato> candidatiScelti = FXCollections.observableArrayList();
+	private ObservableList<String> listCandSceglibili = FXCollections.observableArrayList();
+	private ObservableList<String> listCandScelti = FXCollections.observableArrayList();
 	@FXML private ComboBox<String> comboBoxVincitore;
 	@FXML private ComboBox<String> comboBoxCandidati;	
 	@FXML private ComboBox<String> comboBoxCandidatiScelti;
@@ -39,9 +43,35 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	}
 
 	public void aggiungiCandidato(ActionEvent event) {
+		String candidato = comboBoxCandidati.getValue();
+		List<Candidato> candidatiAdded = new ArrayList<>();
+		for(Candidato c : candidatiSceglibili) 
+			if(c.toString().equals(candidato))
+				candidatiAdded.add(c);
+		for(Candidato c : candidatiAdded) {
+			candidatiSceglibili.remove(c);
+			listCandSceglibili.remove(c.toString());
+			candidatiScelti.add(c);
+			listCandScelti.add(c.toString());
+		}
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
+		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {
+		String candidato = comboBoxCandidati.getValue();
+		List<Candidato> candidatiRemoved = new ArrayList<>();
+		for(Candidato c : candidatiScelti)
+			if(c.toString().equals(candidato))
+				candidatiRemoved.add(c);
+		for(Candidato c : candidatiRemoved) {
+			candidatiScelti.remove(c);
+			listCandScelti.remove(c.toString());
+			candidatiSceglibili.add(c);
+			listCandSceglibili.add(c.toString());
+		}
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
+		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
 	
 
@@ -51,17 +81,15 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	}
 	
 	private void loadData() {
-		list.addAll("Maggioranza", "Maggioranza assoluta");
-		comboBoxVincitore.getItems().addAll(list);
-		list.clear();
+		comboBoxVincitore.getItems().addAll("Maggioranza", "Maggioranza assoluta");
 		PartitoDao pa = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
 		List<Partito> l = pa.getPartiti();
 		for(Partito p : l) {
-			System.out.println(p);
 			for(Candidato c : p.getCandidati()) {
-				list.add("(" + p.getNome() + ")" + c.getNome() + " " + c.getCognome());
+				candidatiSceglibili.add(c);
+				listCandSceglibili.add(c.toString());
 			}
 		}
-		comboBoxCandidati.getItems().addAll(list);
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);		
 	}
 }

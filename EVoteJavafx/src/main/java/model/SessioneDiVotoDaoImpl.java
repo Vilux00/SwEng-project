@@ -30,6 +30,14 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		}
 	}
 	
+	public boolean inserisciSessioneNonReferendum(SessioneDiVoto s) {
+		return false;
+	}
+	
+	public boolean getIdSessione(SessioneDiVoto s) {
+		return false;
+	}
+	
 	public void inserisciPartitoSessione() {
 		
 	}
