@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert.AlertType;
 import model.Candidato;
 import model.CandidatoDao;
 import model.DaoFactory;
+import model.Partito;
+import model.PartitoDao;
 
 public class CreaVotazioneHandler extends DefaultSceneHandler implements Initializable{
 	
@@ -50,7 +53,14 @@ public class CreaVotazioneHandler extends DefaultSceneHandler implements Initial
 	private void loadData() {
 		list.addAll("Maggioranza", "Maggioranza assoluta");
 		comboBoxVincitore.getItems().addAll(list);
-		CandidatoDao ca = (CandidatoDao) DaoFactory.getInstance().getDao("Candidato");
 		list.clear();
+		PartitoDao pa = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
+		List<Partito> l = pa.getPartiti();
+		for(Partito p : l) {
+			for(Candidato c : p.getCandidati()) {
+				list.add("(" + p.getNome() + ")" + c.getNome() + " " + c.getCognome());
+			}
+		}
+		comboBoxCandidati.getItems().addAll(list);
 	}
 }
