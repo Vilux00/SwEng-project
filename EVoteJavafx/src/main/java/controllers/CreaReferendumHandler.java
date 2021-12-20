@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Region;
 import model.DaoFactory;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDaoImpl;
@@ -37,6 +38,8 @@ public class CreaReferendumHandler extends DefaultSceneHandler implements Initia
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setHeaderText("Conferma i dati inseriti");
 			alert.setTitle("Conferma dati");
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.setContentText("Quesito: " + quesito.getText() + "\nModalita' di voto: " + comboBoxVincitore.getValue());
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				SessioneDiVoto s = (SessioneDiVoto) data;
