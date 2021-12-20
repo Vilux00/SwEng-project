@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Region;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -62,6 +63,9 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 				alert.setContentText("Conferma i dati inseriti per procedere");
 				alert.setHeaderText("Conferma dati");
 				alert.setTitle("Conferma dati");
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+				alert.setContentText("Nome, cognome: " + nome + " " + cognome + "\nCodice fiscale: " + codF + "\nLuogo di nascita: " + paese + " (" + nazione + ") \nData di nascita: " +
+									giorno + "-" + mese + "-" + anno + "\nSesso: " +sesso+"\nPrivilegio: " +privilegio);
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
 					setScenaPrecedente("registrazioneUtenteView1.fxml", "Registrazione utente");
