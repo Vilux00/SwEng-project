@@ -8,8 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import model.Elettore;
 
 public class ProfiloElettoreController extends DefaultSceneController implements Initializable{
+	
+	protected boolean infoMostrate = false;
 	
 	@FXML
 	private Label gener;
@@ -38,5 +41,18 @@ public class ProfiloElettoreController extends DefaultSceneController implements
 		codF.setText(codF.getText() + props.get(3));*/
 	}
 	
-	
+	public void mostraInfo(ActionEvent event) throws IOException{
+		Elettore e = (Elettore)data;
+		if (!infoMostrate) {
+			gener.setText(gener.getText().replace("***********", "Nome e cognome"));
+			id.setText(id.getText().replace("***********", "data di nascita"));
+			codF.setText(codF.getText().replace("***********", e.getCodF()));
+			infoMostrate = true;
+		}else {
+			gener.setText("Nome, Cognome: ************");
+			id.setText("ID: ************");
+			codF.setText("Codice Fiscale: ************");
+			infoMostrate = false;
+		}
+	}
 }
