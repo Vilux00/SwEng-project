@@ -16,7 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import model.Candidato;
-import model.CandidatoDao;
 import model.DaoFactory;
 import model.Partito;
 import model.PartitoDao;
@@ -54,6 +53,7 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 			candidatiScelti.add(c);
 			listCandScelti.add(c.toString());
 		}
+		clearComboBox();
 		comboBoxCandidati.getItems().addAll(listCandSceglibili);
 		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
@@ -62,14 +62,17 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 		String candidato = comboBoxCandidati.getValue();
 		List<Candidato> candidatiRemoved = new ArrayList<>();
 		for(Candidato c : candidatiScelti)
-			if(c.toString().equals(candidato))
+			if(c.toString().equals(candidato)) {
 				candidatiRemoved.add(c);
+				
+			}
 		for(Candidato c : candidatiRemoved) {
 			candidatiScelti.remove(c);
 			listCandScelti.remove(c.toString());
 			candidatiSceglibili.add(c);
 			listCandSceglibili.add(c.toString());
 		}
+		clearComboBox();
 		comboBoxCandidati.getItems().addAll(listCandSceglibili);
 		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
@@ -90,6 +93,11 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 				listCandSceglibili.add(c.toString());
 			}
 		}
-		comboBoxCandidati.getItems().addAll(listCandSceglibili);		
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
+	}
+	
+	private void clearComboBox() {
+		comboBoxCandidati.getItems().clear();
+		comboBoxCandidatiScelti.getItems().clear();
 	}
 }
