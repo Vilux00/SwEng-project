@@ -5,7 +5,6 @@ public class Candidato {
 	private String cognome;
 	
 	public Candidato(String nome, String cognome) {
-		super();
 		this.nome = nome;
 		this.cognome = cognome;
 	}
@@ -25,5 +24,6 @@ public class Candidato {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+
 
 }

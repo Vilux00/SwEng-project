@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import data.DbManager;
 
 public class CandidatoDaoImpl implements CandidatoDao{
@@ -42,6 +45,24 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			e.printStackTrace();
 			return null;
 		}finally {
+			dbM.close(conn);
+		}
+	}
+
+	@Override
+	public List<Candidato> getCandidati() {
+		List<Candidato> candidati = new ArrayList<>();
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+			PreparedStatement s = conn.prepareStatement("SELECT * FROM evoting.candidato");
+			ResultSet r = s.executeQuery();
+			while(r.next()) candidati.add(new Candidato(r.getString(2), r.getString(3)));
+			return candidati;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
 			dbM.close(conn);
 		}
 	}

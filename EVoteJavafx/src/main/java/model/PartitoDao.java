@@ -7,4 +7,5 @@ public interface PartitoDao extends DaoInterface{
 	public boolean isIn(Partito p);
 	public List<Candidato> getCandidati(Partito p);
 	public Integer getId(Partito p);
+	public List<Partito> getPartiti();
 }

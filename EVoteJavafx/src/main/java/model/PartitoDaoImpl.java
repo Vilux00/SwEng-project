@@ -83,5 +83,27 @@ public class PartitoDaoImpl implements PartitoDao{
 			dbM.close(conn);
 		}
 	}
+	
+	@Override
+	public List<Partito> getPartiti() {
+		List<Partito> l = new ArrayList<>();
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM evoting.partito");
+			ResultSet r = ps.executeQuery();
+			while(r.next()) {
+				Partito p = new Partito(r.getString(2));
+				p.setCandidati(getCandidati(p));
+				l.add(p);
+			}
+			return null;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			dbM.close(conn);
+		}
+	}
 
 }

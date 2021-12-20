@@ -23,6 +23,10 @@ public class Partito {
 		l.add(c);
 	}
 	
+	public void setCandidati(List<Candidato> l) {
+		this.l = l;
+	}
+	
 	public List<Candidato> getCandidati() {
 		return Collections.unmodifiableList(l);
 	}
