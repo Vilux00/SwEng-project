@@ -12,7 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 
-public class VotazioneCategoricaPreferenzaHandler extends DefaultSceneHandler implements Initializable{
+public class VotazioneCategoricaPreferenzaController extends DefaultSceneController implements Initializable{
 	
 	@FXML
     private ComboBox<String> comboBoxPartiti;
