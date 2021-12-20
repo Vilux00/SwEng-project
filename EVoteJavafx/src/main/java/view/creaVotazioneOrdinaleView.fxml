@@ -58,7 +58,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxCandidatiSelti" prefWidth="150.0">
+                  <ComboBox fx:id="comboBoxCandidatiScelti" prefWidth="150.0">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

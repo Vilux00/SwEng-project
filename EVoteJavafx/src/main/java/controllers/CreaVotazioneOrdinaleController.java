@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -14,9 +15,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
+import model.Candidato;
+import model.DaoFactory;
+import model.Partito;
+import model.PartitoDao;
 
 public class CreaVotazioneOrdinaleController extends DefaultSceneController implements Initializable{
-	@FXML private ComboBox<String> comboBoxVincitore;
+	
+	private ObservableList<Candidato> candidatiSceglibili = FXCollections.observableArrayList();
+	private ObservableList<Candidato> candidatiScelti = FXCollections.observableArrayList();
+	private ObservableList<String> listCandSceglibili = FXCollections.observableArrayList();
+	private ObservableList<String> listCandScelti = FXCollections.observableArrayList();
 	@FXML private ComboBox<String> comboBoxCandidati;
 	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
@@ -32,18 +41,64 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	}
 
 	public void aggiungiCandidato(ActionEvent event) {
+		String candidato = comboBoxCandidati.getValue();
+		Candidato candidatoAgg = null;
+		for(Candidato c : candidatiSceglibili) 
+			if(c.toString().equals(candidato)) candidatoAgg = c;
+		switchCandidato(candidatoAgg, true);
+		clearComboBox();
+		updateComboBox();
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {
+		String candidato = comboBoxCandidatiScelti.getValue();
+		Candidato candidatoRem = null;
+		for(Candidato c : candidatiScelti)
+			if(c.toString().equals(candidato)) candidatoRem = c;
+		switchCandidato(candidatoRem, false);
+		clearComboBox();
+		updateComboBox();
 	}
 	
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadData();
 	}
 	
 	private void loadData() {
-		ObservableList<String> list = FXCollections.observableArrayList();
+		PartitoDao pa = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
+		List<Partito> l = pa.getPartiti();
+		for(Partito p : l) {
+			for(Candidato c : p.getCandidati()) {
+				candidatiSceglibili.add(c);
+				listCandSceglibili.add(c.toString());
+			}
+		}
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
 	}
+	
+	private void clearComboBox() {
+		comboBoxCandidati.getItems().clear();
+		comboBoxCandidatiScelti.getItems().clear();
+	}
+	
+	private void switchCandidato(Candidato c, boolean b) {
+		if(b) {
+			candidatiSceglibili.remove(c);
+			listCandSceglibili.remove(c.toString());
+			candidatiScelti.add(c);
+			listCandScelti.add(c.toString());
+			return;
+		}
+		candidatiScelti.remove(c);
+		listCandScelti.remove(c.toString());
+		candidatiSceglibili.add(c);
+		listCandSceglibili.add(c.toString());
+	}
+	
+	private void updateComboBox() {
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
+		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
+	}
+
 }
