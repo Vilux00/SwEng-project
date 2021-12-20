@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import model.NuovoUtente;
 
 
-public class RegistrazioneUtente1Handler  extends DefaultSceneHandler implements Initializable{
+public class RegistrazioneUtente1Controller  extends DefaultSceneController implements Initializable{
 		
 	private ObservableList<Integer> ol = FXCollections.observableArrayList();
 	private ObservableList<String> ol2 = FXCollections.observableArrayList();

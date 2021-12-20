@@ -16,7 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 
-public class SelezioneSessioneHandler extends DefaultSceneHandler implements Initializable{
+public class SelezioneSessioneController extends DefaultSceneController implements Initializable{
 	
 private ObservableList<String> list = FXCollections.observableArrayList();
 	

@@ -10,7 +10,7 @@ import model.Elettore;
 import model.Scrutatore;
 import model.ScrutatoreDaoImpl;
 
-public class LoginScrutatoreHandler extends DefaultSceneHandler{
+public class LoginScrutatoreController extends DefaultSceneController{
 	@FXML
 	private TextField codF;
 	@FXML
@@ -32,7 +32,7 @@ public class LoginScrutatoreHandler extends DefaultSceneHandler{
 		if(sc.login(e)){
 			setScenaPrecedente("loginScrutatoreView.fxml", "Login scrutatore"); 
 			changeScene(event, "profiloScrutatoreView.fxml", "Home profilo", e);
-			DefaultSceneHandler.isLogged = true;
+			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Credenziali non corrette");

@@ -10,7 +10,7 @@ import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreDaoImpl;
 
-public class LoginElettoreHandler extends DefaultSceneHandler{	
+public class LoginElettoreController extends DefaultSceneController{	
 	@FXML
 	private TextField codF;
 	@FXML
@@ -32,7 +32,7 @@ public class LoginElettoreHandler extends DefaultSceneHandler{
 		if(ed.login(e)){
 			setScenaPrecedente("loginElettoreView.fxml", "Login elettore"); 
 			changeScene(event, "profiloElettoreView.fxml", "Home profilo", e);
-			DefaultSceneHandler.isLogged = true;
+			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Credenziali non corrette");

@@ -15,7 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 
-public class CreaVotazioneOrdinaleHandler extends DefaultSceneHandler implements Initializable{
+public class CreaVotazioneOrdinaleController extends DefaultSceneController implements Initializable{
 	
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	

@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import model.SessioneDiVoto;
 import javafx.scene.control.Alert.AlertType;
 
-public class CreazioneSessioneHandler extends DefaultSceneHandler implements Initializable{
+public class CreazioneSessioneController extends DefaultSceneController implements Initializable{
 	
 	private ObservableList<Integer> ol = FXCollections.observableArrayList();
 	private ObservableList<String> ol2 = FXCollections.observableArrayList();

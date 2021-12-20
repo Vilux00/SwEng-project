@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class RegistraElettoreASessioneController extends DefaultSceneHandler{
+public class RegistraElettoreASessioneController extends DefaultSceneController{
 
     @FXML
     private ComboBox<String> ComboBoxSessioni;

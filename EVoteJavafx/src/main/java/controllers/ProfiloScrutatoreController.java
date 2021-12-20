@@ -3,7 +3,7 @@ package controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 
-public class ProfiloScrutatoreHandler extends ProfiloElettoreHandler{
+public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	@Override
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloScrutatoreView.fxml", "Profilo scrutatore");

@@ -15,7 +15,7 @@ import model.NuovoUtente;
 import model.Password;
 import model.NuovoUtenteDaoImpl;
 
-public class RegistrazioneUtente2Handler extends DefaultSceneHandler{
+public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	private String password;
 	@FXML
 	private TextField visualizzaPassword;

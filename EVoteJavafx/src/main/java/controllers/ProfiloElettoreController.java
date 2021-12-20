@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import model.Elettore;
 
-public class ProfiloElettoreHandler extends DefaultSceneHandler implements Initializable{
+public class ProfiloElettoreController extends DefaultSceneController implements Initializable{
 	
 	@FXML
 	private Label gener;

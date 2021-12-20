@@ -12,7 +12,7 @@ import model.Elettore;
 import model.ElettoreDaoImpl;
 import model.Password;
 
-public class ModificaPasswordHandler extends DefaultSceneHandler{
+public class ModificaPasswordController extends DefaultSceneController{
 	@FXML
 	private PasswordField vecchiaPassword;
 	@FXML

@@ -11,7 +11,7 @@ import model.CandidatoDaoImpl;
 import model.DaoFactory;
 import model.Partito;
 
-public class InserimentoCandidatoHandler  extends DefaultSceneHandler{
+public class InserimentoCandidatoController  extends DefaultSceneController{
 	@FXML TextField nome;
 	@FXML TextField cognome;
 	@FXML TextField partito;

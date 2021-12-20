@@ -22,7 +22,7 @@ import model.SessioneDiVoto;
 import model.SessioneDiVotoDaoImpl;
 import javafx.scene.control.Alert.AlertType;
 
-public class CreaReferendumHandler extends DefaultSceneHandler implements Initializable{
+public class CreaReferendumController extends DefaultSceneController implements Initializable{
 
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	@FXML private TextArea quesito;

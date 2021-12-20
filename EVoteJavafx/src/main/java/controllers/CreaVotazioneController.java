@@ -20,7 +20,7 @@ import model.DaoFactory;
 import model.Partito;
 import model.PartitoDao;
 
-public class CreaVotazioneHandler extends DefaultSceneHandler implements Initializable{
+public class CreaVotazioneController extends DefaultSceneController implements Initializable{
 	
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	@FXML private ComboBox<String> comboBoxVincitore;

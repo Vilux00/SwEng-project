@@ -14,7 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class DefaultSceneHandler {
+public class DefaultSceneController {
 	private Parent root;
 	private Stage stage;
 	protected Scene scene;
@@ -29,7 +29,7 @@ public class DefaultSceneHandler {
 	public void changeScene(ActionEvent event, String sceneName, String title, Object o) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
 		root = loader.load();
-		DefaultSceneHandler c = loader.getController();
+		DefaultSceneController c = loader.getController();
 		c.passParameter(o); 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 
 
-public class HomeHandler extends DefaultSceneHandler{
+public class HomeController extends DefaultSceneController{
 	
 	public void switchToLoginElettoreScene(ActionEvent event) throws IOException {
 		setScenaPrecedente("homeView.fxml", "Home");

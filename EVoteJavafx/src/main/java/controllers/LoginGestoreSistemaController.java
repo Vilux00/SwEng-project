@@ -11,7 +11,7 @@ import model.Elettore;
 import model.Gestore;
 import model.GestoreDaoImpl;
 
-public class LoginGestoreSistemaHandler extends DefaultSceneHandler{
+public class LoginGestoreSistemaController extends DefaultSceneController{
 	@FXML
 	private TextField codF;
 	@FXML
@@ -33,7 +33,7 @@ public class LoginGestoreSistemaHandler extends DefaultSceneHandler{
 		if(ge.login(e)){
 			setScenaPrecedente("loginGestoreSistemaView.fxml", "Login gestore"); 
 			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", e);
-			DefaultSceneHandler.isLogged = true;
+			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Credenziali non corrette");
