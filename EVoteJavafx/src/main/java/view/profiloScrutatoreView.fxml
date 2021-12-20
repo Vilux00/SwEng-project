@@ -10,124 +10,156 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProfiloScrutatoreController">
-   <children>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0" layoutY="361.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../home-button.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
-      <VBox prefHeight="365.0" prefWidth="600.0">
-         <children>
-            <VBox prefHeight="129.0" prefWidth="600.0">
-               <children>
-                  <Label text="Dati utente">
-               <font>
-                  <Font size="21.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="30.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="codF" text="Codice fiscale: ***************">
-               <VBox.margin>
-                  <Insets left="30.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-			<Label fx:id="nc" text="Nome, Cognome: ***************">
-               <VBox.margin>
-                  <Insets left="30.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="nascita" text="Data di nascita, luogo: ***************">
-               <VBox.margin>
-                  <Insets left="30.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#mostraInfo" text="Mostra/Nascondi dati personali">
-               <VBox.margin>
-                  <Insets left="30.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-               </children>
-            </VBox>
-            <HBox prefHeight="139.0" prefWidth="600.0">
-               <children>
-                  <VBox prefHeight="122.0" prefWidth="215.0">
-                     <children>
-                        <Label style="-fx-background-color: #4c5157;" text="Funzioni Elettore">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Button mnemonicParsing="false" onAction="#vota" text="Vota">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets top="17.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="139.0" prefWidth="256.0">
-                     <children>
-                        <Label style="-fx-background-color: #4c5157;" text="Funzioni Scrutatore">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Button mnemonicParsing="false" onAction="#vota" text="Inserisci voto cartaceo">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#registraElettoreASessione" prefHeight="31.0" prefWidth="249.0" text="Registra elettore alla sessione">
-                           <VBox.margin>
-                              <Insets left="30.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="94.0" prefWidth="600.0">
-               <children>
-                  <Label style="-fx-background-color: #4c5157;" text="Funzioni utente">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" onAction="#cambiaPassword" style="-fx-font-size: 12;" text="Modifica password">
-                     <VBox.margin>
-                        <Insets left="30.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="361.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Back_Arrow.svg.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0" prefWidth="17.0" text="Button" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" stylesheets="@../application.css"
+	xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controllers.ProfiloScrutatoreController">
+	<children>
+		<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="561.0"
+			layoutY="361.0" opacity="0.4" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../home-button.png" />
+			</image>
+		</ImageView>
+		<Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false"
+			onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0"
+			prefWidth="1.0" text="Button" />
+		<VBox prefHeight="365.0" prefWidth="600.0">
+			<children>
+				<VBox prefHeight="129.0" prefWidth="600.0">
+					<children>
+						<HBox prefHeight="34.0" prefWidth="350.0">
+							<children>
+								<Label text="Dati utente">
+									<font>
+										<Font size="21.0" />
+									</font>
+									<HBox.margin>
+										<Insets right="30.0" />
+									</HBox.margin>
+								</Label>
+								<Button mnemonicParsing="false" onAction="#mostraInfo"
+									style="-fx-font-size: 10;"
+									text="Mostra/Nascondi dati personali">
+									<HBox.margin>
+										<Insets top="5.0" />
+									</HBox.margin>
+								</Button>
+							</children>
+							<VBox.margin>
+								<Insets left="30.0" top="10.0" />
+							</VBox.margin>
+						</HBox>
+						<Label fx:id="codF" text="Codice fiscale: ***************">
+							<VBox.margin>
+								<Insets left="30.0" top="5.0" />
+							</VBox.margin>
+						</Label>
+						<Label fx:id="nc" text="Nome, Cognome: ***************">
+							<VBox.margin>
+								<Insets left="30.0" top="5.0" />
+							</VBox.margin>
+						</Label>
+						<Label fx:id="nascita"
+							text="Data di nascita, luogo: ***************">
+							<VBox.margin>
+								<Insets left="30.0" top="5.0" />
+							</VBox.margin>
+						</Label>
+					</children>
+				</VBox>
+				<HBox prefHeight="139.0" prefWidth="600.0">
+					<children>
+						<VBox prefHeight="122.0" prefWidth="215.0">
+							<children>
+								<Label style="-fx-background-color: #4c5157;"
+									text="Funzioni Elettore">
+									<VBox.margin>
+										<Insets bottom="10.0" left="30.0" />
+									</VBox.margin>
+									<font>
+										<Font size="14.0" />
+									</font>
+								</Label>
+								<Button mnemonicParsing="false" onAction="#vota"
+									text="Vota">
+									<VBox.margin>
+										<Insets bottom="10.0" left="30.0" />
+									</VBox.margin>
+								</Button>
+							</children>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+							<HBox.margin>
+								<Insets top="17.0" />
+							</HBox.margin>
+						</VBox>
+						<VBox alignment="CENTER_LEFT" prefHeight="139.0"
+							prefWidth="256.0">
+							<children>
+								<Label style="-fx-background-color: #4c5157;"
+									text="Funzioni Scrutatore">
+									<VBox.margin>
+										<Insets bottom="10.0" left="30.0" />
+									</VBox.margin>
+									<font>
+										<Font size="14.0" />
+									</font>
+								</Label>
+								<Button mnemonicParsing="false" onAction="#vota"
+									text="Inserisci voto cartaceo">
+									<VBox.margin>
+										<Insets bottom="10.0" left="30.0" />
+									</VBox.margin>
+								</Button>
+								<Button mnemonicParsing="false"
+									onAction="#registraElettoreASessione" prefHeight="31.0"
+									prefWidth="249.0" text="Registra elettore alla sessione">
+									<VBox.margin>
+										<Insets left="30.0" />
+									</VBox.margin>
+								</Button>
+							</children>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+						</VBox>
+					</children>
+				</HBox>
+				<VBox alignment="CENTER_LEFT" prefHeight="94.0"
+					prefWidth="600.0">
+					<children>
+						<Label style="-fx-background-color: #4c5157;"
+							text="Funzioni utente">
+							<VBox.margin>
+								<Insets bottom="10.0" left="30.0" />
+							</VBox.margin>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+						<Button mnemonicParsing="false" onAction="#cambiaPassword"
+							style="-fx-font-size: 12;" text="Modifica password">
+							<VBox.margin>
+								<Insets left="30.0" />
+							</VBox.margin>
+						</Button>
+					</children>
+				</VBox>
+			</children>
+		</VBox>
+		<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="531.0"
+			layoutY="361.0" opacity="0.53" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../Back_Arrow.svg.png" />
+			</image>
+		</ImageView>
+		<Button layoutX="528.0" layoutY="358.0" mnemonicParsing="false"
+			onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0"
+			prefWidth="17.0" text="Button" />
+	</children>
 </AnchorPane>
