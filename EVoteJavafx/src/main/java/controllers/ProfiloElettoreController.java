@@ -15,7 +15,6 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	@FXML private Label codF;
 	@FXML private Label nc;
 	@FXML private Label nascita;
-
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
