@@ -27,7 +27,7 @@ public class DefaultSceneController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/"+sceneName));
 		root = loader.load();
 		DefaultSceneController c = loader.getController();
-		c.sendData(o); 
+		c.receiveData(o); 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -37,10 +37,6 @@ public class DefaultSceneController {
 
 	public void changeScene(ActionEvent event, String sceneName, String title) throws IOException{
 		changeScene(event, sceneName, title, null);
-	}
-	
-	public void sendData(Object o) {
-		this.data = o;
 	}
 	
 	public void backToHomeScene(ActionEvent event) throws IOException {	
@@ -96,5 +92,9 @@ public class DefaultSceneController {
 	
 	public void rimuoviScenaPrecedente(int n) {
 		for (int i = 0; i < n; i++) rimuoviScenaPrecedente();
+	}
+	
+	public void receiveData(Object o) {
+		this.data = o;
 	}
 }
