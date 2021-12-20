@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -43,41 +42,24 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 
 	public void aggiungiCandidato(ActionEvent event) {
 		String candidato = comboBoxCandidati.getValue();
-		List<Candidato> candidatiAdded = new ArrayList<>();
+		Candidato candidatoAgg = null;
 		for(Candidato c : candidatiSceglibili) 
-			if(c.toString().equals(candidato))
-				candidatiAdded.add(c);
-		for(Candidato c : candidatiAdded) {
-			candidatiSceglibili.remove(c);
-			listCandSceglibili.remove(c.toString());
-			candidatiScelti.add(c);
-			listCandScelti.add(c.toString());
-		}
+			if(c.toString().equals(candidato)) candidatoAgg = c;
+		switchCandidato(candidatoAgg, true);
 		clearComboBox();
-		comboBoxCandidati.getItems().addAll(listCandSceglibili);
-		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
+		updateComboBox();
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {
-		String candidato = comboBoxCandidati.getValue();
-		List<Candidato> candidatiRemoved = new ArrayList<>();
+		String candidato = comboBoxCandidatiScelti.getValue();
+		Candidato candidatoRem = null;
 		for(Candidato c : candidatiScelti)
-			if(c.toString().equals(candidato)) {
-				candidatiRemoved.add(c);
-				
-			}
-		for(Candidato c : candidatiRemoved) {
-			candidatiScelti.remove(c);
-			listCandScelti.remove(c.toString());
-			candidatiSceglibili.add(c);
-			listCandSceglibili.add(c.toString());
-		}
+			if(c.toString().equals(candidato)) candidatoRem = c;
+		switchCandidato(candidatoRem, false);
 		clearComboBox();
-		comboBoxCandidati.getItems().addAll(listCandSceglibili);
-		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
+		updateComboBox();
 	}
 	
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadData();
@@ -100,4 +82,24 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 		comboBoxCandidati.getItems().clear();
 		comboBoxCandidatiScelti.getItems().clear();
 	}
+	
+	private void switchCandidato(Candidato c, boolean b) {
+		if(b) {
+			candidatiSceglibili.remove(c);
+			listCandSceglibili.remove(c.toString());
+			candidatiScelti.add(c);
+			listCandScelti.add(c.toString());
+			return;
+		}
+		candidatiScelti.remove(c);
+		listCandScelti.remove(c.toString());
+		candidatiSceglibili.add(c);
+		listCandSceglibili.add(c.toString());
+	}
+	
+	private void updateComboBox() {
+		comboBoxCandidati.getItems().addAll(listCandSceglibili);
+		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
+	}
+
 }
