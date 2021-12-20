@@ -32,10 +32,14 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#setFavorevole" text="Favorevole">
                      <HBox.margin>
-                        <Insets right="100.0" />
+                        <Insets right="60.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#setContrario" text="Contrario" />
+                  <Button mnemonicParsing="false" onAction="#setContrario" text="Contrario">
+                     <HBox.margin>
+                        <Insets right="60.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" onAction="#setSchedaBianca" text="Scheda bianca" />
                </children>
             </HBox>
          </children></VBox>
