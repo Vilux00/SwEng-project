@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SessioneDiVoto implements Iterable<Candidato>{
+	private int id;
 	private String nome;
 	private String modalitaVoto;
 	private String modVincitore;
@@ -90,4 +91,11 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		return candidati.iterator();
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int i) {
+		this.id = id;
+	}
 }

@@ -12,7 +12,7 @@ public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	
 	public void registraElettoreASessione(ActionEvent event)  throws IOException {
 		setScenaPrecedente("profiloScrutatoreView.fxml", "Profilo scrutatore");
-		changeScene(event, "registraElettoreASessioneView.fxml", "Registra utente a sessione");
+		changeScene(event, "registraElettoreASessioneView.fxml", "Registra utente a sessione", data);
 	}
 	
 	@Override
