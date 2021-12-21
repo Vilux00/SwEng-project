@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.DbManager;
 
@@ -59,10 +62,30 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			dbM.close(c);
 		}
 	}
-	
+
 	@Override
-	public boolean getIdSessione(SessioneDiVoto s) {
-		return false;
+	public List<SessioneDiVoto> getSessioni() {
+		DbManager dbM = DbManager.getInstance();
+		Connection c = dbM.open();
+		List<SessioneDiVoto> l = new ArrayList<>();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM evoting.sessione_voto");
+			ResultSet r = ps.executeQuery();
+			while(r.next()) {
+				SessioneDiVoto s = new SessioneDiVoto(r.getString(2), r.getString(3));
+				s.setModVincitore(r.getString(4));
+				s.setQuesito(r.getString(5));
+				s.setScadenza((LocalDateTime) r.getObject(6));
+				s.setPOrC(r.getString(8).charAt(0));
+			}
+			return l;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			dbM.close(c);
+		}
 	}
+
 
 }
