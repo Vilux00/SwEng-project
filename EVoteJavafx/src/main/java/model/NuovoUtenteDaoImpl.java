@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.postgresql.util.PSQLException;
 
 import data.DbManager;
 

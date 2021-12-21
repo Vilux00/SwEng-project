@@ -10,23 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import model.DaoFactory;
-import model.Elettore;
 import model.NuovoUtente;
 import model.Password;
 import model.NuovoUtenteDaoImpl;
 
 public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	private String password;
-	@FXML
-	private TextField visualizzaPassword;
-	@FXML
-	private HBox boxCreaAccount;
-	@FXML
-	private HBox stampaPdfAccount;
-	@FXML
-	private Button btnGeneraPassword;
-	@FXML
-	private Button btnCreaAccount;
+	@FXML private TextField visualizzaPassword;
+	@FXML private HBox boxCreaAccount;
+	@FXML private HBox stampaPdfAccount;
+	@FXML private Button btnGeneraPassword;
+	@FXML private Button btnCreaAccount;
 	
 	public void generaPassword(ActionEvent event) {
 		password = Password.generateRandomPassword();
@@ -47,14 +41,22 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 			alert.show();
 			rimuoviScenaPrecedente();
 			goToScenaPrecedente(event);
-		};
-		btnCreaAccount.setDisable(true);
-		stampaPdfAccount.setVisible(true);
+		}else {
+			btnCreaAccount.setDisable(true);
+			stampaPdfAccount.setVisible(true);
+		}
 	}
 	
-	public void stampaCredenzialiUtente(ActionEvent event) {
-		Elettore e = (Elettore)data;
-		System.out.println("Codice fiscale: " + e.getCodF() + ", password: " + e.getPassword());
+	public void stampaCredenzialiUtente(ActionEvent event) throws IOException{
+		Object []objArr = (Object[])data;
+		NuovoUtente n = (NuovoUtente)objArr[1];
+		System.out.println("Codice fiscale: " + n.getCodF() + ", password: " + n.getPassword());
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Registrazione avvenuta con successo");
+		alert.setTitle("");
+		alert.show();
+		rimuoviScenaPrecedente(2);
+		changeScene(event, "profiloGestoreView.fxml", "Home profilo", objArr[0]);
 	}
 
 	@Override
