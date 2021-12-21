@@ -76,9 +76,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
         	/*
         	 * Bisogna aggiungere i controlli per controllare se e' possibile attivare lo scrutinio
         	 * ovvero bisogna controllare se la sessione e' scaduta o meno
-        	 */
-        	
-        	
+        	 */        	
         	sDAO.avviaScrutinio(s);
             changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
         }
