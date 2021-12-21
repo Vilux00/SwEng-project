@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -11,16 +13,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Candidato;
+import model.DaoFactory;
+import model.PartitoDao;
 import model.SessioneDiVoto;
+import model.SessioneDiVotoDao;
 
 public class VisualizzaSessioniController extends DefaultSceneController implements Initializable{
 
 		@FXML
 	    private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
-
-	    @FXML
-	    private TableColumn<SessioneDiVoto, String> colonnaModSessione;
-
+		
 	    @FXML
 	    private TableColumn<SessioneDiVoto, String> colonnaNomeSessione;
 
@@ -32,10 +36,26 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList<SessioneDiVoto> list = FXCollections.observableArrayList(
-				new SessioneDiVoto("ciao", "hello"));
+		tabella.setEditable(false);
+		colonnaNomeSessione.setCellValueFactory(
+    			new PropertyValueFactory<SessioneDiVoto, String>("nome"));
+		colonnaDataScadenza.setCellValueFactory(
+    			new PropertyValueFactory<SessioneDiVoto, String>("scadenzaAsString"));
+		/*colonnaScrutinio.setCellValueFactory(
+    			new PropertyValueFactory<SessioneDiVoto, String>(""));*/
+		loadData();
 	}
 
+	private void loadData() {
+		ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
+		SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		List<SessioneDiVoto> list = sDAO.getSessioni();
+		for (SessioneDiVoto s : list) {
+			sessioni.add(s);
+		}
+		tabella.setItems(sessioni);
+	}
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		// TODO Auto-generated method stub
@@ -51,6 +71,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     void visualizzaInformazioni(ActionEvent event) {
     	SessioneDiVoto sessioneSelezionata =  tabella.getSelectionModel().getSelectedItem();
     	int index = tabella.getSelectionModel().selectedIndexProperty().get();
+    	
     }
 	
     

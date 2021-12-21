@@ -10,6 +10,7 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 	private String modalitaVoto;
 	private String modVincitore;
 	private LocalDateTime scadenza;
+	private String scadenzaAsString;
 	private char pOrC;
 	private String quesito;
 	private List<Candidato> candidati;
@@ -49,12 +50,18 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		return this.scadenza;
 	}
 
+	public String getScadenzaAsString() {
+		return scadenzaAsString;
+	}
+	
 	public void setScadenza(int giorno, int mese, int anno, int ore, int minuti) {
 		this.scadenza = LocalDateTime.of(anno, mese, giorno, ore, minuti);
+		this.scadenzaAsString = scadenza.toString();
 	}
 	
 	public void setScadenza(LocalDateTime l) {
 		this.scadenza = l;
+		this.scadenzaAsString = scadenza.toString();
 	}
 
 	public String getQuesito() {
