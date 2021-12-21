@@ -19,60 +19,60 @@ import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
 
 public class VisualizzaSessioniController extends DefaultSceneController implements Initializable{
-		private ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
-		@FXML
-	    private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
-		
-	    @FXML
-	    private TableColumn<SessioneDiVoto, String> colonnaNomeSessione;
+        private ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
+        @FXML
+        private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
+        
+        @FXML
+        private TableColumn<SessioneDiVoto, String> colonnaNomeSessione;
 
-	    @FXML
-	    private TableColumn<SessioneDiVoto, String> colonnaScrutinio;
+        @FXML
+        private TableColumn<SessioneDiVoto, String> colonnaScrutinio;
 
-	    @FXML
-	    private TableView<SessioneDiVoto> tabella;
+        @FXML
+        private TableView<SessioneDiVoto> tabella;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		tabella.setEditable(false);
-		colonnaNomeSessione.setCellValueFactory(
-    			new PropertyValueFactory<SessioneDiVoto, String>("nome"));
-		colonnaDataScadenza.setCellValueFactory(
-    			new PropertyValueFactory<SessioneDiVoto, String>("scadenzaAsString"));
-		colonnaScrutinio.setCellValueFactory(
-    			new PropertyValueFactory<SessioneDiVoto, String>("scrutinio"));
-		loadData();
-	}
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tabella.setEditable(false);
+        colonnaNomeSessione.setCellValueFactory(
+                new PropertyValueFactory<SessioneDiVoto, String>("nome"));
+        colonnaDataScadenza.setCellValueFactory(
+                new PropertyValueFactory<SessioneDiVoto, String>("scadenzaAsString"));
+        colonnaScrutinio.setCellValueFactory(
+                new PropertyValueFactory<SessioneDiVoto, String>("scrutinio"));
+        loadData();
+    }
 
-	private void loadData() {
-		sessioni = FXCollections.observableArrayList();
-		SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-		List<SessioneDiVoto> list = sDAO.getSessioni();
-		for (SessioneDiVoto s : list) {
-			sessioni.add(s);
-		}
-		tabella.setItems(sessioni);
-	}
-	
-	@Override
-	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@FXML
+    private void loadData() {
+        sessioni = FXCollections.observableArrayList();
+        SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+        List<SessioneDiVoto> list = sDAO.getSessioni();
+        for (SessioneDiVoto s : list) {
+            sessioni.add(s);
+        }
+        tabella.setItems(sessioni);
+    }
+    
+    @Override
+    public void goToScenaPrecedente(ActionEvent event) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @FXML
     void avviaScrutinio(ActionEvent event) {
-		SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-		s.setScrutinio(true);
+        SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+        SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+        s.setScrutinio(true);
     }
 
     @FXML
     void visualizzaInformazioni(ActionEvent event) {
-    	SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-    	System.out.println(s.getNome());    
-    	
+        SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+        System.out.println(s.getNome());    
+        
     }
-	
+    
     
 }
