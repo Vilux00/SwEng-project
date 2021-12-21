@@ -79,11 +79,18 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     void visualizzaInformazioni(ActionEvent event) {
         SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
         SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-        String modVoto;
-        if(s.getModalitaVoto().equals("REF")) modVoto = "Referendum senza quorum";
-        else if(s.getModalitaVoto().equals("REFQ")) modVoto = "Referendum con quorum";
+        String modVoto, modVincitore;
+        
+        if(s.getModalitaVoto().equals("REF")) modVoto = "Referendum";
+        else if(s.getModalitaVoto().equals("CATP")) modVoto = "Categorica con preferenza";
         else if(s.getModalitaVoto().equals("CAT")) modVoto = "Categorica";
         else modVoto = "Ordinale";
+        
+        if(s.getModVincitore() == null) modVincitore = "-";
+        else if(s.getModVincitore().equals("MAGA")) modVincitore = "Maggioranza assoluta";
+        else if(s.getModVincitore().equals("REF")) modVincitore = "Referendum";
+        else if(s.getModVincitore().equals("REFQ")) modVincitore = "Referendum con quorum";
+        else modVincitore = "Maggioranza";
         
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -92,7 +99,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 		alert.setContentText("Nome sessione: " + s.getNome() 
 							+ "\nID: " + s.getId()
 							+ "\nModalita' voto: " + modVoto
-							+ "\nModalita' vincitore : " + s.getModVincitore() 
+							+ "\nModalita' vincitore : " + modVincitore 
 							+ "\nScadenza sessione: " + s.getScadenzaAsString()
 							+ "\nScrutinio: " + s.getScrutinio()
 							+ "\nNumero voti registrati: " + sd.getNumeroVoti(s));
