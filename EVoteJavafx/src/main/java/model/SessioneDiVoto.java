@@ -115,4 +115,9 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		this.scrutinio = scrutinio ? "Avviato" : "Non avviato";
 	}
 	
+	@Override
+	public String toString() {
+		return "(" + id + ") " + nome; 
+	}
+	
 }
