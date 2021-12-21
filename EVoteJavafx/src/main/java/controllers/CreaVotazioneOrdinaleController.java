@@ -34,7 +34,7 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	public void conferma(ActionEvent event) throws IOException{
 		Object []obj = (Object [])data;
 		SessioneDiVoto s = (SessioneDiVoto) obj[1];
-		for(Candidato c : candidatiScelti) s.addCandidato(c);
+		s.addCandidati(candidatiScelti);
 		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		if(!se.inserisciSessioneNonReferendum(s)) {
 			Alert alert = new Alert(AlertType.ERROR);

@@ -68,6 +68,10 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 	public boolean addCandidato(Candidato c) {
 		return candidati.add(c);
 	}
+	
+	public void addCandidati(List<Candidato> c) {
+		for(Candidato cand : c) if(!candidati.contains(cand)) addCandidato(cand);
+	}
 
 	public char getPOrC() {
 		return pOrC;
