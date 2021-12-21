@@ -11,9 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import model.DaoFactory;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
@@ -56,22 +59,45 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     
     @Override
     public void goToScenaPrecedente(ActionEvent event) throws IOException {
-        // TODO Auto-generated method stub
-        
+    	changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
     }
     
     @FXML
-    void avviaScrutinio(ActionEvent event) {
+    void avviaScrutinio(ActionEvent event) throws IOException {
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-        s.setScrutinio(true);
+        if(s.getScrutinio().equals("Avviato")) {
+        	Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Scrutinio gia' avviato");
+			alert.setTitle("Attento!");
+			alert.show();
+        }else {
+        	
+        	/*
+        	 * Bisogna aggiungere i controlli per controllare se e' possibile attivare lo scrutinio
+        	 * ovvero bisogna controllare se la sessione e' scaduta o meno
+        	 */
+        	
+        	
+        	sDAO.avviaScrutinio(s);
+            changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
+        }
     }
 
     @FXML
     void visualizzaInformazioni(ActionEvent event) {
         SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-        System.out.println(s.getNome());    
-        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    	alert.setTitle("Informazioni sessione");
+		alert.setHeaderText("Informazioni relative a:" + s.getNome());
+		alert.setContentText("Nome sessione: " + s.getNome() 
+							+ "\nID: " + s.getId()
+							+ "\nModalita' voto: " + s.getModalitaVoto()
+							+ "\nModalita' vincitore : " + s.getModVincitore()
+							+ "\nScadenza sessione: " + s.getScadenzaAsString()
+							+ "\nScrutinio: " + s.getScrutinio());
+		alert.show();        
     }
     
     

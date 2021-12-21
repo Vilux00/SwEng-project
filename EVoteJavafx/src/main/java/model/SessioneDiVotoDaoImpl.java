@@ -100,7 +100,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             ps.setInt(1, s.getId());
             ps.executeQuery();
         }catch(SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }finally {
             dbM.close(c);
         }
