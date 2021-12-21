@@ -52,6 +52,10 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 	public void setScadenza(int giorno, int mese, int anno, int ore, int minuti) {
 		this.scadenza = LocalDateTime.of(anno, mese, giorno, ore, minuti);
 	}
+	
+	public void setScadenza(LocalDateTime l) {
+		this.scadenza = l;
+	}
 
 	public String getQuesito() {
 		return quesito;
