@@ -18,7 +18,7 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
-		<VBox layoutY="13.0" prefHeight="148.0" prefWidth="600.0">
+		<VBox layoutY="13.0" prefHeight="148.0" prefWidth="361.0">
 			<children>
 				<HBox prefHeight="34.0" prefWidth="350.0">
 					<children>
@@ -30,11 +30,6 @@
 								<Insets right="30.0" />
 							</HBox.margin>
 						</Label>
-						<Button mnemonicParsing="false" onAction="#mostraInfo" style="-fx-font-size: 10;" text="Mostra/Nascondi dati personali">
-							<HBox.margin>
-								<Insets top="5.0" />
-							</HBox.margin>
-						</Button>
 					</children>
 					<VBox.margin>
 						<Insets left="30.0" top="10.0" />
@@ -98,5 +93,16 @@
 			</image>
 		</ImageView>
 		<Button layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0" prefWidth="17.0" text="Button" />
+      <ImageView fx:id="immagineOcchioChiuso" fitHeight="25.0" fitWidth="25.0" layoutX="544.0" layoutY="102.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../closed.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="immagineOcchioAperto" fitHeight="25.0" fitWidth="25.0" layoutX="544.0" layoutY="102.0" opacity="0.42" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../open.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="541.0" layoutY="94.0" mnemonicParsing="false" onAction="#mostraInfo" opacity="0.0" prefHeight="31.0" prefWidth="25.0" text="Button" />
 	</children>
 </AnchorPane>

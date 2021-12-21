@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreDao;
@@ -15,7 +16,9 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	@FXML private Label codF;
 	@FXML private Label nc;
 	@FXML private Label nascita;
-
+	@FXML private ImageView immagineOcchioChiuso;
+	@FXML private ImageView immagineOcchioAperto;
+	
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
@@ -31,10 +34,14 @@ public class ProfiloElettoreController extends DefaultSceneController{
 		ElettoreDao el = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
 		List<String> info = el.getInfoByCodF(e);
 		if (!infoMostrate) {
+			immagineOcchioAperto.setVisible(true);
+			immagineOcchioChiuso.setVisible(false);
 			nc.setText(nc.getText().replace("*", "") + ": " + info.get(0) + ", " + info.get(1));
 			nascita.setText(nascita.getText().replace("*", "") + info.get(2) + ", " + info.get(4) + ", " + info.get(3));
 			codF.setText(codF.getText().replace("*", "") + e.getCodF());
 		}else {
+			immagineOcchioAperto.setVisible(false);
+			immagineOcchioChiuso.setVisible(true);
 			nc.setText("Nome, Cognome: ***************");
 			nascita.setText("Data di nascita, luogo: ***************");
 			codF.setText("Codice fiscale: ***************");
