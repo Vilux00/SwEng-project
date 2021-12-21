@@ -69,7 +69,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		Connection c = dbM.open();
 		List<SessioneDiVoto> l = new ArrayList<>();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM evoting.sessione_voto");
+			PreparedStatement ps = c.prepareStatement("SELECT nome, modalita_voto, modalita_vincitore, quesito, termine, p_or_c FROM evoting.sessione_voto");
 			ResultSet r = ps.executeQuery();
 			while(r.next()) {
 				SessioneDiVoto s = new SessioneDiVoto(r.getString(2), r.getString(3));
