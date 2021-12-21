@@ -21,7 +21,7 @@ import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
 
 public class VisualizzaSessioniController extends DefaultSceneController implements Initializable{
-
+		private ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
 		@FXML
 	    private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
 		
@@ -47,7 +47,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	}
 
 	private void loadData() {
-		ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
+		sessioni = FXCollections.observableArrayList();
 		SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		List<SessioneDiVoto> list = sDAO.getSessioni();
 		for (SessioneDiVoto s : list) {
@@ -65,12 +65,13 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	@FXML
     void avviaScrutinio(ActionEvent event) {
 		System.out.println("scrutinio avviato");
+		aggiorna database
     }
 
     @FXML
     void visualizzaInformazioni(ActionEvent event) {
-    	SessioneDiVoto sessioneSelezionata =  tabella.getSelectionModel().getSelectedItem();
-    	int index = tabella.getSelectionModel().selectedIndexProperty().get();
+    	SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+    	System.out.println(s.getNome());    
     	
     }
 	

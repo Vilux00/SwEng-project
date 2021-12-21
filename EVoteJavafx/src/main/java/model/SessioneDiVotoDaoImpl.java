@@ -76,8 +76,8 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 				s.setId(r.getInt(7));
 				s.setModVincitore(r.getString(3));
 				s.setQuesito(r.getString(4));
-				s.setScadenza((LocalDateTime) r.getObject(5));
-				s.setPOrC(r.getString(6).charAt(0));
+				s.setScadenza(r.getObject(5,LocalDateTime.class));
+				l.add(s);
 			}
 			return l;
 		}catch(SQLException e) {
