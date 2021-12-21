@@ -43,5 +43,7 @@ public class LoginGestoreSistemaController extends DefaultSceneController{
 	}
 
 	@Override
-	public void goToScenaPrecedente(ActionEvent event) throws IOException {}
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, "homeView.fxml", "Home");
+	}
 }
