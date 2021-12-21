@@ -98,9 +98,9 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE evoting.sessione_voto SET scrutinio = true WHERE id = ?");
             ps.setInt(1, s.getId());
-            ps.executeQuery();
+            ps.executeUpdate();
         }catch(SQLException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }finally {
             dbM.close(c);
         }
