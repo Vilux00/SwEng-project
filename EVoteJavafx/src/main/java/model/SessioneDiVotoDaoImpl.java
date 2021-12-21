@@ -18,7 +18,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		DbManager dbM = DbManager.getInstance();
 		Connection c = dbM.open();
 		try {
-			PreparedStatement ps = c.prepareStatement("INSERT INTO evoting.sessione_voto(nome, modalita_voto, modalita_vincitore, p_or_c, quesito, termine) VALUES(?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = c.prepareStatement("INSERT INTO evoting.sessione_voto(nome, modalita_voto, modalita_vincitore, p_or_c, quesito, termine, scrutinio) VALUES(?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, s.getNome());
 			ps.setString(2, s.getModalitaVoto());
 			ps.setString(3, s.getModVincitore());
@@ -39,7 +39,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		DbManager dbM = DbManager.getInstance();
 		Connection c = dbM.open();
 		try {
-			PreparedStatement ps = c.prepareStatement("INSERT INTO evoting.sessione_voto(nome, modalita_voto, modalita_vincitore, p_or_c, quesito, termine) VALUES(?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = c.prepareStatement("INSERT INTO evoting.sessione_voto(nome, modalita_voto, modalita_vincitore, p_or_c, quesito, termine, scrutinio) VALUES(?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, s.getNome());
 			ps.setString(2, s.getModalitaVoto());
 			ps.setString(3, s.getModVincitore());
