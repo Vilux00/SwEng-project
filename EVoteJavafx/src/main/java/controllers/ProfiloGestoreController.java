@@ -33,6 +33,8 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	}
 	
 	public void visualizzaSessioni(ActionEvent event) throws IOException{
+		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
+		changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
 	}
 	
 	public void aggiungiCandidato(ActionEvent event) throws IOException{
