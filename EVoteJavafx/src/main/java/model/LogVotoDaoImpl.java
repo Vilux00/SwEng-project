@@ -20,7 +20,6 @@ public class LogVotoDaoImpl implements LogVotoDao{
 			ps.setObject(3, LocalDateTime.now());
 			return ps.executeUpdate() > 0;
 		}catch(SQLException e) {
-			e.printStackTrace();
 			return false;
 		}finally {
 			dbM.close(c);

@@ -124,6 +124,31 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         }
 	}
     
+	 public List<SessioneDiVoto> getSessioni(String codF) {
+	        DbManager dbM = DbManager.getInstance();
+	        Connection c = dbM.open();
+	        List<SessioneDiVoto> l = new ArrayList<>();
+	        try {
+	            PreparedStatement ps = c.prepareStatement("SELECT s.nome, s.modalita_voto, s.modalita_vincitore, s.quesito, s.termine, s.id, s.scrutinio FROM evoting.sessione_voto AS s JOIN evoting.log_voto AS v ON s.id = v.id_sessione WHERE v.codice_fiscale = ?");
+	            ps.setString(1, codF);
+	            ResultSet r = ps.executeQuery();
+	            while(r.next()) {
+	                SessioneDiVoto s = new SessioneDiVoto(r.getString(1), r.getString(2));
+	                s.setModVincitore(r.getString(3));
+	                s.setQuesito(r.getString(4));
+	                s.setScadenza(r.getObject(5, LocalDateTime.class));
+	                s.setId(r.getInt(6));
+	                s.setScrutinio(r.getBoolean(7));
+	                l.add(s);
+	            }
+	            return l;
+	        }catch(SQLException e) {
+	            e.printStackTrace();
+	            return null;
+	        }finally {
+	            dbM.close(c);
+	        }
+	    }
     
 
 

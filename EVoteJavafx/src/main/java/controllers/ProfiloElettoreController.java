@@ -26,7 +26,7 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
-		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
+		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
 	}
 	
 	public void mostraInfo(ActionEvent event) throws IOException{

@@ -18,6 +18,6 @@ public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	@Override
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloScrutatoreView.fxml", "Profilo scrutatore");
-		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
+		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
 	}
 }

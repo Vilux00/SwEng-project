@@ -4,16 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import model.DaoFactory;
 import model.SessioneDiVoto;
@@ -35,22 +30,16 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 			alert.show();
 			//pop  
 		}else {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setHeaderText("Conferma sessione");
-			alert.setTitle("Conferma sessione");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.isPresent() && result.get() == ButtonType.OK) {
-				for (SessioneDiVoto s : list) {
-					if (s.toString().equals(comboBoxSessione.getValue())) {
-						if (s.getModalitaVoto().equals("REF")) {
-							changeScene(event, "votazioneReferendumView.fxml", "Votazione", new Object[] {data, s});
-						}else if (s.getModalitaVoto().equals("ORD")) {
-							changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", new Object[] {data, s});
-						}else if (s.getModalitaVoto().equals("CAT")) {
-							changeScene(event, "votazioneCategoricaView.fxml", "Votazione", new Object[] {data, s});
-						}else {
-							changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", new Object[] {data, s});
-						}
+			for (SessioneDiVoto s : list) {
+				if (s.toString().equals(comboBoxSessione.getValue())) {
+					if (s.getModalitaVoto().equals("REF")) {
+						changeScene(event, "votazioneReferendumView.fxml", "Votazione", new Object[] {data, s});
+					}else if (s.getModalitaVoto().equals("ORD")) {
+						changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", new Object[] {data, s});
+					}else if (s.getModalitaVoto().equals("CAT")) {
+						changeScene(event, "votazioneCategoricaView.fxml", "Votazione", new Object[] {data, s});
+					}else {
+						changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", new Object[] {data, s});
 					}
 				}
 			}
@@ -63,7 +52,6 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 	}
 
 	private void loadData() {
-		//list = FXCollections.observableArrayList();
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         list = sDAO.getSessioni();
         for (SessioneDiVoto s : list) comboBoxSessione.getItems().addAll(s.toString());

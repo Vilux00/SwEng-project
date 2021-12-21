@@ -7,54 +7,129 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import model.DaoFactory;
+import model.Elettore;
+import model.LogVoto;
+import model.LogVotoDao;
+import model.SessioneDiVoto;
+import model.Voto;
+import model.VotoDao;
 
 public class VotazioneReferendumController extends DefaultSceneController{
+	
 	public void setFavorevole(ActionEvent event) throws IOException{
+		Object []objArr = (Object [])data;
+		Elettore e = (Elettore) objArr[0];
+		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma votazione");
+		alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
 		alert.setTitle("Conferma votazione");
-		alert.setContentText("Sicuro di voler votare 'favorevole' al referendum?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			//aggiorna db
-			//output visivo
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			if(!insertLog(s, e.getCodF())) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}else {
+				Voto v = new Voto(s);
+				v.setR_quesito(true);
+				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+				if(vd.inserisciVotoReferendum(v)) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Votazione inserita con successo");
+					alert.setTitle("Votazione inserita");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+				}else {
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Errore inserimento votazione");
+					alert.setTitle("Errore");
+					alert.show();
+				}
+			}
 		}
 	}
 	
 	public void setContrario(ActionEvent event) throws IOException{
+		Object []objArr = (Object [])data;
+		Elettore e = (Elettore) objArr[0];
+		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma votazione");
+		alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
 		alert.setTitle("Conferma votazione");
-		alert.setContentText("Sicuro di voler votare 'contrario' al referendum?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			//aggiorna db
-			//output visivo
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			if(!insertLog(s, e.getCodF())) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}else {
+				Voto v = new Voto(s);
+				v.setR_quesito(false);
+				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+				if(vd.inserisciVotoReferendum(v)) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Votazione inserita con successo");
+					alert.setTitle("Votazione inserita");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+				}else {
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Errore inserimento votazione");
+					alert.setTitle("Errore");
+					alert.show();
+				}
+			}
 		}
 	}
 	
 	public void setSchedaBianca(ActionEvent event) throws IOException{
+		Object []objArr = (Object [])data;
+		Elettore e = (Elettore) objArr[0];
+		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma dati");
-		alert.setTitle("Conferma dati");
-		alert.setContentText("Sicuro di voler lasciare la scheda bianca?");
+		alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");
+		alert.setTitle("Conferma votazione");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			//aggiorna db
-			//output visivo
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			if(!insertLog(s, e.getCodF())) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}else {
+				Voto v = new Voto(s);
+				v.setR_quesito(null);
+				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+				if(vd.inserisciVotoReferendum(v)) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Votazione inserita con successo");
+					alert.setTitle("Votazione inserita");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+				}else {
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Errore inserimento votazione");
+					alert.setTitle("Errore");
+					alert.show();
+				}
+			}
 		}
 	}
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), ((Object [])data)[0]);
 	}
 	
+	public boolean insertLog(SessioneDiVoto s, String codF) {
+		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+		return ld.inserisciLog(new LogVoto(s.getId(), codF));
+	}
 	
 }
