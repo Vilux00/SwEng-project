@@ -69,14 +69,15 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		Connection c = dbM.open();
 		List<SessioneDiVoto> l = new ArrayList<>();
 		try {
-			PreparedStatement ps = c.prepareStatement("SELECT nome, modalita_voto, modalita_vincitore, quesito, termine, p_or_c FROM evoting.sessione_voto");
+			PreparedStatement ps = c.prepareStatement("SELECT nome, modalita_voto, modalita_vincitore, quesito, termine, p_or_c, id FROM evoting.sessione_voto");
 			ResultSet r = ps.executeQuery();
 			while(r.next()) {
-				SessioneDiVoto s = new SessioneDiVoto(r.getString(2), r.getString(3));
-				s.setModVincitore(r.getString(4));
-				s.setQuesito(r.getString(5));
-				s.setScadenza((LocalDateTime) r.getObject(6));
-				s.setPOrC(r.getString(8).charAt(0));
+				SessioneDiVoto s = new SessioneDiVoto(r.getString(1), r.getString(2));
+				s.setId(r.getInt(7));
+				s.setModVincitore(r.getString(3));
+				s.setQuesito(r.getString(4));
+				s.setScadenza((LocalDateTime) r.getObject(5));
+				s.setPOrC(r.getString(6).charAt(0));
 			}
 			return l;
 		}catch(SQLException e) {
