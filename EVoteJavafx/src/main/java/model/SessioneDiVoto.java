@@ -15,6 +15,7 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 	private char pOrC;
 	private String quesito;
 	private List<Candidato> candidati;
+	private String scrutinio;
 	
 	public SessioneDiVoto(String nome, String modalitaVoto) {
 		this.nome = nome;
@@ -102,7 +103,16 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		return id;
 	}
 	
-	public void setId(int i) {
+	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getScrutinio() {
+		return scrutinio;
+	}
+
+	public void setScrutinio(boolean scrutinio) {
+		this.scrutinio = scrutinio ? "Avviato" : "Non avviato";
+	}
+	
 }
