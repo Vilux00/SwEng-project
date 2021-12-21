@@ -64,7 +64,7 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 				alert.setHeaderText("Conferma dati");
 				alert.setTitle("Conferma dati");
 				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-				alert.setContentText("Nome, cognome: " + nome + " " + cognome + "\nCodice fiscale: " + codF + "\nLuogo di nascita: " + paese + " (" + nazione + ") \nData di nascita: " +
+				alert.setContentText("Nome, cognome: " + nome + ", " + cognome + "\nCodice fiscale: " + codF + "\nLuogo di nascita: " + paese + " (" + nazione + ") \nData di nascita: " +
 									giorno + "-" + mese + "-" + anno + "\nSesso: " +sesso+"\nPrivilegio: " +privilegio);
 				Object []objArr = new Object[] {data, n};
 				Optional<ButtonType> result = alert.showAndWait();

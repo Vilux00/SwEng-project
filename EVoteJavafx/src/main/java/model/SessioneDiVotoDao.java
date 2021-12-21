@@ -7,4 +7,5 @@ public interface SessioneDiVotoDao extends DaoInterface{
 	public boolean inserisciSessioneNonReferendum(SessioneDiVoto s);
 	public List<SessioneDiVoto> getSessioni();
 	public void avviaScrutinio(SessioneDiVoto s);
+	public int getNumeroVoti(SessioneDiVoto s);
 }

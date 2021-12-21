@@ -109,4 +109,20 @@ public class ElettoreDaoImpl implements ElettoreDao{
 		}
 	}
 
+	@Override
+	public boolean isIn(String codF) {
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ?");
+			stm.setString(1, codF);
+			return stm.executeQuery().next();
+		} catch(SQLException ex){
+			ex.printStackTrace();
+			return false;
+		} finally {
+			dbM.close(conn);
+		}
+	}
+
 }

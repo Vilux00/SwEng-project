@@ -105,6 +105,24 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             dbM.close(c);
         }
     }
+
+	@Override
+	public int getNumeroVoti(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM evoting.log_voto WHERE id_sessione = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getInt(1);
+            return -1;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }finally {
+            dbM.close(c);
+        }
+	}
     
     
 

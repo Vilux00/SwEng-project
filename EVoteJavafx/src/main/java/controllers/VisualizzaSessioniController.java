@@ -23,17 +23,10 @@ import model.SessioneDiVotoDao;
 
 public class VisualizzaSessioniController extends DefaultSceneController implements Initializable{
         private ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
-        @FXML
-        private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
-        
-        @FXML
-        private TableColumn<SessioneDiVoto, String> colonnaNomeSessione;
-
-        @FXML
-        private TableColumn<SessioneDiVoto, String> colonnaScrutinio;
-
-        @FXML
-        private TableView<SessioneDiVoto> tabella;
+        @FXML private TableColumn<SessioneDiVoto, String> colonnaDataScadenza;
+        @FXML private TableColumn<SessioneDiVoto, String> colonnaNomeSessione;
+        @FXML private TableColumn<SessioneDiVoto, String> colonnaScrutinio;
+        @FXML private TableView<SessioneDiVoto> tabella;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,9 +44,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
         sessioni = FXCollections.observableArrayList();
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         List<SessioneDiVoto> list = sDAO.getSessioni();
-        for (SessioneDiVoto s : list) {
-            sessioni.add(s);
-        }
+        for (SessioneDiVoto s : list) sessioni.add(s);
         tabella.setItems(sessioni);
     }
     
@@ -69,32 +60,42 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
         if(s.getScrutinio().equals("Avviato")) {
         	Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Scrutinio gia' avviato");
-			alert.setTitle("Attento!");
+			alert.setTitle("Errore");
 			alert.show();
         }else {
-        	
-        	/*
-        	 * Bisogna aggiungere i controlli per controllare se e' possibile attivare lo scrutinio
-        	 * ovvero bisogna controllare se la sessione e' scaduta o meno
-        	 */        	
-        	sDAO.avviaScrutinio(s);
-            changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
+        	if(s.getScadenza().isAfter(LocalDateTime.now())){
+        		Alert alert = new Alert(AlertType.ERROR);
+    			alert.setHeaderText("Non è ancora possibile avviare lo scrutinio, la sessione non è terminata");
+    			alert.setTitle("Errore");
+    			alert.show();
+        	}else {
+        		sDAO.avviaScrutinio(s);
+        		changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
+        	}
         }
     }
 
     @FXML
     void visualizzaInformazioni(ActionEvent event) {
         SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+        SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+        String modVoto;
+        if(s.getModalitaVoto().equals("REF")) modVoto = "Referendum senza quorum";
+        else if(s.getModalitaVoto().equals("REFQ")) modVoto = "Referendum con quorum";
+        else if(s.getModalitaVoto().equals("CAT")) modVoto = "Categorica";
+        else modVoto = "Ordinale";
+        
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
     	alert.setTitle("Informazioni sessione");
 		alert.setHeaderText("Informazioni relative a:" + s.getNome());
 		alert.setContentText("Nome sessione: " + s.getNome() 
 							+ "\nID: " + s.getId()
-							+ "\nModalita' voto: " + s.getModalitaVoto()
-							+ "\nModalita' vincitore : " + s.getModVincitore()
+							+ "\nModalita' voto: " + modVoto
+							+ "\nModalita' vincitore : " + s.getModVincitore() 
 							+ "\nScadenza sessione: " + s.getScadenzaAsString()
-							+ "\nScrutinio: " + s.getScrutinio());
+							+ "\nScrutinio: " + s.getScrutinio()
+							+ "\nNumero voti registrati: " + sd.getNumeroVoti(s));
 		alert.show();        
     }
     
