@@ -97,4 +97,9 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 		ol2.addAll("Elettore", "Scrutatore", "Gestore di sistema");
 		choiceBoxPrivilegio.getItems().addAll(ol2);
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+	}
 }

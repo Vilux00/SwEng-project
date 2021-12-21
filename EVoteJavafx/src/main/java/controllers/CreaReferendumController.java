@@ -53,7 +53,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 					alert.setTitle("Sessione creata");
 					alert.show();
 					rimuoviScenaPrecedente(2);
-					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]); //da rivedere (sarebbe meglio avere un output visivo dell'avvenuta creazione
+					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]);
 				}
 				else {
 					alert = new Alert(AlertType.ERROR);
@@ -73,6 +73,12 @@ public class CreaReferendumController extends DefaultSceneController implements 
 	private void loadData() {
 		list.addAll("Referendum senza quorum(REFQ)", "Referendum con quorum(REF)");
 		comboBoxVincitore.getItems().addAll(list);
+	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		Object []obj = (Object [])data;
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), obj[1]);
 	}
 	
 }

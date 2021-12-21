@@ -20,5 +20,8 @@ public class HomeController extends DefaultSceneController{
 		setScenaPrecedente("homeView.fxml", "Home");
 		changeScene(event, "loginGestoreSistemaView.fxml", "Login gestore");
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {	}
 	
 }

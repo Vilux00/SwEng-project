@@ -60,7 +60,12 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, data);
+			goToScenaPrecedente(event);
 		}
+	}
+	
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 }

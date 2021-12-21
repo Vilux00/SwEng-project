@@ -41,4 +41,7 @@ public class LoginGestoreSistemaController extends DefaultSceneController{
 			alert.show();
 		}		
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {}
 }

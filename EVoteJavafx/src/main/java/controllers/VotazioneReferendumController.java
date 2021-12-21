@@ -19,7 +19,7 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, data);
+			goToScenaPrecedente(event);
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, data);
+			goToScenaPrecedente(event);
 		}
 	}
 	
@@ -47,8 +47,13 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, data);
+			goToScenaPrecedente(event);
 		}
+	}
+	
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 	
 	

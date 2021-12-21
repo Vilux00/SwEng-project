@@ -14,7 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class DefaultSceneController {
+public abstract class DefaultSceneController {
 	private Parent root;
 	private Stage stage;
 	protected Scene scene;
@@ -63,28 +63,7 @@ public class DefaultSceneController {
 		scenaPrecedente.add(fxml);
 		scenaPrecedenteTitolo.add(titolo);
 	}
-	
-	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		goToScenaPrecedente(event, null);
-	}
 
-	public void goToScenaPrecedente(ActionEvent event, Object data) throws IOException{
-		String str = scenaPrecedente.lastElement();
-		if (str.contains("login") == true) {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Sicuro di fare logout?");
-			alert.setHeaderText("Conferma logout");
-			alert.setTitle("Logout");
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.isPresent() && result.get() == ButtonType.OK) {
-				changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
-				isLogged = false;
-			}
-			return;
-		}
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
-	}
-	
 	public void rimuoviScenaPrecedente() {
 		scenaPrecedente.pop();
 		scenaPrecedenteTitolo.pop();
@@ -97,4 +76,6 @@ public class DefaultSceneController {
 	public void receiveData(Object o) {
 		this.data = o;
 	}
+	
+	public abstract void goToScenaPrecedente(ActionEvent event) throws IOException;
 }

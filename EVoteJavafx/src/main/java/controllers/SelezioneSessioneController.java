@@ -15,7 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Region;
 
 public class SelezioneSessioneController extends DefaultSceneController implements Initializable{
 	
@@ -62,5 +61,10 @@ private ObservableList<String> list = FXCollections.observableArrayList();
 	private void loadData() {
 		list.addAll("Voto ordinale", "Voto categorico", "Voto categorico con preferenza", "Referendum");
 		comboBoxSessione.getItems().addAll(list);
+	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 }

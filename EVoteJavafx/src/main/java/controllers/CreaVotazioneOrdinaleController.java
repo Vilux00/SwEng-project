@@ -33,7 +33,7 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	
 	public void conferma(ActionEvent event) throws IOException{
 		Object []obj = (Object [])data;
-		SessioneDiVoto s = (SessioneDiVoto) obj[1];
+		SessioneDiVoto s = (SessioneDiVoto) obj[0];
 		s.addCandidati(candidatiScelti);
 		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		if(!se.inserisciSessioneNonReferendum(s)) {
@@ -114,4 +114,9 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
 
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		Object []obj = (Object [])data;
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), obj[1]);
+	}
 }

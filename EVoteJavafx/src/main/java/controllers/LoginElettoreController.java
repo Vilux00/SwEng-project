@@ -40,6 +40,9 @@ public class LoginElettoreController extends DefaultSceneController{
 			alert.show();
 		}			
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {}
 	
 	
 }

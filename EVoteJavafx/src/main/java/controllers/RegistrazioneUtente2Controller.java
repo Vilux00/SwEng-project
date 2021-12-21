@@ -46,7 +46,7 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 			alert.setTitle("Errore");
 			alert.show();
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, objArr[0]);
+			goToScenaPrecedente(event);
 		};
 		btnCreaAccount.setDisable(true);
 		stampaPdfAccount.setVisible(true);
@@ -55,5 +55,11 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	public void stampaCredenzialiUtente(ActionEvent event) {
 		Elettore e = (Elettore)data;
 		System.out.println("Codice fiscale: " + e.getCodF() + ", password: " + e.getPassword());
+	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		Object []objArr = (Object[])data;
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), objArr[0]);
 	}
 }

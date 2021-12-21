@@ -88,4 +88,9 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			}
 		}		
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+	}
 }

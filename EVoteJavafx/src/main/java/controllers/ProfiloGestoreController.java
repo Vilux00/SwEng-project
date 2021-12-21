@@ -13,13 +13,13 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	@Override
 	public void registraElettoreASessione(ActionEvent event)  throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "registraElettoreASessioneView.fxml", "Registra utente a sessione");
+		changeScene(event, "registraElettoreASessioneView.fxml", "Registra utente a sessione", data);
 	}
 	
 	@Override
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
+		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
 	}
 	
 	public void registrazioneUtente(ActionEvent event) throws IOException {

@@ -48,4 +48,9 @@ public class ProfiloElettoreController extends DefaultSceneController{
 		}
 		infoMostrate = !infoMostrate;
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		backToHomeScene(event);
+	}
 }

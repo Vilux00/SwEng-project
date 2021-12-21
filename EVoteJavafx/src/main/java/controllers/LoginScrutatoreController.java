@@ -40,4 +40,7 @@ public class LoginScrutatoreController extends DefaultSceneController{
 			alert.show();
 		}			
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {}
 }

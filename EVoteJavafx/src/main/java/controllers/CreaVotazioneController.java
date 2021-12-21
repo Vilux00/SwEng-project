@@ -118,5 +118,11 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 		comboBoxCandidati.getItems().addAll(listCandSceglibili);
 		comboBoxCandidatiScelti.getItems().addAll(listCandScelti);
 	}
+	
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		Object []obj = (Object [])data;
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), obj[1]);
+	}
 
 }

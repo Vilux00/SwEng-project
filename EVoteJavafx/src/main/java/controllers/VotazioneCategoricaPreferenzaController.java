@@ -32,7 +32,7 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event, data);
+			goToScenaPrecedente(event);
 		}
 	}
 
@@ -55,5 +55,10 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	
 	private void loadData() {
 		//aggiunta partiti
+	}
+	
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException {
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 }

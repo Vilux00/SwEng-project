@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -62,7 +61,7 @@ public class ModificaPasswordController extends DefaultSceneController{
 				alert.setHeaderText("Password modificata con successo");
 				alert.setTitle("Password modificata");
 				alert.show();
-				goToScenaPrecedente(event, e);
+				goToScenaPrecedente(event);
 			}else{
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Qualcosa è andato storto, riavviare la applicazione");
@@ -83,4 +82,10 @@ public class ModificaPasswordController extends DefaultSceneController{
 		ElettoreDaoImpl el = (ElettoreDaoImpl)DaoFactory.getInstance().getDao("Elettore");
 		return(el.updatePassword(e));
 	}
+
+	@Override
+	public void goToScenaPrecedente(ActionEvent event) throws IOException{
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+	}
+		
 }
