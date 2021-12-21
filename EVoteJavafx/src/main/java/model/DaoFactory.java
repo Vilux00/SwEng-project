@@ -29,6 +29,8 @@ public class DaoFactory {
 				return new PartitoDaoImpl();
 			case "NuovoUtente":
 				return new NuovoUtenteDaoImpl();
+			case "LogVoto":
+				return new LogVotoDaoImpl();
 			default:
 				return null;
 		}

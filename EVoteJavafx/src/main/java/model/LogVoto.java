@@ -1,18 +1,26 @@
 package model;
 
 public class LogVoto {
-	private SessioneDiVoto sessione;
+	private int idSessione;
 	private String codFiscale;
 	
-	public SessioneDiVoto getSessione() {
-		return sessione;
+	public LogVoto(int idSessione, String codFiscale) {
+		this.idSessione = idSessione;
+		this.codFiscale = codFiscale;
 	}
-	public void setSessione(SessioneDiVoto sessione) {
-		this.sessione = sessione;
+	
+	public int getIdSessione() {
+		return idSessione;
 	}
+	
+	public void setIdSessione(int idSessione) {
+		this.idSessione = idSessione;
+	}
+	
 	public String getCodFiscale() {
 		return codFiscale;
 	}
+	
 	public void setCodFiscale(String codFiscale) {
 		this.codFiscale = codFiscale;
 	}

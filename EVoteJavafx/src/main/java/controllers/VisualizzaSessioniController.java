@@ -14,9 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Candidato;
 import model.DaoFactory;
-import model.PartitoDao;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
 
