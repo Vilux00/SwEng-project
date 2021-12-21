@@ -41,8 +41,8 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     			new PropertyValueFactory<SessioneDiVoto, String>("nome"));
 		colonnaDataScadenza.setCellValueFactory(
     			new PropertyValueFactory<SessioneDiVoto, String>("scadenzaAsString"));
-		/*colonnaScrutinio.setCellValueFactory(
-    			new PropertyValueFactory<SessioneDiVoto, String>(""));*/
+		colonnaScrutinio.setCellValueFactory(
+    			new PropertyValueFactory<SessioneDiVoto, String>("scrutinio"));
 		loadData();
 	}
 
@@ -64,8 +64,9 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	
 	@FXML
     void avviaScrutinio(ActionEvent event) {
-		System.out.println("scrutinio avviato");
-		aggiorna database
+		SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+		s.setScrutinio(true);
     }
 
     @FXML
