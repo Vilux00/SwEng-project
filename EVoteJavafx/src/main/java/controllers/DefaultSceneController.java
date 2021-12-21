@@ -64,6 +64,10 @@ public class DefaultSceneController {
 		scenaPrecedenteTitolo.add(titolo);
 	}
 	
+	public void goToScenaPrecedente(ActionEvent event) throws IOException{
+		goToScenaPrecedente(event, null);
+	}
+
 	public void goToScenaPrecedente(ActionEvent event, Object data) throws IOException{
 		String str = scenaPrecedente.lastElement();
 		if (str.contains("login") == true) {
@@ -79,10 +83,6 @@ public class DefaultSceneController {
 			return;
 		}
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
-	}
-
-	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		goToScenaPrecedente(event, null);
 	}
 	
 	public void rimuoviScenaPrecedente() {

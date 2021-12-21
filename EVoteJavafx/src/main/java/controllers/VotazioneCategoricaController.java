@@ -60,7 +60,7 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, data);
 		}
 	}
 }

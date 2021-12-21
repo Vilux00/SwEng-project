@@ -32,7 +32,7 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, data);
 		}
 	}
 

@@ -35,7 +35,8 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	}
 	
 	public void registraUtenteDB(ActionEvent event) throws IOException {
-		NuovoUtente n = (NuovoUtente)data;
+		Object []objArr = (Object[])data;
+		NuovoUtente n = (NuovoUtente)objArr[1];
 		n.setPassword(password);
 		btnGeneraPassword.setDisable(true);
 		NuovoUtenteDaoImpl nu = (NuovoUtenteDaoImpl)DaoFactory.getInstance().getDao("NuovoUtente");
@@ -45,7 +46,7 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 			alert.setTitle("Errore");
 			alert.show();
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, objArr[0]);
 		};
 		btnCreaAccount.setDisable(true);
 		stampaPdfAccount.setVisible(true);

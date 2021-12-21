@@ -19,7 +19,7 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, data);
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, data);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class VotazioneReferendumController extends DefaultSceneController{
 			//aggiorna db
 			//output visivo
 			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			goToScenaPrecedente(event, data);
 		}
 	}
 	

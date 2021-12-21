@@ -24,7 +24,7 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	
 	public void registrazioneUtente(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "registrazioneUtenteView1.fxml", "Registrazione utente");
+		changeScene(event, "registrazioneUtenteView1.fxml", "Registrazione utente", data);
 	}
 	
 	public void creaSessioneVoto(ActionEvent event) throws IOException{
@@ -37,6 +37,6 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	
 	public void aggiungiCandidato(ActionEvent event) throws IOException{
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		changeScene(event, "aggiungiCandidatoView.fxml", "Aggiungi candidato");
+		changeScene(event, "aggiungiCandidatoView.fxml", "Aggiungi candidato", data);
 	}
 }

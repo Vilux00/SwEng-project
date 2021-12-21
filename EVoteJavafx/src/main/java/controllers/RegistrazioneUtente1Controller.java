@@ -66,10 +66,11 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 				alert.setContentText("Nome, cognome: " + nome + " " + cognome + "\nCodice fiscale: " + codF + "\nLuogo di nascita: " + paese + " (" + nazione + ") \nData di nascita: " +
 									giorno + "-" + mese + "-" + anno + "\nSesso: " +sesso+"\nPrivilegio: " +privilegio);
+				Object []objArr = new Object[] {data, n};
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
 					setScenaPrecedente("registrazioneUtenteView1.fxml", "Registrazione utente");
-					changeScene(event, "registrazioneUtenteView2.fxml", "Registrazione utente", n);
+					changeScene(event, "registrazioneUtenteView2.fxml", "Registrazione utente", objArr);
 				}
 			}
 		}
