@@ -43,6 +43,8 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	@FXML private VBox vBoxElenco;
 	@FXML private Button votaPerPartiti;
 	
+	private char tipoElenco;
+	
 	public void confermaVotazione(ActionEvent event) throws IOException {
 		if (!checkValidita()) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -60,9 +62,16 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		for (TextField tF : listTextField) {
 			l.add(tF.getText());
 		}
-		for (int i = 1; i <= listTextField.size(); i++) {
-			if (!l.contains((i+""))) return false;
+		if (tipoElenco == 'c') {
+			for (int i = 1; i <= candidati.size(); i++) {
+				if (!l.contains((i+""))) return false;
+			}
+		}else {
+			for (int i = 1; i <= partiti.size(); i++) {
+				if (!l.contains((i+""))) return false;
+			}
 		}
+		
 		return true;
 	}
 	
@@ -76,6 +85,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	}
 
 	public void votaPerCandidati(ActionEvent event) {
+		tipoElenco = 'c';
 		setVisible();
 		resetVBox();
 		for (int i = 0; i < candidati.size(); i++) {
@@ -93,6 +103,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	}
 
 	public void votaPerPartiti(ActionEvent event) {
+		tipoElenco = 'p';
 		setVisible();
 		resetVBox();
 		for (int i = 0; i < partiti.size(); i++) {
