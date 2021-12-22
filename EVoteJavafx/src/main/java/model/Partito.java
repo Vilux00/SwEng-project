@@ -1,11 +1,11 @@
 package model;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class Partito {
+public class Partito implements Iterable<Candidato>{
 	private int id;
-
 	private String nome;
 	private List<Candidato> l;
 	
@@ -50,5 +50,10 @@ public class Partito {
 	public boolean equals(Object o) {
 		Partito p = (Partito)o;
 		return nome == p.nome;
+	}
+
+	@Override
+	public Iterator<Candidato> iterator() {
+		return l.iterator();
 	}
 }

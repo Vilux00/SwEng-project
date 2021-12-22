@@ -30,7 +30,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxPartitio" onAction="#updateCandidati" prefWidth="200.0" />
+                  <ComboBox fx:id="comboBoxPartiti" onAction="#updateCandidati" prefWidth="200.0"/>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="539.0">
@@ -64,7 +64,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxCandidatiSelti" prefWidth="150.0">
+                  <ComboBox fx:id="comboBoxCandidatiScelti" prefWidth="150.0">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -74,7 +74,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="527.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#confermaVotazione" text="Conferma" />
+                  <Button fx:id="conferma" mnemonicParsing="false" onAction="#confermaVotazione" text="Conferma" />
                </children>
             </HBox>
          </children></VBox>
