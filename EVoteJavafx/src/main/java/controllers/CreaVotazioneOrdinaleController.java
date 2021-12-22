@@ -54,13 +54,20 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	}
 
 	public void aggiungiCandidato(ActionEvent event) {
-		String candidato = comboBoxCandidati.getValue();
-		Candidato candidatoAgg = null;
-		for(Candidato c : candidatiSceglibili) 
-			if(c.toString().equals(candidato)) candidatoAgg = c;
-		switchCandidato(candidatoAgg, true);
-		clearComboBox();
-		updateComboBox();
+		if (candidatiScelti.size() < 5) {
+			String candidato = comboBoxCandidati.getValue();
+			Candidato candidatoAgg = null;
+			for(Candidato c : candidatiSceglibili) 
+				if(c.toString().equals(candidato)) candidatoAgg = c;
+			switchCandidato(candidatoAgg, true);
+			clearComboBox();
+			updateComboBox();
+			return;
+		}
+		Alert alert = new Alert(AlertType.ERROR);	
+		alert.setHeaderText("Puoi inserire massimo 5 candidati");
+		alert.setTitle("Errore");
+		alert.show();
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {

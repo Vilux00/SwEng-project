@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,6 +25,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 
 	private List<Candidato> candidati;
 	private List<Partito> partiti;
+	private List<TextField> listTextField;
 	
 	@FXML private Button bottoneConferma;
 	@FXML private Label label1;
@@ -54,10 +56,37 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 
 	public void votaPerCandidati(ActionEvent event) {
 		setVisible();
+		resetVBox();
+		for (int i = 0; i < candidati.size(); i++) {
+			listTextField.get(i).setVisible(true);
+		}
+		try {
+			label1.setText(candidati.get(0).getNome() + " " + candidati.get(0).getCognome());
+			label2.setText(candidati.get(1).getNome() + " " + candidati.get(1).getCognome());
+			label3.setText(candidati.get(2).getNome() + " " + candidati.get(2).getCognome());
+			label4.setText(candidati.get(3).getNome() + " " + candidati.get(3).getCognome());
+			label5.setText(candidati.get(4).getNome() + " " + candidati.get(4).getCognome());
+		}catch(IndexOutOfBoundsException e) {
+			//e.printStackTrace();
+		}
+		
 	}
 
 	public void votaPerPartiti(ActionEvent event) {
 		setVisible();
+		resetVBox();
+		for (int i = 0; i < partiti.size(); i++) {
+			listTextField.get(i).setVisible(true);
+		}
+		try {
+			label1.setText(partiti.get(0).getNome());
+			label2.setText(partiti.get(1).getNome());
+			label3.setText(partiti.get(2).getNome());
+			label4.setText(partiti.get(3).getNome());
+			label5.setText(partiti.get(4).getNome());
+		}catch(IndexOutOfBoundsException e) {
+			//e.printStackTrace();
+		}
 		
 	}
 
@@ -67,7 +96,25 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		listTextField = new ArrayList<>(); 
+		listTextField.add(textField1);
+		listTextField.add(textField2);
+		listTextField.add(textField3);
+		listTextField.add(textField4);
+		listTextField.add(textField5);
 		loadData();
+	}
+	
+	private void resetVBox() {
+		label1.setText("");
+		label2.setText("");
+		label3.setText("");
+		label4.setText("");
+		label5.setText("");
+		for (TextField tF : listTextField) {
+			tF.setText("");
+			tF.setVisible(false);
+		}
 	}
 	
 	private void loadData() {
