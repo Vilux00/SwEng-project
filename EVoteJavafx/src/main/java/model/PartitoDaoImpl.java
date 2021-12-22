@@ -116,7 +116,7 @@ public class PartitoDaoImpl implements PartitoDao{
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT p.* FROM evoting.candidato_partito AS c JOIN evoting.candidato_per AS cp ON c.id = cp.id_candidato JOIN evoting.partito AS p ON p.id = c.id_partito WHERE cp.id_sessione = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT DISTINCT(p.*) FROM evoting.candidato_partito AS c JOIN evoting.candidato_per AS cp ON c.id = cp.id_candidato JOIN evoting.partito AS p ON p.id = c.id_partito WHERE cp.id_sessione = ?");
 			ps.setInt(1, s.getId());
 			ResultSet r = ps.executeQuery();
 			while(r.next()) {
