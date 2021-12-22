@@ -9,9 +9,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import model.Candidato;
 import model.CandidatoDaoImpl;
@@ -42,16 +44,35 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	@FXML private Button votaPerPartiti;
 	
 	public void confermaVotazione(ActionEvent event) throws IOException {
-
+		if (!checkValidita()) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore inserimento votazione");
+			alert.setTitle("Errore");
+			alert.setContentText("Numera correttamente i candidati/partiti scelti");
+			alert.show();
+		}
+		//inserimento
 	}
 
+	
+	private boolean checkValidita() {
+		List <String> l = new ArrayList<>();
+		for (TextField tF : listTextField) {
+			l.add(tF.getText());
+		}
+		for (int i = 1; i <= listTextField.size(); i++) {
+			if (!l.contains((i+""))) return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 
 	public void setSchedaBianca(ActionEvent event) {
-
+		
 	}
 
 	public void votaPerCandidati(ActionEvent event) {
@@ -69,7 +90,6 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		}catch(IndexOutOfBoundsException e) {
 			//e.printStackTrace();
 		}
-		
 	}
 
 	public void votaPerPartiti(ActionEvent event) {
@@ -92,6 +112,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 
 	private void setVisible() {
 		vBoxElenco.setVisible(true);
+		bottoneConferma.setVisible(true);
 	}
 
 	@Override

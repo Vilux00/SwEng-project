@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VotazioneOrdinaleController">
    <children>
-      <VBox layoutX="32.0" layoutY="59.0" prefHeight="314.0" prefWidth="553.0">
+      <VBox layoutX="32.0" layoutY="43.0" prefHeight="314.0" prefWidth="553.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="563.0">
                <children>
