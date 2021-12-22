@@ -110,6 +110,10 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 		}
 	}
 	
+	public void setSchedaBianca(ActionEvent event) {
+		
+	}
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);

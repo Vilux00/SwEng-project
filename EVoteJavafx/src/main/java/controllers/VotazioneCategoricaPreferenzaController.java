@@ -36,6 +36,9 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 		}
 	}
 
+	public void setSchedaBianca(ActionEvent event) {
+		
+	}
 	public void aggiungiCandidato(ActionEvent event) {
 		
 	}
