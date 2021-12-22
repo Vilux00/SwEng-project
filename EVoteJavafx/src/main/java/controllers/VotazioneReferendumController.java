@@ -27,79 +27,29 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 	@FXML private Label visualizzaQuesito;
 	
 	public void setFavorevole(ActionEvent event) throws IOException{
-		Elettore e = (Elettore) data;
-		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
-		alert.setTitle("Conferma votazione");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(!insertLog(s, e.getCodF())) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Impossibile registrare il voto per la sessione");
-				alert.setTitle("Errore");
-				alert.show();
-			}else {
-				Voto v = new Voto(s);
-				v.setR_quesito(true);
-				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-				if(vd.inserisciVotoReferendum(v)) {
-					alert = new Alert(AlertType.INFORMATION);
-					alert.setHeaderText("Votazione inserita con successo");
-					alert.setTitle("Votazione inserita");
-					alert.show();
-					rimuoviScenaPrecedente();
-					goToScenaPrecedente(event);
-				}else {
-					alert = new Alert(AlertType.ERROR);
-					alert.setHeaderText("Errore inserimento votazione");
-					alert.setTitle("Errore");
-					alert.show();
-				}
-			}
-		}
+		setVoto("Favorevole", event);
 	}
 	
 	public void setContrario(ActionEvent event) throws IOException{
-		Elettore e = (Elettore) data;
-		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
-		alert.setTitle("Conferma votazione");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(!insertLog(s, e.getCodF())) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Impossibile registrare il voto per la sessione");
-				alert.setTitle("Errore");
-				alert.show();
-			}else {
-				Voto v = new Voto(s);
-				v.setR_quesito(false);
-				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-				if(vd.inserisciVotoReferendum(v)) {
-					alert = new Alert(AlertType.INFORMATION);
-					alert.setHeaderText("Votazione inserita con successo");
-					alert.setTitle("Votazione inserita");
-					alert.show();
-					rimuoviScenaPrecedente();
-					goToScenaPrecedente(event);
-				}else {
-					alert = new Alert(AlertType.ERROR);
-					alert.setHeaderText("Errore inserimento votazione");
-					alert.setTitle("Errore");
-					alert.show();
-				}
-			}
-		}
+		setVoto("Contrario", event);
 	}
 	
 	public void setSchedaBianca(ActionEvent event) throws IOException{
+		setVoto("Scheda bianca", event);
+	}
+	
+	private void setVoto(String tipoVoto, ActionEvent event) throws IOException {
 		Elettore e = (Elettore) data;
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");
-		alert.setTitle("Conferma votazione");
+		switch (tipoVoto) {
+			case "Favorevole":
+				alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
+			case "Contrario":
+				alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
+			case "Scheda bianca":
+				alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");
+		}
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			if(!insertLog(s, e.getCodF())) {
@@ -109,7 +59,14 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 				alert.show();
 			}else {
 				Voto v = new Voto(s);
-				v.setR_quesito(null);
+				switch (tipoVoto) {
+				case "Favorevole":
+					v.setR_quesito(true);
+				case "Contrario":
+					v.setR_quesito(false);
+				case "Scheda bianca":
+					v.setR_quesito(null);
+			}
 				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 				if(vd.inserisciVotoReferendum(v)) {
 					alert = new Alert(AlertType.INFORMATION);
