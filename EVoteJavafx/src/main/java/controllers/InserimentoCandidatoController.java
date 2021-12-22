@@ -25,13 +25,20 @@ public class InserimentoCandidatoController  extends DefaultSceneController{
 		Candidato ca = new Candidato(n, c);
 		CandidatoDao cd = (CandidatoDaoImpl) DaoFactory.getInstance().getDao("Candidato");
 		if(cd.inserisciCandidato(ca, new Partito(p))) {
-			Alert alert = new Alert(AlertType.ERROR);
+			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Inserimento candidato");
 			alert.setHeaderText("Candidato inserito correttamente");
 			alert.show();
+			resetCampi();
 		}
 	}
 
+	private void resetCampi() {
+		nome.setText("");
+		cognome.setText("");
+		partito.setText("");
+	}
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);

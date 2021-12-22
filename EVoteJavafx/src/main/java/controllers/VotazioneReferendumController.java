@@ -24,7 +24,7 @@ import model.VotoDao;
 
 public class VotazioneReferendumController extends DefaultSceneController implements Initializable{
 	
-	@FXML private Label quesito;
+	@FXML private Label visualizzaQuesito;
 	
 	public void setFavorevole(ActionEvent event) throws IOException{
 		Elettore e = (Elettore) data;
@@ -146,7 +146,7 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 	public void loadData() {
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		String quesito = sd.getQuesito(SessioneDiVotoHolder.getInstance().getSessione());
-		this.quesito.setText(quesito);
+		this.visualizzaQuesito.setText(quesito);
 	}
 	
 }

@@ -25,7 +25,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="102.0" prefWidth="557.0" />
+                  <Label fx:id="visualizzaQuesito" prefHeight="102.0" prefWidth="557.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
