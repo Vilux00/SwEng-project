@@ -18,10 +18,9 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
-		<Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
 		<VBox prefHeight="389.0" prefWidth="600.0">
 			<children>
-				<HBox prefHeight="143.0" prefWidth="600.0">
+				<HBox prefHeight="121.0" prefWidth="600.0">
 					<children>
 						<VBox prefHeight="89.0" prefWidth="383.0">
 							<children>
@@ -139,7 +138,7 @@
 						</VBox>
 					</children>
 				</HBox>
-				<VBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="600.0">
+				<VBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="466.0">
 					<children>
 						<Label style="-fx-background-color: #4c5157;" text="Funzioni utente">
 							<VBox.margin>
@@ -175,5 +174,6 @@
          </image>
       </ImageView>
       <Button layoutX="541.0" layoutY="84.0" mnemonicParsing="false" onAction="#mostraInfo" opacity="0.0" prefHeight="31.0" prefWidth="25.0" text="Button" />
+		<Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
 	</children>
 </AnchorPane>
