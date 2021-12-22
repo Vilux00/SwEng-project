@@ -5,9 +5,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import org.apache.commons.lang3.StringUtils;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -104,14 +101,40 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 					VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 					vd.inserisciVotoNonReferendum(v);
 				}
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Preferenza inserita correttamente");
+				alert.setTitle("Votazione completata");
+				alert.show();
 				rimuoviScenaPrecedente();
 				goToScenaPrecedente(event);
 			}
 		}
 	}
 	
-	public void setSchedaBianca(ActionEvent event) {
-		
+	public void setSchedaBianca(ActionEvent event) throws IOException{
+		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
+		VotoDao v = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+		Elettore e = (Elettore) data; // Holder
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("Conferma di voler lasciare scheda bianca?");
+		alert.setTitle("Conferma");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			if(!insertLog(s, e.getCodF())) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}else {
+				v.inserisciVotoNonReferendum(new Voto(s));
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Preferenza inserita correttamente");
+				alert.setTitle("Votazione completata");
+				alert.show();
+				rimuoviScenaPrecedente();
+				goToScenaPrecedente(event);
+			}
+		}
 	}
 	
 	@Override

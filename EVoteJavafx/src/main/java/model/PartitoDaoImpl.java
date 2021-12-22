@@ -122,6 +122,7 @@ public class PartitoDaoImpl implements PartitoDao{
 			while(r.next()) {
 				Partito p = new Partito(r.getString(2));
 				p.setId(r.getInt(1));
+				p.setCandidati(getCandidati(p));
 				l.add(p);
 			}
 			return l;

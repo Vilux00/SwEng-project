@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,17 +12,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
+import model.DaoFactory;
+import model.Partito;
+import model.PartitoDao;
+import model.SessioneDiVotoHolder;
 
 public class VotazioneCategoricaPreferenzaController extends DefaultSceneController implements Initializable{
 	
-	@FXML
-    private ComboBox<String> comboBoxPartiti;
-
-	@FXML
-    private ComboBox<String> comboBoxCandidati;
-	
-	@FXML
-    private ComboBox<String> comboBoxCandidatiScelti;
+	@FXML private ComboBox<String> comboBoxPartiti;
+	@FXML private ComboBox<String> comboBoxCandidati;
+	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
 	public void confermaVotazione(ActionEvent event) throws IOException{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -57,7 +57,13 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	}
 	
 	private void loadData() {
-		//aggiunta partiti
+		PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
+		List<Partito> l = pd.getPartiti(SessioneDiVotoHolder.getInstance().getSessione());
+		for(Partito p : l) {
+			System.out.println(p);
+			comboBoxPartiti.getItems().addAll(p.toString());
+			
+		}
 	}
 	
 	@Override
