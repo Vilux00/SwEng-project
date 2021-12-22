@@ -16,7 +16,7 @@
          <children>
             <HBox prefHeight="37.0" prefWidth="563.0">
                <children>
-                  <Label text="Quesito:">
+                  <Label fx:id="quesito" text="Quesito:">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

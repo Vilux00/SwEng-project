@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import model.Elettore;
+import model.ElettoreHolder;
 
 public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	@Override
@@ -18,6 +20,7 @@ public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	@Override
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloScrutatoreView.fxml", "Profilo scrutatore");
+		ElettoreHolder.getInstance().setElettore((Elettore) data);
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
 	}
 }

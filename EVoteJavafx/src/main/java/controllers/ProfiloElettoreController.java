@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreDao;
+import model.ElettoreHolder;
 
 public class ProfiloElettoreController extends DefaultSceneController{
 	private boolean infoMostrate = false;
@@ -26,6 +27,7 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
+		ElettoreHolder.getInstance().setElettore((Elettore) data);
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
 	}
 	

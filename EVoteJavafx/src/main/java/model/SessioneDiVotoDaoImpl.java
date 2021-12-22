@@ -124,12 +124,13 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         }
 	}
     
+	 @Override
 	 public List<SessioneDiVoto> getSessioni(String codF) {
 	        DbManager dbM = DbManager.getInstance();
 	        Connection c = dbM.open();
 	        List<SessioneDiVoto> l = new ArrayList<>();
 	        try {
-	            PreparedStatement ps = c.prepareStatement("SELECT s.nome, s.modalita_voto, s.modalita_vincitore, s.quesito, s.termine, s.id, s.scrutinio FROM evoting.sessione_voto AS s JOIN evoting.log_voto AS v ON s.id = v.id_sessione WHERE v.codice_fiscale = ?");
+	            PreparedStatement ps = c.prepareStatement("SELECT s.nome, s.modalita_voto, s.modalita_vincitore, s.quesito, s.termine, s.id, s.scrutinio FROM evoting.sessione_voto AS s WHERE NOT EXISTS(SELECT * FROM evoting.log_voto WHERE id_sessione = s.id AND log_voto.codice_fiscale = ?)");
 	            ps.setString(1, codF);
 	            ResultSet r = ps.executeQuery();
 	            while(r.next()) {
@@ -149,6 +150,24 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 	            dbM.close(c);
 	        }
 	    }
+
+	@Override
+	public String getQuesito(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT quesito FROM evoting.sessione_voto WHERE id = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getString(1);
+            return null;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            dbM.close(c);
+        }
+	}
     
 
 

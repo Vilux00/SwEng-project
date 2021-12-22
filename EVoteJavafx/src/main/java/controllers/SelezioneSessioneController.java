@@ -11,8 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import model.DaoFactory;
+import model.ElettoreHolder;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
+import model.SessioneDiVotoHolder;
 import javafx.scene.control.Alert.AlertType;
 
 public class SelezioneSessioneController extends DefaultSceneController implements Initializable{
@@ -32,14 +34,15 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 		}else {
 			for (SessioneDiVoto s : list) {
 				if (s.toString().equals(comboBoxSessione.getValue())) {
+					SessioneDiVotoHolder.getInstance().setSessione(s);
 					if (s.getModalitaVoto().equals("REF")) {
-						changeScene(event, "votazioneReferendumView.fxml", "Votazione", new Object[] {data, s});
+						changeScene(event, "votazioneReferendumView.fxml", "Votazione", data);
 					}else if (s.getModalitaVoto().equals("ORD")) {
-						changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", new Object[] {data, s});
+						changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", data);
 					}else if (s.getModalitaVoto().equals("CAT")) {
-						changeScene(event, "votazioneCategoricaView.fxml", "Votazione", new Object[] {data, s});
+						changeScene(event, "votazioneCategoricaView.fxml", "Votazione", data);
 					}else {
-						changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", new Object[] {data, s});
+						changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", data);
 					}
 				}
 			}
@@ -53,7 +56,8 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 
 	private void loadData() {
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-        list = sDAO.getSessioni();
+        list = sDAO.getSessioni(ElettoreHolder.getInstance().getElettore().getCodF());
+        System.out.println(list);
         for (SessioneDiVoto s : list) comboBoxSessione.getItems().addAll(s.toString());
          
 	}

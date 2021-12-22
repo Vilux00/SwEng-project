@@ -1,26 +1,34 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
 import model.LogVoto;
 import model.LogVotoDao;
 import model.SessioneDiVoto;
+import model.SessioneDiVotoDao;
+import model.SessioneDiVotoHolder;
 import model.Voto;
 import model.VotoDao;
 
-public class VotazioneReferendumController extends DefaultSceneController{
+public class VotazioneReferendumController extends DefaultSceneController implements Initializable{
+	
+	@FXML private Label quesito;
 	
 	public void setFavorevole(ActionEvent event) throws IOException{
-		Object []objArr = (Object [])data;
-		Elettore e = (Elettore) objArr[0];
-		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
+		Elettore e = (Elettore) data;
+		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
 		alert.setTitle("Conferma votazione");
@@ -53,9 +61,8 @@ public class VotazioneReferendumController extends DefaultSceneController{
 	}
 	
 	public void setContrario(ActionEvent event) throws IOException{
-		Object []objArr = (Object [])data;
-		Elettore e = (Elettore) objArr[0];
-		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
+		Elettore e = (Elettore) data;
+		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
 		alert.setTitle("Conferma votazione");
@@ -88,9 +95,8 @@ public class VotazioneReferendumController extends DefaultSceneController{
 	}
 	
 	public void setSchedaBianca(ActionEvent event) throws IOException{
-		Object []objArr = (Object [])data;
-		Elettore e = (Elettore) objArr[0];
-		SessioneDiVoto s = (SessioneDiVoto) objArr[1];
+		Elettore e = (Elettore) data;
+		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");
 		alert.setTitle("Conferma votazione");
@@ -124,12 +130,23 @@ public class VotazioneReferendumController extends DefaultSceneController{
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), ((Object [])data)[0]);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 	
 	public boolean insertLog(SessioneDiVoto s, String codF) {
 		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
 		return ld.inserisciLog(new LogVoto(s.getId(), codF));
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		loadData();
+	}
+	
+	public void loadData() {
+		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		String quesito = sd.getQuesito(SessioneDiVotoHolder.getInstance().getSessione());
+		this.quesito.setText(quesito);
 	}
 	
 }

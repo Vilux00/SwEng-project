@@ -83,5 +83,29 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			dbM.close(conn);
 		}
 	}
+	
+	@Override
+	public List<Candidato> getCandidatiSessione(SessioneDiVoto s){
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		List<Candidato> l = new ArrayList<>();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT c.id, c.nome, c.cognome, p.nome FROM evoting.candidato_partito AS c JOIN evoting.candidato_per AS cp ON c.id = cp.id_candidato JOIN evoting.partito AS p ON p.id = c.id_partito WHERE cp.id_sessione = ?");
+			ps.setInt(1, s.getId());
+			ResultSet r = ps.executeQuery();
+			while(r.next()) {
+				Candidato c = new Candidato(r.getString(2), r.getString(3));
+				c.setId(r.getInt(1));
+				c.setPartito(new Partito(r.getString(4)));
+				l.add(c);
+			}
+			return l;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			dbM.close(conn);
+		}
+	}
 
 }

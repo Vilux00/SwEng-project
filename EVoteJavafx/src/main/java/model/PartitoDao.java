@@ -8,4 +8,5 @@ public interface PartitoDao extends DaoInterface{
 	public List<Candidato> getCandidati(Partito p);
 	public Integer getId(Partito p);
 	public List<Partito> getPartiti();
+	public List<Partito> getPartiti(SessioneDiVoto s);
 }

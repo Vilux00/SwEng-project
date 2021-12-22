@@ -109,5 +109,28 @@ public class PartitoDaoImpl implements PartitoDao{
 			dbM.close(conn);
 		}
 	}
+	
+	@Override
+	public List<Partito> getPartiti(SessioneDiVoto s){
+		List<Partito> l = new ArrayList<>();
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT p.* FROM evoting.candidato_partito AS c JOIN evoting.candidato_per AS cp ON c.id = cp.id_candidato JOIN evoting.partito AS p ON p.id = c.id_partito WHERE cp.id_sessione = ?");
+			ps.setInt(1, s.getId());
+			ResultSet r = ps.executeQuery();
+			while(r.next()) {
+				Partito p = new Partito(r.getString(2));
+				p.setId(r.getInt(1));
+				l.add(p);
+			}
+			return l;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			dbM.close(conn);
+		}
+	}
 
 }

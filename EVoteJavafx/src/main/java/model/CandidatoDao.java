@@ -7,4 +7,5 @@ public interface CandidatoDao extends DaoInterface{
 	public Candidato getCandidatoById(int id);
 	public List<Candidato> getCandidati();
 	public boolean inserisciCandidatoSessione(Candidato c, int id);
+	public List<Candidato> getCandidatiSessione(SessioneDiVoto s);
 }

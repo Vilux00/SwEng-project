@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Partito {
+	private int id;
+
 	private String nome;
 	private List<Candidato> l;
 	
@@ -29,6 +31,14 @@ public class Partito {
 	
 	public List<Candidato> getCandidati() {
 		return Collections.unmodifiableList(l);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Override
