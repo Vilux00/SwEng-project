@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,18 +49,40 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 			int []l = new int[candidatiScelti.size()];
 			for(int i = 0; i < candidatiScelti.size(); i++) l[i] = candidatiScelti.get(i).getId(); 
 			v.setPreferenze_candidato(l);
-			vd.inserisciVotoNonReferendum(v);
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
+			if(vd.inserisciVotoNonReferendum(v)) {
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Preferenza inserita correttamente");
+				alert.setTitle("Votazione completata");
+				alert.show();
+				rimuoviScenaPrecedente();
+				goToScenaPrecedente(event);
+				return;
+			}
+			alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore inserimento voto");
+			alert.setTitle("Errore");
+			alert.show();
 		}
 	}
 
-	public void setSchedaBianca(ActionEvent event) {
+	public void setSchedaBianca(ActionEvent event) throws IOException{
 		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
 		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
 		ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
-		vd.inserisciVotoNonReferendum(v);
+		if(vd.inserisciVotoNonReferendum(v)) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Preferenza inserita correttamente");
+			alert.setTitle("Votazione completata");
+			alert.show();
+			rimuoviScenaPrecedente();
+			goToScenaPrecedente(event);
+			return;
+		}
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("Errore inserimento voto");
+		alert.setTitle("Errore");
+		alert.show();
 	}
 	
 	public void aggiungiCandidato(ActionEvent event) {
@@ -88,12 +107,13 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	
 	public void updateCandidati(ActionEvent event) {
 		comboBoxCandidati.getItems().clear();
+		comboBoxCandidatiScelti.getItems().clear();
 		comboBoxCandidati.setDisable(false);
 		comboBoxCandidatiScelti.setDisable(false);
+		candidatiScelti.clear();
 		conferma.setDisable(false);
 		for(Partito p : partiti) {
 			if(p.toString().equals(comboBoxPartiti.getValue())) {
-				System.out.println(p.getCandidati());
 				candidati.addAll(p.getCandidati());
 				for(Candidato c : p) comboBoxCandidati.getItems().addAll(c.toString());
 			}
