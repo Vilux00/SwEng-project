@@ -57,7 +57,6 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 	private void loadData() {
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         list = sDAO.getSessioni(ElettoreHolder.getInstance().getElettore().getCodF());
-        System.out.println(list);
         for (SessioneDiVoto s : list) comboBoxSessione.getItems().addAll(s.toString());
          
 	}
