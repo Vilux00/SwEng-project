@@ -11,6 +11,14 @@ public class Candidato {
 		this.cognome = cognome;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -35,14 +43,6 @@ public class Candidato {
 		return partito;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	@Override
 	public String toString() {
 		return "(" + partito.toString() + ") " + nome + " " + cognome;
@@ -51,7 +51,7 @@ public class Candidato {
 	@Override
 	public boolean equals(Object o) {
 		Candidato c = (Candidato) o;
-		return nome == c.nome && cognome == c.cognome && partito.equals(c.partito);
+		return nome.equals(c.nome) && cognome.equals(c.cognome) && partito.equals(c.partito);
 	}
 
 }
