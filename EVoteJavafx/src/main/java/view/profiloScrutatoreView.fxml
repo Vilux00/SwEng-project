@@ -17,7 +17,6 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
-		<Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
 		<VBox prefHeight="365.0" prefWidth="600.0">
 			<children>
 				<VBox prefHeight="129.0" prefWidth="600.0">
@@ -142,5 +141,6 @@
          </image>
       </ImageView>
       <Button layoutX="541.0" layoutY="84.0" mnemonicParsing="false" onAction="#mostraInfo" opacity="0.0" prefHeight="31.0" prefWidth="25.0" text="Button" />
+		<Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
 	</children>
 </AnchorPane>
