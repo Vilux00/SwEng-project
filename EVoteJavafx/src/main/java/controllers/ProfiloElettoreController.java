@@ -22,17 +22,16 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	
 	public void cambiaPassword(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
-		changeScene(event, "modificaPasswordView.fxml", "Modifica password", data);
+		changeScene(event, "modificaPasswordView.fxml", "Modifica password");
 	}
 	
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
-		ElettoreHolder.getInstance().setElettore((Elettore) data);
-		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione", data);
+		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}
 	
 	public void mostraInfo(ActionEvent event) throws IOException{
-		Elettore e = (Elettore)data;
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 		ElettoreDao el = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
 		List<String> info = el.getInfoByCodF(e);
 		if (!infoMostrate) {

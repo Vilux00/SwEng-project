@@ -13,6 +13,7 @@ import model.DaoFactory;
 import model.NuovoUtente;
 import model.Password;
 import model.NuovoUtenteDaoImpl;
+import model.NuovoUtenteHolder;
 
 public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	private String password;
@@ -29,8 +30,7 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	}
 	
 	public void registraUtenteDB(ActionEvent event) throws IOException {
-		Object []objArr = (Object[])data;
-		NuovoUtente n = (NuovoUtente)objArr[1];
+		NuovoUtente n = NuovoUtenteHolder.getInstance().getUtente();
 		n.setPassword(password);
 		btnGeneraPassword.setDisable(true);
 		NuovoUtenteDaoImpl nu = (NuovoUtenteDaoImpl)DaoFactory.getInstance().getDao("NuovoUtente");
@@ -41,6 +41,7 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 			alert.show();
 			rimuoviScenaPrecedente();
 			goToScenaPrecedente(event);
+			NuovoUtenteHolder.getInstance().setUtente(null);
 		}else {
 			btnCreaAccount.setDisable(true);
 			stampaPdfAccount.setVisible(true);
@@ -48,20 +49,18 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	}
 	
 	public void stampaCredenzialiUtente(ActionEvent event) throws IOException{
-		Object []objArr = (Object[])data;
-		NuovoUtente n = (NuovoUtente)objArr[1];
+		NuovoUtente n = NuovoUtenteHolder.getInstance().getUtente();
 		System.out.println("Codice fiscale: " + n.getCodF() + ", password: " + n.getPassword());
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText("Registrazione avvenuta con successo");
 		alert.setTitle("");
 		alert.show();
 		rimuoviScenaPrecedente(2);
-		changeScene(event, "profiloGestoreView.fxml", "Home profilo", objArr[0]);
+		changeScene(event, "profiloGestoreView.fxml", "Home profilo");
 	}
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		Object []objArr = (Object[])data;
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), objArr[0]);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 }

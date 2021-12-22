@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import model.ElettoreHolder;
 
 public abstract class DefaultSceneController {
 	private Parent root;
@@ -42,8 +42,7 @@ public abstract class DefaultSceneController {
 	public void backToHomeScene(ActionEvent event) throws IOException {	
 		if (isLogged == true) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Sicuro di fare logout?");
-			alert.setHeaderText("Conferma logout");
+			alert.setHeaderText("Sei sicuro di voler effettuare il logout?");
 			alert.setTitle("Logout");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -51,6 +50,7 @@ public abstract class DefaultSceneController {
 				scenaPrecedente.clear();
 				scenaPrecedenteTitolo.clear();
 				isLogged = false;
+				ElettoreHolder.getInstance().setElettore(null);
 			}
 		}else {
 			changeScene(event, "homeView.fxml", "Home");

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
+import model.ElettoreHolder;
 import model.LogVoto;
 import model.LogVotoDao;
 import model.SessioneDiVoto;
@@ -38,7 +39,7 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 	}
 	
 	private void setVoto(String tipoVoto, ActionEvent event) throws IOException {
-		Elettore e = (Elettore) data;
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		switch (tipoVoto) {
@@ -51,27 +52,23 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 		}
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(!insertLog(s, e.getCodF())) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Impossibile registrare il voto per la sessione");
-				alert.setTitle("Errore");
-				alert.show();
-			}else {
+			if(insertLog(s, e.getCodF())) {
 				Voto v = new Voto(s);
 				switch (tipoVoto) {
-				case "Favorevole":
-					v.setR_quesito(true);
-				case "Contrario":
-					v.setR_quesito(false);
-				case "Scheda bianca":
-					v.setR_quesito(null);
-			}
+					case "Favorevole":
+						v.setR_quesito(true);
+					case "Contrario":
+						v.setR_quesito(false);
+					case "Scheda bianca":
+						v.setR_quesito(null);
+				}
 				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 				if(vd.inserisciVotoReferendum(v)) {
 					alert = new Alert(AlertType.INFORMATION);
 					alert.setHeaderText("Votazione inserita con successo");
 					alert.setTitle("Votazione inserita");
 					alert.show();
+					SessioneDiVotoHolder.getInstance().setSessione(null);
 					rimuoviScenaPrecedente();
 					goToScenaPrecedente(event);
 				}else {
@@ -80,13 +77,18 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 					alert.setTitle("Errore");
 					alert.show();
 				}
+			}else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();	
 			}
 		}
 	}
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 	
 	public boolean insertLog(SessioneDiVoto s, String codF) {

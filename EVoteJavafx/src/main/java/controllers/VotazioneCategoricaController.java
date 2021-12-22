@@ -19,6 +19,7 @@ import model.Candidato;
 import model.CandidatoDao;
 import model.DaoFactory;
 import model.Elettore;
+import model.ElettoreHolder;
 import model.LogVoto;
 import model.LogVotoDao;
 import model.Partito;
@@ -64,6 +65,7 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		CandidatoDao cd = (CandidatoDao) DaoFactory.getInstance().getDao("Candidato");
 		PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
+		
 		candidatiL = cd.getCandidatiSessione(s);
 		partitiL = pd.getPartiti(s); 
 		for(Candidato c : candidatiL) candidati.add(c.toString());
@@ -73,19 +75,16 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 	public void confermaVotazione(ActionEvent event) throws IOException{
 		String preferenza = comboBoxCandidatiPartiti.getValue();
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 		PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
-		Elettore e = (Elettore) data; // Holder
+	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Conferma di voler votare per: " + preferenza + "?");
 		alert.setTitle("Conferma dati");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(!insertLog(s, e.getCodF())) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Impossibile registrare il voto per la sessione");
-				alert.setTitle("Errore");
-				alert.show();
-			}else {
+			// Hopefully short circuit evaluation does his job
+			if((data != null && ((String)data).equals("SuperUser")) || insertLog(s, e.getCodF())) {
 				if(preferenza.contains("(")) {
 					Voto v = new Voto(s);
 					for(Candidato c : candidatiL) 
@@ -107,14 +106,21 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 				alert.show();
 				rimuoviScenaPrecedente();
 				goToScenaPrecedente(event);
-			}
+				SessioneDiVotoHolder.getInstance().setSessione(null);
+			}else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}		
 		}
 	}
 	
 	public void setSchedaBianca(ActionEvent event) throws IOException{
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		VotoDao v = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-		Elettore e = (Elettore) data; // Holder
+		Elettore e = ElettoreHolder.getInstance().getElettore();
+		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Conferma di voler lasciare scheda bianca?");
 		alert.setTitle("Conferma");
@@ -126,20 +132,27 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 				alert.setTitle("Errore");
 				alert.show();
 			}else {
-				v.inserisciVotoNonReferendum(new Voto(s));
-				alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Preferenza inserita correttamente");
-				alert.setTitle("Votazione completata");
-				alert.show();
-				rimuoviScenaPrecedente();
-				goToScenaPrecedente(event);
+				if(v.inserisciVotoNonReferendum(new Voto(s))) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Preferenza inserita correttamente");
+					alert.setTitle("Votazione completata");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+				}
+				else {
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Qualcosa è andato storto");
+					alert.setTitle("Errore");
+					alert.show();
+				}
 			}
 		}
 	}
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 	
 	public boolean insertLog(SessioneDiVoto s, String codF) {

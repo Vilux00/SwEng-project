@@ -20,6 +20,7 @@ import javafx.scene.layout.Region;
 import model.DaoFactory;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDaoImpl;
+import model.SessioneDiVotoHolder;
 import javafx.scene.control.Alert.AlertType;
 
 public class CreaReferendumController extends DefaultSceneController implements Initializable{
@@ -42,8 +43,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 			alert.setContentText("Quesito: " + quesito.getText() + "\nModalita' di voto: " + comboBoxVincitore.getValue());
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
-				Object []obj = (Object [])data;
-				SessioneDiVoto s = (SessioneDiVoto) obj[0];
+				SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 				s.setModVincitore(StringUtils.substringBetween(comboBoxVincitore.getValue(), "(", ")"));
 				s.setQuesito(quesito.getText());
 				SessioneDiVotoDaoImpl se = (SessioneDiVotoDaoImpl) DaoFactory.getInstance().getDao("SessioneDiVoto");
@@ -53,7 +53,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 					alert.setTitle("Sessione creata");
 					alert.show();
 					rimuoviScenaPrecedente(2);
-					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", obj[1]);
+					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema");
 				}
 				else {
 					alert = new Alert(AlertType.ERROR);
@@ -77,8 +77,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		Object []obj = (Object [])data;
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), obj[1]);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 	
 }

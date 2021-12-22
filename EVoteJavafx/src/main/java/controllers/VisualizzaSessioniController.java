@@ -44,13 +44,13 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
         sessioni = FXCollections.observableArrayList();
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         List<SessioneDiVoto> list = sDAO.getSessioni();
-        for (SessioneDiVoto s : list) sessioni.add(s);
+        for(SessioneDiVoto s : list) sessioni.add(s);
         tabella.setItems(sessioni);
     }
     
     @Override
     public void goToScenaPrecedente(ActionEvent event) throws IOException {
-    	changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+    	changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
     }
     
     @FXML
@@ -70,7 +70,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     			alert.show();
         	}else {
         		sDAO.avviaScrutinio(s);
-        		changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni", data);
+        		changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni");
         	}
         }
     }

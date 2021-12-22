@@ -21,41 +21,44 @@ public class SelSessioneInserimVotoController extends DefaultSceneController imp
 	private List<SessioneDiVoto> list;
 	@FXML private ComboBox<String> comboBoxSessione;
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		 SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-	     list = sd.getSessioni();
-	     for (SessioneDiVoto s : sd.getSessioni()) comboBoxSessione.getItems().addAll(s.toString());
-	}
-	
 	public void goToSessione(ActionEvent event) throws IOException{
 		setScenaPrecedente("selezioneSessioneView.fxml", "Selezione sessione");
 		if(Objects.isNull(comboBoxSessione.getValue()) == true) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Selezionare la sessione");
 			alert.show();
-			//pop  
 		}else {
 			for (SessioneDiVoto s : list) {
 				if (s.toString().equals(comboBoxSessione.getValue())) {
 					SessioneDiVotoHolder.getInstance().setSessione(s);
 					if (s.getModalitaVoto().equals("REF")) {
-						changeScene(event, "votazioneReferendumView.fxml", "Votazione", data);
+						changeScene(event, "votazioneReferendumView.fxml", "Votazione", "SuperUser");
 					}else if (s.getModalitaVoto().equals("ORD")) {
-						changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", data);
+						changeScene(event, "votazioneOrdinaleView.fxml", "Votazione", "SuperUser");
 					}else if (s.getModalitaVoto().equals("CAT")) {
-						changeScene(event, "votazioneCategoricaView.fxml", "Votazione", data);
+						changeScene(event, "votazioneCategoricaView.fxml", "Votazione", "SuperUser");
 					}else {
-						changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", data);
+						changeScene(event, "votazioneCategoricaPreferenzaView.fxml", "Votazione", "SuperUser");
 					}
 				}
 			}
 		}	
 	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		loadData();
+	}
 
+	public void loadData() {
+		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+	    list = sd.getSessioni();
+	    for (SessioneDiVoto s : sd.getSessioni()) comboBoxSessione.getItems().addAll(s.toString());
+	}
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 
 }

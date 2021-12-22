@@ -17,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.NuovoUtente;
+import model.NuovoUtenteHolder;
 
 
 public class RegistrazioneUtente1Controller  extends DefaultSceneController implements Initializable{
@@ -66,11 +67,11 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 				alert.setContentText("Nome, cognome: " + nome + ", " + cognome + "\nCodice fiscale: " + codF + "\nLuogo di nascita: " + paese + " (" + nazione + ") \nData di nascita: " +
 									giorno + "-" + mese + "-" + anno + "\nSesso: " +sesso+"\nPrivilegio: " +privilegio);
-				Object []objArr = new Object[] {data, n};
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.isPresent() && result.get() == ButtonType.OK) {
+					NuovoUtenteHolder.getInstance().setUtente(n);
 					setScenaPrecedente("registrazioneUtenteView1.fxml", "Registrazione utente");
-					changeScene(event, "registrazioneUtenteView2.fxml", "Registrazione utente", objArr);
+					changeScene(event, "registrazioneUtenteView2.fxml", "Registrazione utente");
 				}
 			}
 		}
@@ -100,6 +101,6 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 }

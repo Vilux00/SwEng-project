@@ -81,36 +81,43 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		}
 		LogVotoDao lv = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
 		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-		lv.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
-		if(!vd.inserisciVotoNonReferendum(v)) {
+		LogVoto lo = new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF());
+		// Hopefully short circuit evaluation does his job
+		if((data != null && ((String)data).equals("SuperUser")) || lv.inserisciLog(lo)) {
+			if(!vd.inserisciVotoNonReferendum(v)) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Errore inserimento voto");
+				alert.setTitle("Errore");
+				alert.show();
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Voto inserito correttamente");
+				alert.setTitle("Voto inserito");
+				alert.show();
+				SessioneDiVotoHolder.getInstance().setSessione(null);
+				rimuoviScenaPrecedente();
+				goToScenaPrecedente(event);
+			}
+		}
+		else {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Errore inserimento voto");
+			alert.setHeaderText("Impossibile registrare il voto per la sessione");
 			alert.setTitle("Errore");
 			alert.show();
-		} else {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText("Voto inserito correttamente");
-			alert.setTitle("Voto inserito");
-			alert.show();
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
 		}
 	}
 
 	
 	private boolean checkValidita() {
 		List <String> l = new ArrayList<>();
-		for (TextField tF : listTextField) {
+		for (TextField tF : listTextField)
 			l.add(tF.getText());
-		}
 		if (tipoElenco == 'c') {
-			for (int i = 1; i <= candidati.size(); i++) {
+			for (int i = 1; i <= candidati.size(); i++)
 				if (!l.contains((i+""))) return false;
-			}
 		}else {
-			for (int i = 1; i <= partiti.size(); i++) {
+			for (int i = 1; i <= partiti.size(); i++)
 				if (!l.contains((i+""))) return false;
-			}
 		}
 		return true;
 	}

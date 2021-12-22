@@ -9,12 +9,11 @@ import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreDaoImpl;
+import model.ElettoreHolder;
 
 public class LoginElettoreController extends DefaultSceneController{	
-	@FXML
-	private TextField codF;
-	@FXML
-	private TextField password;
+	@FXML private TextField codF;
+	@FXML private TextField password;
 
 	public void login(ActionEvent event) throws IOException {
 		String codFisc = codF.getText().replaceAll(" ", "");
@@ -27,11 +26,13 @@ public class LoginElettoreController extends DefaultSceneController{
 			alert.show();
 			return;
 		}
+		
 		Elettore e = new Elettore(codFisc, pwd);
 		ElettoreDaoImpl ed = (ElettoreDaoImpl) DaoFactory.getInstance().getDao("Elettore");
 		if(ed.login(e)){
+			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginElettoreView.fxml", "Login elettore"); 
-			changeScene(event, "profiloElettoreView.fxml", "Home profilo", e);
+			changeScene(event, "profiloElettoreView.fxml", "Profilo scrutatore");
 			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -44,7 +45,5 @@ public class LoginElettoreController extends DefaultSceneController{
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		changeScene(event, "homeView.fxml", "Home");
-	}
-	
-	
+	}	
 }

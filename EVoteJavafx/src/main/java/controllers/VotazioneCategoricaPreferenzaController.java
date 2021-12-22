@@ -44,24 +44,34 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 			Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
 			VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 			LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
-			ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
-			for(Partito p : partiti) if(p.toString().equals(comboBoxPartiti.getValue())) v.setPreferenze_partito(new int[] {p.getId()});
-			int []l = new int[candidatiScelti.size()];
-			for(int i = 0; i < candidatiScelti.size(); i++) l[i] = candidatiScelti.get(i).getId(); 
-			v.setPreferenze_candidato(l);
-			if(vd.inserisciVotoNonReferendum(v)) {
-				alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Preferenza inserita correttamente");
-				alert.setTitle("Votazione completata");
+			LogVoto lv = new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF());
+			// Hopefully short circuit evaluation does his job
+			if((data != null && ((String)data).equals("SuperUser")) || ld.inserisciLog(lv)) {
+				for(Partito p : partiti) if(p.toString().equals(comboBoxPartiti.getValue())) v.setPreferenze_partito(new int[] {p.getId()});
+				int []l = new int[candidatiScelti.size()];
+				for(int i = 0; i < candidatiScelti.size(); i++) l[i] = candidatiScelti.get(i).getId(); 
+				v.setPreferenze_candidato(l);
+				if(vd.inserisciVotoNonReferendum(v)) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Preferenza inserita correttamente");
+					alert.setTitle("Votazione completata");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+					SessioneDiVotoHolder.getInstance().setSessione(null);
+					return;
+				}
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Errore inserimento voto");
+				alert.setTitle("Errore");
 				alert.show();
-				rimuoviScenaPrecedente();
-				goToScenaPrecedente(event);
-				return;
 			}
-			alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Errore inserimento voto");
-			alert.setTitle("Errore");
-			alert.show();
+			else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}
 		}
 	}
 
@@ -138,7 +148,7 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 	
 	private void switchCandidato(Candidato c, boolean b) {

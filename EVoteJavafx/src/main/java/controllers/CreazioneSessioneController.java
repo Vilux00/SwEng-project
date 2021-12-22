@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.SessioneDiVoto;
+import model.SessioneDiVotoHolder;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 
@@ -77,13 +78,13 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				SessioneDiVoto s = new SessioneDiVoto(nome.getText(), StringUtils.substringBetween(v, "(", ")"));
 				s.setScadenza(gg, mm, yy, hh, 0);
-				Object []objArray = new Object[] {s, data};
+				SessioneDiVotoHolder.getInstance().setSessione(s);
 				if(comboBoxVoto.getValue().contains("categorico") == true) {
-					changeScene(event, "creaVotazioneCategorica.fxml", "Creazione sessione di voto", objArray);
+					changeScene(event, "creaVotazioneCategorica.fxml", "Creazione sessione di voto");
 				}else if (comboBoxVoto.getValue().contains("Referendum") == true){
-					changeScene(event, "creaReferendumView.fxml", "Creazione sessione di voto", objArray);
+					changeScene(event, "creaReferendumView.fxml", "Creazione sessione di voto");
 				}else {
-					changeScene(event, "creaVotazioneOrdinaleView.fxml", "Creazione sessione di voto", objArray);
+					changeScene(event, "creaVotazioneOrdinaleView.fxml", "Creazione sessione di voto");
 				}
 			}
 		}		
@@ -91,6 +92,6 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 }

@@ -9,21 +9,19 @@ import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreDaoImpl;
+import model.ElettoreHolder;
 import model.Password;
 
 public class ModificaPasswordController extends DefaultSceneController{
-	@FXML
-	private PasswordField vecchiaPassword;
-	@FXML
-	private PasswordField nuovaPassword1;
-	@FXML
-	private PasswordField nuovaPassword2;
+	@FXML private PasswordField vecchiaPassword;
+	@FXML private PasswordField nuovaPassword1;
+	@FXML private PasswordField nuovaPassword2;
 	
 	public void modificaPassword(ActionEvent event) throws IOException {
 		String oldPw = vecchiaPassword.getText();
 		String newPw1 = nuovaPassword1.getText();
 		String newPw2 = nuovaPassword2.getText();
-		Elettore e = (Elettore)data;
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 
 		if(oldPw.equals("") || newPw1.equals("") || newPw2.equals("")){
 			Alert alert = new Alert(AlertType.ERROR);
@@ -72,12 +70,12 @@ public class ModificaPasswordController extends DefaultSceneController{
 	}
 	
 	private boolean checkOldPassword() {
-		Elettore e = (Elettore)data;
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 		return e.getPassword().equals(vecchiaPassword.getText());
 	}
 	
 	private boolean changePasswordDB() {
-		Elettore e = (Elettore)data;
+		Elettore e = ElettoreHolder.getInstance().getElettore();
 		e.setPassword(nuovaPassword1.getText());
 		ElettoreDaoImpl el = (ElettoreDaoImpl)DaoFactory.getInstance().getDao("Elettore");
 		return(el.updatePassword(e));
@@ -85,7 +83,7 @@ public class ModificaPasswordController extends DefaultSceneController{
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException{
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 		
 }

@@ -8,14 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
+import model.ElettoreHolder;
 import model.Gestore;
 import model.GestoreDaoImpl;
 
 public class LoginGestoreSistemaController extends DefaultSceneController{
-	@FXML
-	private TextField codF;
-	@FXML
-	private TextField password;
+	@FXML private TextField codF;
+	@FXML private TextField password;
 	
 	public void login(ActionEvent event) throws IOException {
 		String codFisc = codF.getText().replaceAll(" ", "");;
@@ -31,8 +30,9 @@ public class LoginGestoreSistemaController extends DefaultSceneController{
 		Elettore e = new Gestore(codFisc, pwd);
 		GestoreDaoImpl ge = (GestoreDaoImpl)DaoFactory.getInstance().getDao("Gestore");
 		if(ge.login(e)){
+			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginGestoreSistemaView.fxml", "Login gestore"); 
-			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema", e);
+			changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema");
 			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);

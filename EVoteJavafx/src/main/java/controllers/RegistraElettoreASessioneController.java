@@ -2,13 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import org.apache.commons.lang3.StringUtils;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,12 +26,12 @@ public class RegistraElettoreASessioneController extends DefaultSceneController 
 
     @FXML private ComboBox<String> ComboBoxSessioni;
     @FXML private TextField TextFieldCodFisc;
-    List<SessioneDiVoto> l = new ArrayList<>();
 
     @FXML
     void aggiungiElettoreASessione(ActionEvent event) {
     	String codF = TextFieldCodFisc.getText().replace(" ", "");
     	String sessione = ComboBoxSessioni.getValue();
+    	
     	ElettoreDao el = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
     	if(!el.isIn(codF)) {
     		Alert alert = new Alert(AlertType.ERROR);
@@ -46,16 +43,17 @@ public class RegistraElettoreASessioneController extends DefaultSceneController 
     	else {
     		LogVoto l = new LogVoto(Integer.parseInt(StringUtils.substringBetween(sessione, "(", ")")), codF);
     		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+    		
     		Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Conferma i dati inseriti per procedere");
 			alert.setHeaderText("Conferma dati");
 			alert.setTitle("Conferma dati");
 			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 			alert.setContentText("Registrazione di: " + codF + "\nalla votazione: " + sessione);
+			
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				if(ld.inserisciLog(l)) {
-	    			alert = new Alert(AlertType.CONFIRMATION);
+	    			alert = new Alert(AlertType.INFORMATION);
 	        		alert.setTitle("Inserimento avvenuto con successo");
 	        		alert.setHeaderText("Hai inserito correttamente la presenza alla votazione");
 	        		alert.show();
@@ -74,7 +72,7 @@ public class RegistraElettoreASessioneController extends DefaultSceneController 
 
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
+		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 
 	@Override
@@ -84,8 +82,8 @@ public class RegistraElettoreASessioneController extends DefaultSceneController 
 	
 	private void loadData() {
 		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-		List<SessioneDiVoto> l = se.getSessioni();
-		for(SessioneDiVoto s : l) ComboBoxSessioni.getItems().add(s.toString());
+		List<SessioneDiVoto> sessioni = se.getSessioni();
+		for(SessioneDiVoto s : sessioni) ComboBoxSessioni.getItems().add(s.toString());
 	}
 	
 	private void clearFields() {
