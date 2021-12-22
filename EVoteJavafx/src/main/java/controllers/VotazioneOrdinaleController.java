@@ -8,9 +8,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.stream.Stream;
-
-import org.apache.commons.lang3.StringUtils;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +35,6 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 
 	private List<Candidato> candidati;
 	private List<Partito> partiti;
-	private List<Label> listLabel;
 	private List<TextField> listTextField;
 	
 	@FXML private Button bottoneConferma;
