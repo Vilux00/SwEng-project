@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,15 +23,22 @@ import javafx.scene.layout.VBox;
 import model.Candidato;
 import model.CandidatoDaoImpl;
 import model.DaoFactory;
+import model.ElettoreHolder;
+import model.LogVoto;
+import model.LogVotoDao;
 import model.Partito;
+import model.PartitoDao;
 import model.PartitoDaoImpl;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoHolder;
+import model.Voto;
+import model.VotoDao;
 
 public class VotazioneOrdinaleController extends DefaultSceneController implements Initializable{
 
 	private List<Candidato> candidati;
 	private List<Partito> partiti;
+	private List<Label> listLabel;
 	private List<TextField> listTextField;
 	
 	@FXML private Button bottoneConferma;
@@ -48,12 +60,45 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	public void confermaVotazione(ActionEvent event) throws IOException {
 		if (!checkValidita()) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Errore inserimento votazione");
+			alert.setHeaderText("Numera correttamente i candidati/partiti scelti");
 			alert.setTitle("Errore");
-			alert.setContentText("Numera correttamente i candidati/partiti scelti");
 			alert.show();
 		}
-		//inserimento
+		Map<String, Integer> map = new TreeMap<>();
+		fillMap(map);
+		Stream<Map.Entry<String,Integer>> sortedMap = map.entrySet().stream().sorted(Map.Entry.comparingByValue());
+		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
+		int []arr;
+		int i = 0;
+		if(tipoElenco == 'c') {
+			arr = new int[candidati.size()];
+			for (Map.Entry<String,Integer> s : (Iterable<Map.Entry<String, Integer>>) () -> sortedMap.iterator())
+				for(Candidato c : candidati) if(c.toString().equals(s.getKey())) arr[i++] = c.getId();
+			v.setPreferenze_candidato(arr);
+		}
+		else {
+			arr = new int[partiti.size()];
+			PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
+			for (Map.Entry<String,Integer> s : (Iterable<Map.Entry<String, Integer>>) () -> sortedMap.iterator())	
+				arr[i++] = pd.getId(new Partito(s.getKey()));
+			v.setPreferenze_partito(arr);
+		}
+		LogVotoDao lv = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+		lv.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
+		if(!vd.inserisciVotoNonReferendum(v)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore inserimento voto");
+			alert.setTitle("Errore");
+			alert.show();
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Voto inserito correttamente");
+			alert.setTitle("Voto inserito");
+			alert.show();
+			rimuoviScenaPrecedente();
+			goToScenaPrecedente(event);
+		}
 	}
 
 	
@@ -71,7 +116,6 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 				if (!l.contains((i+""))) return false;
 			}
 		}
-		
 		return true;
 	}
 	
@@ -80,8 +124,24 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop(), data);
 	}
 
-	public void setSchedaBianca(ActionEvent event) {
-		
+	public void setSchedaBianca(ActionEvent event) throws IOException{
+		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
+		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+		ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
+		if(vd.inserisciVotoNonReferendum(v)) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Preferenza inserita correttamente");
+			alert.setTitle("Votazione completata");
+			alert.show();
+			rimuoviScenaPrecedente();
+			goToScenaPrecedente(event);
+			return;
+		}
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("Errore inserimento voto");
+		alert.setTitle("Errore");
+		alert.show();
 	}
 
 	public void votaPerCandidati(ActionEvent event) {
@@ -92,11 +152,11 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			listTextField.get(i).setVisible(true);
 		}
 		try {
-			label1.setText(candidati.get(0).getNome() + " " + candidati.get(0).getCognome());
-			label2.setText(candidati.get(1).getNome() + " " + candidati.get(1).getCognome());
-			label3.setText(candidati.get(2).getNome() + " " + candidati.get(2).getCognome());
-			label4.setText(candidati.get(3).getNome() + " " + candidati.get(3).getCognome());
-			label5.setText(candidati.get(4).getNome() + " " + candidati.get(4).getCognome());
+			label1.setText(candidati.get(0).toString());
+			label2.setText(candidati.get(1).toString());
+			label3.setText(candidati.get(2).toString());
+			label4.setText(candidati.get(3).toString());
+			label5.setText(candidati.get(4).toString());
 		}catch(IndexOutOfBoundsException e) {
 			//e.printStackTrace();
 		}
@@ -147,6 +207,14 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			tF.setText("");
 			tF.setVisible(false);
 		}
+	}
+	
+	private void fillMap(Map<String, Integer> map) {
+		if(!label1.getText().equals("")) map.put(label1.getText(), Integer.parseInt(textField1.getText()));
+		if(!label2.getText().equals("")) map.put(label2.getText(), Integer.parseInt(textField2.getText()));
+		if(!label3.getText().equals("")) map.put(label3.getText(), Integer.parseInt(textField3.getText()));
+		if(!label4.getText().equals("")) map.put(label4.getText(), Integer.parseInt(textField4.getText()));
+		if(!label5.getText().equals("")) map.put(label5.getText(), Integer.parseInt(textField5.getText()));
 	}
 	
 	private void loadData() {
