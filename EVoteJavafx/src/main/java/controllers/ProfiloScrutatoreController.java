@@ -24,7 +24,6 @@ public class ProfiloScrutatoreController extends ProfiloElettoreController{
 	
 	public void inserisciVoto(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloScrutatoreView.fxml", "Profilo scrutatore");
-		System.out.println(data);
-		changeScene(event, "selSessioneInserimVoto.fxml", "Selezione sessione", data);
+		changeScene(event, "selSessioneInserimVoto.fxml", "Selezione sessione");
 	}
 }
