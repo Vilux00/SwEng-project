@@ -31,7 +31,7 @@ public class LoginScrutatoreController extends DefaultSceneController{
 		if(sc.login(e)){
 			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginScrutatoreView.fxml", "Login scrutatore"); 
-			changeScene(event, "profiloScrutatoreView.fxml", "Profilo gestore");
+			changeScene(event, "profiloScrutatoreView.fxml", "Profilo scrutatore");
 			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);

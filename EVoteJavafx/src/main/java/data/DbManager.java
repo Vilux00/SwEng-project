@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbManager {
     private static DbManager dbMgr;
-    private String connString = "jdbc:postgresql://localhost/eVoting-platform?user=user_1&password=password&ssl=false"; //Not working with ssl=true
+    private String connString = "jdbc:postgresql://localhost/eVoting-platform?user=user_1&password=password&currentSchema=evoting&ssl=false"; //Not working with ssl=true
     
     private DbManager(){}
 

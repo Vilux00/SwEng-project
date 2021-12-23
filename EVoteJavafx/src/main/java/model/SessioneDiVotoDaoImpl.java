@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -164,6 +165,46 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         }catch(SQLException e) {
             e.printStackTrace();
             return null;
+        }finally {
+            dbM.close(c);
+        }
+	}
+	
+	public String getRisultati(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+        	PreparedStatement ps = c.prepareStatement("SELECT evoting.scrutinio(?)");
+        	ps.setInt(1, s.getId());
+        	ResultSet rs = ps.executeQuery();
+        	if(rs.next()) return rs.getString(1);
+        	return null;
+            /*CallableStatement cs = c.prepareCall(" { ? = call scrutinio(?)");
+            cs.registerOutParameter(1, Types.VARCHAR);
+            cs.setInt(2, s.getId());
+            cs.execute();
+            return cs.getString(1);*/
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            dbM.close(c);
+        }
+	}
+	
+	@Override
+	public boolean getScrutinio(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT scrutinio FROM evoting.sessione_voto WHERE id = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getBoolean(1);
+            return false;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return false;
         }finally {
             dbM.close(c);
         }

@@ -45,22 +45,28 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 		switch (tipoVoto) {
 			case "Favorevole":
 				alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
+				break;
 			case "Contrario":
 				alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
+				break;
 			case "Scheda bianca":
 				alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");
+				break;
 		}
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(insertLog(s, e.getCodF())) {
+			if((data != null && ((String)data).equals("SuperUser")) || insertLog(s, e.getCodF())) {
 				Voto v = new Voto(s);
 				switch (tipoVoto) {
 					case "Favorevole":
 						v.setR_quesito(true);
+						break;
 					case "Contrario":
 						v.setR_quesito(false);
+						break;
 					case "Scheda bianca":
 						v.setR_quesito(null);
+						break;
 				}
 				VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
 				if(vd.inserisciVotoReferendum(v)) {

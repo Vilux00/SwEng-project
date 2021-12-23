@@ -2,8 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import model.Elettore;
-import model.ElettoreHolder;
 
 public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	@Override
@@ -21,14 +19,12 @@ public class ProfiloGestoreController extends ProfiloScrutatoreController{
 	@Override
 	public void vota(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		ElettoreHolder.getInstance().setElettore((Elettore) data);
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}
 	
 	@Override
 	public void inserisciVoto(ActionEvent event) throws IOException {
 		setScenaPrecedente("profiloGestoreView.fxml", "Profilo gestore di sistema");
-		ElettoreHolder.getInstance().setElettore((Elettore) data);
 		changeScene(event, "selSessioneInserimVoto.fxml", "Selezione sessione");
 	}
 	

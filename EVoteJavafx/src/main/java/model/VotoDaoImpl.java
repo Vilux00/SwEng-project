@@ -13,8 +13,9 @@ public class VotoDaoImpl implements VotoDao{
 		try {
 			PreparedStatement ps = c.prepareStatement("INSERT INTO evoting.voto(r_quesito, id_sessione) VALUES(?, ?)");
 			String rQuesito;
+			System.out.println(v.getR_quesito());
 			if(v.getR_quesito() == null) rQuesito = "X";
-			else if(v.getR_quesito() == true) rQuesito = "S";
+			else if(v.getR_quesito().equals(true)) rQuesito = "S";
 			else rQuesito = "N";
 			ps.setString(1, rQuesito);
 			ps.setInt(2, v.getS().getId());
