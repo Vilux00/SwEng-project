@@ -32,31 +32,4 @@ public class DbManager {
 		}
     }
 
-    /*
-    public List<String> getInfoElettoreByCodF(String codF){
-    	System.out.println(1);
-        Connection conn = open();
-        try{
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ?");
-            stm.setString(1, codF);
-            ResultSet r = stm.executeQuery();
-            
-            if(r.next()){
-                List<String> l = new ArrayList<>();
-                l.add(r.getString("nome"));
-                l.add(r.getString("cognome"));
-                l.add(r.getString("data_nascita"));
-                return l;
-            }
-            return null;
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        } finally{
-            close(conn);
-        }
-    }
-    */
-
 }
