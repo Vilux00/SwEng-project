@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.stream.Stream;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -59,6 +61,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			alert.setHeaderText("Numera correttamente i candidati/partiti scelti");
 			alert.setTitle("Errore");
 			alert.show();
+			return;
 		}
 		Map<String, Integer> map = new TreeMap<>();
 		fillMap(map);
@@ -66,17 +69,24 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
 		int []arr;
 		int i = 0;
+		String msg = "";
 		if(tipoElenco == 'c') {
 			arr = new int[candidati.size()];
 			for (Map.Entry<String,Integer> s : (Iterable<Map.Entry<String, Integer>>) () -> sortedMap.iterator())
-				for(Candidato c : candidati) if(c.toString().equals(s.getKey())) arr[i++] = c.getId();
+				for(Candidato c : candidati) 
+					if(c.toString().equals(s.getKey())) {
+						arr[i++] = c.getId();
+						msg += c.toString() + "\n";
+					}
 			v.setPreferenze_candidato(arr);
 		}
 		else {
 			arr = new int[partiti.size()];
 			PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
-			for (Map.Entry<String,Integer> s : (Iterable<Map.Entry<String, Integer>>) () -> sortedMap.iterator())	
+			for (Map.Entry<String,Integer> s : (Iterable<Map.Entry<String, Integer>>) () -> sortedMap.iterator()) {	
 				arr[i++] = pd.getId(new Partito(s.getKey()));
+				msg += s.getKey() + "\n";
+			}
 			v.setPreferenze_partito(arr);
 		}
 		LogVotoDao lv = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
@@ -84,19 +94,26 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		LogVoto lo = new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF());
 		// Hopefully short circuit evaluation does his job
 		if((data != null && ((String)data).equals("SuperUser")) || lv.inserisciLog(lo)) {
-			if(!vd.inserisciVotoNonReferendum(v)) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Errore inserimento voto");
-				alert.setTitle("Errore");
-				alert.show();
-			} else {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Voto inserito correttamente");
-				alert.setTitle("Voto inserito");
-				alert.show();
-				SessioneDiVotoHolder.getInstance().setSessione(null);
-				rimuoviScenaPrecedente();
-				goToScenaPrecedente(event);
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText("Conferma i dati inseriti");
+			alert.setTitle("Conferma dati");
+			alert.setContentText("Ordine preferenze: \n" + msg);
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				if(!vd.inserisciVotoNonReferendum(v)) {
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Errore inserimento voto");
+					alert.setTitle("Errore");
+					alert.show();
+				} else {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Voto inserito correttamente");
+					alert.setTitle("Voto inserito");
+					alert.show();
+					SessioneDiVotoHolder.getInstance().setSessione(null);
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+				}
 			}
 		}
 		else {
@@ -128,23 +145,29 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	}
 
 	public void setSchedaBianca(ActionEvent event) throws IOException{
-		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
-		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
-		ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
-		if(vd.inserisciVotoNonReferendum(v)) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText("Preferenza inserita correttamente");
-			alert.setTitle("Votazione completata");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("Conferma di voler lasciare scheda bianca?");
+		alert.setTitle("Conferma");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
+			VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+			LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+			ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
+			if(vd.inserisciVotoNonReferendum(v)) {
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Preferenza inserita correttamente");
+				alert.setTitle("Votazione completata");
+				alert.show();
+				rimuoviScenaPrecedente();
+				goToScenaPrecedente(event);
+				return;
+			}
+			alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Errore inserimento voto");
+			alert.setTitle("Errore");
 			alert.show();
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
-			return;
 		}
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Errore inserimento voto");
-		alert.setTitle("Errore");
-		alert.show();
 	}
 
 	public void votaPerCandidati(ActionEvent event) {
@@ -213,11 +236,11 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	}
 	
 	private void fillMap(Map<String, Integer> map) {
-		if(!label1.getText().equals("")) map.put(label1.getText(), Integer.parseInt(textField1.getText()));
-		if(!label2.getText().equals("")) map.put(label2.getText(), Integer.parseInt(textField2.getText()));
-		if(!label3.getText().equals("")) map.put(label3.getText(), Integer.parseInt(textField3.getText()));
-		if(!label4.getText().equals("")) map.put(label4.getText(), Integer.parseInt(textField4.getText()));
-		if(!label5.getText().equals("")) map.put(label5.getText(), Integer.parseInt(textField5.getText()));
+		if(!textField1.getText().equals("")) map.put(label1.getText(), Integer.parseInt(textField1.getText()));
+		if(!textField2.getText().equals("")) map.put(label2.getText(), Integer.parseInt(textField2.getText()));
+		if(!textField3.getText().equals("")) map.put(label3.getText(), Integer.parseInt(textField3.getText()));
+		if(!textField4.getText().equals("")) map.put(label4.getText(), Integer.parseInt(textField4.getText()));
+		if(!textField5.getText().equals("")) map.put(label5.getText(), Integer.parseInt(textField5.getText()));
 	}
 	
 	private void loadData() {

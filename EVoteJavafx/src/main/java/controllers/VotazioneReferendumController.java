@@ -44,10 +44,10 @@ public class VotazioneReferendumController extends DefaultSceneController implem
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		switch (tipoVoto) {
 			case "Favorevole":
-				alert.setHeaderText("Sicuro di voler votare 'favorevole' al referendum?");
+				alert.setHeaderText("Sicuro di voler votare favorevole al referendum?");
 				break;
 			case "Contrario":
-				alert.setHeaderText("Sicuro di voler votare 'contrario' al referendum?");
+				alert.setHeaderText("Sicuro di voler votare contrario al referendum?");
 				break;
 			case "Scheda bianca":
 				alert.setHeaderText("Sicuro di voler lasciare la scheda bianca?");

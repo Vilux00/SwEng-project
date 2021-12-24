@@ -78,6 +78,13 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 		Elettore e = ElettoreHolder.getInstance().getElettore();
 		PartitoDao pd = (PartitoDao) DaoFactory.getInstance().getDao("Partito");
 	
+		if(comboBoxCandidatiPartiti.getValue() == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Inserisci una preferenza");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setHeaderText("Conferma di voler votare per: " + preferenza + "?");
 		alert.setTitle("Conferma dati");
@@ -126,12 +133,7 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 		alert.setTitle("Conferma");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			if(!insertLog(s, e.getCodF())) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Impossibile registrare il voto per la sessione");
-				alert.setTitle("Errore");
-				alert.show();
-			}else {
+			if((data != null && ((String)data).equals("SuperUser")) || insertLog(s, e.getCodF())) {
 				if(v.inserisciVotoNonReferendum(new Voto(s))) {
 					alert = new Alert(AlertType.INFORMATION);
 					alert.setHeaderText("Preferenza inserita correttamente");
@@ -145,7 +147,12 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 					alert.setHeaderText("Qualcosa è andato storto");
 					alert.setTitle("Errore");
 					alert.show();
-				}
+				}			
+			}else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
 			}
 		}
 	}

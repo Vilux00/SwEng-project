@@ -22,7 +22,7 @@ public class SelSessioneInserimVotoController extends DefaultSceneController imp
 	@FXML private ComboBox<String> comboBoxSessione;
 	
 	public void goToSessione(ActionEvent event) throws IOException{
-		setScenaPrecedente("selezioneSessioneView.fxml", "Selezione sessione");
+		setScenaPrecedente("selSessioneInserimVoto.fxml", "Selezione sessione");
 		if(Objects.isNull(comboBoxSessione.getValue()) == true) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Selezionare la sessione");

@@ -36,9 +36,19 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	private List<Candidato> candidatiScelti;
 	
 	public void confermaVotazione(ActionEvent event) throws IOException{
+		if(comboBoxCandidatiScelti.getItems().size() == 0) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Non hai inserito alcun candidato di tua preferenza");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setHeaderText("Conferma dati");
+		String msg = "";
+		for(Candidato c : candidatiScelti) msg += c.toString() + "\n";
+		alert.setHeaderText("Conferma i dati inseriti");
 		alert.setTitle("Conferma dati");
+		alert.setContentText("Preferenze inserite: \n" + msg);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
@@ -76,23 +86,36 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	}
 
 	public void setSchedaBianca(ActionEvent event) throws IOException{
-		Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
-		VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
-		LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
-		ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()));
-		if(vd.inserisciVotoNonReferendum(v)) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText("Preferenza inserita correttamente");
-			alert.setTitle("Votazione completata");
-			alert.show();
-			rimuoviScenaPrecedente();
-			goToScenaPrecedente(event);
-			return;
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("Confermi di voler lasciare la scheda bianca?");
+		alert.setTitle("Conferma dati");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			Voto v = new Voto(SessioneDiVotoHolder.getInstance().getSessione());
+			VotoDao vd = (VotoDao) DaoFactory.getInstance().getDao("Voto");
+			LogVotoDao ld = (LogVotoDao) DaoFactory.getInstance().getDao("LogVoto");
+			if((data != null && ((String)data).equals("SuperUser")) || ld.inserisciLog(new LogVoto(SessioneDiVotoHolder.getInstance().getSessione().getId(), ElettoreHolder.getInstance().getElettore().getCodF()))){
+				if(vd.inserisciVotoNonReferendum(v)) {
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Preferenza inserita correttamente");
+					alert.setTitle("Votazione completata");
+					alert.show();
+					rimuoviScenaPrecedente();
+					goToScenaPrecedente(event);
+					return;
+				}
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Errore inserimento voto");
+				alert.setTitle("Errore");
+				alert.show();
+			}
+			else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("Impossibile registrare il voto per la sessione");
+				alert.setTitle("Errore");
+				alert.show();
+			}
 		}
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setHeaderText("Errore inserimento voto");
-		alert.setTitle("Errore");
-		alert.show();
 	}
 	
 	public void aggiungiCandidato(ActionEvent event) {
