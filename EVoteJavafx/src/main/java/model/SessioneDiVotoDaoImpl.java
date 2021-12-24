@@ -275,7 +275,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"    ), voti_c(candidato, voti_ottenuti) AS (" + 
 					"        SELECT v.pref, COUNT(*) FROM voti AS v WHERE v.pref IS NOT NULL GROUP BY v.pref" + 
 					"    ) SELECT c.nome, c.cognome, p.nome, v.voti_ottenuti FROM voti_c AS v JOIN candidato_partito AS c ON c.id = v.candidato" + 
-					"        JOIN partito AS p ON p.id = c.id_partito");
+					"        JOIN partito AS p ON p.id = c.id_partito ORDER BY v.voti_ottenuti DESC LIMIT 7");
 			ps.setInt(1, s.getId());
 			ResultSet r = ps.executeQuery();
 			while(r.next()) map.put("(" + r.getString(3) + ")" + r.getString(1) + r.getString(2), r.getInt(4));
@@ -301,7 +301,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"    ), voti_c(candidato, voti_ottenuti) AS (" + 
 					"        SELECT v.pref, COUNT(*) FROM voti AS v WHERE v.pref IS NOT NULL GROUP BY v.pref" + 
 					"    ) SELECT c.nome, c.cognome, p.nome, v.voti_ottenuti FROM voti_c AS v JOIN candidato_partito AS c ON c.id = v.candidato" + 
-					"        JOIN partito AS p ON p.id = c.id_partito");
+					"        JOIN partito AS p ON p.id = c.id_partito ORDER BY v.voti_ottenuti DESC LIMIT 7");
 			ps.setInt(1, s.getId());
 			ResultSet r = ps.executeQuery();
 			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " +  r.getString(2), r.getInt(4));
