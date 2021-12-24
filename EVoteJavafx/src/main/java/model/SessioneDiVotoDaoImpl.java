@@ -8,6 +8,8 @@ import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import data.DbManager;
 
@@ -180,11 +182,6 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         	ResultSet rs = ps.executeQuery();
         	if(rs.next()) return rs.getString(1);
         	return null;
-            /*CallableStatement cs = c.prepareCall(" { ? = call scrutinio(?)");
-            cs.registerOutParameter(1, Types.VARCHAR);
-            cs.setInt(2, s.getId());
-            cs.execute();
-            return cs.getString(1);*/
         }catch(SQLException e) {
             e.printStackTrace();
             return null;
@@ -265,6 +262,57 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         }
 	}
 	
+	@Override
+	public Map<String, Integer> getStatsCandidati(SessioneDiVoto s){
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        Map<String, Integer> map = new TreeMap<>();
+		try {
+			PreparedStatement ps = c.prepareStatement("    WITH selezione_voti(preferenza) AS (" + 
+					"        SELECT v.preferenza_c FROM voto AS v JOIN sessione_voto AS s ON s.id = v.id_sessione WHERE v.id_sessione = ?" + 
+					"    ), voti(pref) AS (" + 
+					"        SELECT unnest FROM selezione_voti AS s, UNNEST(s.preferenza)" + 
+					"    ), voti_c(candidato, voti_ottenuti) AS (" + 
+					"        SELECT v.pref, COUNT(*) FROM voti AS v WHERE v.pref IS NOT NULL GROUP BY v.pref" + 
+					"    ) SELECT c.nome, c.cognome, p.nome, v.voti_ottenuti FROM voti_c AS v JOIN candidato_partito AS c ON c.id = v.candidato" + 
+					"        JOIN partito AS p ON p.id = c.id_partito");
+			ps.setInt(1, s.getId());
+			ResultSet r = ps.executeQuery();
+			while(r.next()) map.put("(" + r.getString(3) + ")" + r.getString(1) + r.getString(2), r.getInt(4));
+			return map;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			dbM.close(c);
+		}
+	}
+
+	@Override
+	public Map<String, Integer> getStatsPartiti(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        Map<String, Integer> map = new TreeMap<>();
+		try {
+			PreparedStatement ps = c.prepareStatement("    WITH selezione_voti(preferenza) AS (" + 
+					"        SELECT v.preferenza_p FROM voto AS v JOIN sessione_voto AS s ON s.id = v.id_sessione WHERE v.id_sessione = ?" + 
+					"    ), voti(pref) AS (" + 
+					"        SELECT unnest FROM selezione_voti AS s, UNNEST(s.preferenza)" + 
+					"    ), voti_c(candidato, voti_ottenuti) AS (" + 
+					"        SELECT v.pref, COUNT(*) FROM voti AS v WHERE v.pref IS NOT NULL GROUP BY v.pref" + 
+					"    ) SELECT c.nome, c.cognome, p.nome, v.voti_ottenuti FROM voti_c AS v JOIN candidato_partito AS c ON c.id = v.candidato" + 
+					"        JOIN partito AS p ON p.id = c.id_partito");
+			ps.setInt(1, s.getId());
+			ResultSet r = ps.executeQuery();
+			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " +  r.getString(2), r.getInt(4));
+			return map;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			dbM.close(c);
+		}
+	}
 	
     
 
