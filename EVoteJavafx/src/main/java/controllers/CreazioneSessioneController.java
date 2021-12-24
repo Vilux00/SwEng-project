@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -68,7 +69,14 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 			alert.setHeaderText("Alcuni campi non sono stati compilati");
 			alert.show();
 			rimuoviScenaPrecedente();
+		}else if(LocalDateTime.of(yy, mm, gg, hh, 0).isBefore(LocalDateTime.now())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setHeaderText("La data inserita è antecedente a quella odierna");
+				alert.setTitle("Errore");
+				alert.show();
+				rimuoviScenaPrecedente();
 		}else {
+			rimuoviScenaPrecedente();
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setHeaderText("Conferma i dati inseriti");
 			alert.setTitle("Conferma dati");
