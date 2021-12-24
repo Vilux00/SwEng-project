@@ -208,6 +208,62 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             dbM.close(c);
         }
 	}
+
+	@Override
+	public int getNumeroVotiFavorevoli(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(id_voto) FROM voto WHERE r_quesito = 'S' AND id_sessione = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getInt(1);
+            return 0;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }finally {
+            dbM.close(c);
+        }
+	}
+
+	@Override
+	public int getNumeroVotiContrari(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(id_voto) FROM voto WHERE r_quesito = 'N' AND id_sessione = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getInt(1);
+            return 0;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }finally {
+            dbM.close(c);
+        }
+	}
+
+	@Override
+	public int getNumeroSchedeBianche(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(id_voto) FROM voto WHERE r_quesito = 'X' AND id_sessione = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getInt(1);
+            return 0;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }finally {
+            dbM.close(c);
+        }
+	}
+	
+	
     
 
 

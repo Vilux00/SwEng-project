@@ -55,7 +55,7 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 		} else {
 			NuovoUtente n = new NuovoUtente(nome, cognome, codF, LocalDate.of(anno, mese, giorno), paese, nazione, sesso.charAt(0), null, privilegio.charAt(0));
 			if(!n.checkCodFisc()) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
+				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Errore codice fiscale inserito");
 				alert.setTitle("Errore");
 				alert.show();

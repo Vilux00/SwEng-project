@@ -20,6 +20,7 @@ import javafx.scene.layout.Region;
 import model.DaoFactory;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoDao;
+import model.SessioneDiVotoHolder;
 
 public class VisualizzaSessioniController extends DefaultSceneController implements Initializable{
         private ObservableList<SessioneDiVoto> sessioni = FXCollections.observableArrayList();
@@ -81,34 +82,46 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 
     @FXML
     void visualizzaInformazioni(ActionEvent event) {
-        SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-        SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+    	SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+    	SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
         String modVoto, modVincitore;
-        
-        if(s.getModalitaVoto().equals("REF")) modVoto = "Referendum";
-        else if(s.getModalitaVoto().equals("CATP")) modVoto = "Categorica con preferenza";
-        else if(s.getModalitaVoto().equals("CAT")) modVoto = "Categorica";
-        else modVoto = "Ordinale";
-        
-        if(s.getModVincitore() == null) modVincitore = "-";
-        else if(s.getModVincitore().equals("MAGA")) modVincitore = "Maggioranza assoluta";
-        else if(s.getModVincitore().equals("REF")) modVincitore = "Referendum";
-        else if(s.getModVincitore().equals("REFQ")) modVincitore = "Referendum con quorum";
-        else modVincitore = "Maggioranza";
-        
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-    	alert.setTitle("Informazioni sessione");
-		alert.setHeaderText("Informazioni relative a:" + s.getNome());
-		alert.setContentText("Nome sessione: " + s.getNome() 
-							+ "\nID: " + s.getId()
-							+ "\nModalita' voto: " + modVoto
-							+ "\nModalita' vincitore : " + modVincitore 
-							+ "\nScadenza sessione: " + s.getScadenzaAsString()
-							+ "\nScrutinio: " + s.getScrutinio()
-							+ "\nNumero voti registrati: " + sd.getNumeroVoti(s)
-							+ (sd.getScrutinio(s) ? ("\n" + sd.getRisultati(s)) : ""));
-		alert.show();        
+    	try {
+    		 if(s.getModalitaVoto().equals("REF")) modVoto = "Referendum";
+    		 else if(s.getModalitaVoto().equals("CATP")) modVoto = "Categorica con preferenza";
+	         else if(s.getModalitaVoto().equals("CAT")) modVoto = "Categorica";
+	         else modVoto = "Ordinale";
+    		 if(s.getModVincitore() == null) modVincitore = "-";
+    	        else if(s.getModVincitore().equals("MAGA")) modVincitore = "Maggioranza assoluta";
+    	        else if(s.getModVincitore().equals("REF")) modVincitore = "Referendum";
+    	        else if(s.getModVincitore().equals("REFQ")) modVincitore = "Referendum con quorum";
+    	        else modVincitore = "Maggioranza";
+    	        
+    	        Alert alert = new Alert(AlertType.INFORMATION);
+    	        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    	    	alert.setTitle("Informazioni sessione");
+    			alert.setHeaderText("Informazioni relative a:" + s.getNome());
+    			alert.setContentText("Nome sessione: " + s.getNome() 
+    								+ "\nID: " + s.getId()
+    								+ "\nModalita' voto: " + modVoto
+    								+ "\nModalita' vincitore : " + modVincitore 
+    								+ "\nScadenza sessione: " + s.getScadenzaAsString()
+    								+ "\nScrutinio: " + s.getScrutinio()
+    								+ "\nNumero voti registrati: " + sd.getNumeroVoti(s)
+    								+ (sd.getScrutinio(s) ? ("\n" + sd.getRisultati(s)) : ""));
+    			alert.show();        
+    	}catch(NullPointerException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Errore");
+    		alert.setHeaderText("Selezionare una sessione");
+    		alert.show();
+    		return;
+    	}
+    }
+    
+    public void visualizzaStatistiche(ActionEvent event) throws IOException {
+    	SessioneDiVotoHolder.getInstance().setSessione(tabella.getSelectionModel().getSelectedItem());
+    	setScenaPrecedente("visualizzaSessioniView.fxml", "Visualizza sessioni");
+		changeScene(event, "visualizzaStatisticheSessioneView.fxml", "Statistiche sessione");
     }
     
     

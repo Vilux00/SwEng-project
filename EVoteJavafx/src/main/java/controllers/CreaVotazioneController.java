@@ -58,23 +58,41 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	}
 
 	public void aggiungiCandidato(ActionEvent event) {
-		String candidato = comboBoxCandidati.getValue();
-		Candidato candidatoAgg = null;
-		for(Candidato c : candidatiSceglibili) 
-			if(c.toString().equals(candidato)) candidatoAgg = c;
-		switchCandidato(candidatoAgg, true);
-		clearComboBox();
-		updateComboBox();
+		try {
+			String candidato = comboBoxCandidati.getValue();
+			Candidato candidatoAgg = null;
+			for(Candidato c : candidatiSceglibili) 
+				if(c.toString().equals(candidato)) candidatoAgg = c;
+			switchCandidato(candidatoAgg, true);
+			clearComboBox();
+			updateComboBox();
+		}catch(NullPointerException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Errore");
+    		alert.setHeaderText("Selezionare un candidato");
+    		alert.show();
+    		return;
+    	}
+		
 	}
 	
 	public void rimuoviCandidato(ActionEvent event) {
-		String candidato = comboBoxCandidatiScelti.getValue();
-		Candidato candidatoRem = null;
-		for(Candidato c : candidatiScelti)
-			if(c.toString().equals(candidato)) candidatoRem = c;
-		switchCandidato(candidatoRem, false);
-		clearComboBox();
-		updateComboBox();
+		try {
+			String candidato = comboBoxCandidatiScelti.getValue();
+			Candidato candidatoRem = null;
+			for(Candidato c : candidatiScelti)
+				if(c.toString().equals(candidato)) candidatoRem = c;
+			switchCandidato(candidatoRem, false);
+			clearComboBox();
+			updateComboBox();
+		}catch(NullPointerException e) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setTitle("Errore");
+    		alert.setHeaderText("Selezionare un candidato");
+    		alert.show();
+    		return;
+    	}
+		
 	}
 	
 	@Override

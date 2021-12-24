@@ -12,4 +12,7 @@ public interface SessioneDiVotoDao extends DaoInterface{
 	public String getQuesito(SessioneDiVoto s);
 	public String getRisultati(SessioneDiVoto s);
 	public boolean getScrutinio(SessioneDiVoto s);
+	public int getNumeroVotiFavorevoli(SessioneDiVoto s);
+	public int getNumeroVotiContrari(SessioneDiVoto s);
+	public int getNumeroSchedeBianche(SessioneDiVoto s);
 }
