@@ -71,7 +71,8 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         Connection c = dbM.open();
         List<SessioneDiVoto> l = new ArrayList<>();
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT nome, modalita_voto, modalita_vincitore, quesito, termine, id, scrutinio FROM evoting.sessione_voto");
+            PreparedStatement ps = c.prepareStatement("SELECT nome, modalita_voto, modalita_vincitore, quesito, termine, id, scrutinio FROM evoting.sessione_voto WHERE termine > ?");
+            ps.setObject(1, LocalDateTime.now());
             ResultSet r = ps.executeQuery();
             while(r.next()) {
                 SessioneDiVoto s = new SessioneDiVoto(r.getString(1), r.getString(2));
@@ -130,8 +131,9 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 	        Connection c = dbM.open();
 	        List<SessioneDiVoto> l = new ArrayList<>();
 	        try {
-	            PreparedStatement ps = c.prepareStatement("SELECT s.nome, s.modalita_voto, s.modalita_vincitore, s.quesito, s.termine, s.id, s.scrutinio FROM evoting.sessione_voto AS s WHERE NOT EXISTS(SELECT * FROM evoting.log_voto WHERE id_sessione = s.id AND log_voto.codice_fiscale = ?)");
-	            ps.setString(1, codF);
+	            PreparedStatement ps = c.prepareStatement("SELECT s.nome, s.modalita_voto, s.modalita_vincitore, s.quesito, s.termine, s.id, s.scrutinio FROM evoting.sessione_voto AS s WHERE s.termine > ? AND NOT EXISTS(SELECT * FROM evoting.log_voto WHERE id_sessione = s.id AND log_voto.codice_fiscale = ?)");
+	            ps.setObject(1, LocalDateTime.now());
+	            ps.setString(2, codF);
 	            ResultSet r = ps.executeQuery();
 	            while(r.next()) {
 	                SessioneDiVoto s = new SessioneDiVoto(r.getString(1), r.getString(2));
