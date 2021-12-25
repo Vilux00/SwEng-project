@@ -44,7 +44,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
     private void loadData() {
         sessioni = FXCollections.observableArrayList();
         SessioneDiVotoDao sDAO= (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
-        List<SessioneDiVoto> list = sDAO.getSessioni();
+        List<SessioneDiVoto> list = sDAO.getSessioniAll();
         for(SessioneDiVoto s : list) sessioni.add(s);
         tabella.setItems(sessioni);
     }

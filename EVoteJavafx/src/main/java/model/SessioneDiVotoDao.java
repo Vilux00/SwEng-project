@@ -18,4 +18,7 @@ public interface SessioneDiVotoDao extends DaoInterface{
 	public int getNumeroSchedeBianche(SessioneDiVoto s);
 	Map<String, Integer> getStatsCandidati(SessioneDiVoto s);
 	Map<String, Integer> getStatsPartiti(SessioneDiVoto s);
+	List<SessioneDiVoto> getSessioniAll();
+	Map<String, Integer> getStatsCandidatiOrd(SessioneDiVoto s);
+	Map<String, Integer> getStatsPartitiOrd(SessioneDiVoto s);
 }
