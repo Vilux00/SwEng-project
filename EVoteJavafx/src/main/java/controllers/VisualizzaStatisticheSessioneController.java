@@ -122,7 +122,7 @@ public class VisualizzaStatisticheSessioneController extends DefaultSceneControl
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
 				new PieChart.Data("Voti favorevoli", sd.getNumeroVotiFavorevoli(s)), 
-				new PieChart.Data("Voti contari", sd.getNumeroVotiContrari(s)),
+				new PieChart.Data("Voti contrari", sd.getNumeroVotiContrari(s)),
 				new PieChart.Data("Schede bianche", sd.getNumeroSchedeBianche(s)));
 		torta.setData(pieChartData);
 	}
