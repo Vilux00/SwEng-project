@@ -14,9 +14,9 @@ import model.DaoFactory;
 import model.Partito;
 
 public class InserimentoCandidatoController  extends DefaultSceneController{
-	@FXML TextField nome;
-	@FXML TextField cognome;
-	@FXML TextField partito;
+	@FXML private TextField nome;
+	@FXML private TextField cognome;
+	@FXML private TextField partito;
 	
 	public void inserimentoCandidato(ActionEvent event) {
 		String n = nome.getText();
