@@ -278,7 +278,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"        JOIN partito AS p ON p.id = c.id_partito ORDER BY v.voti_ottenuti DESC LIMIT 7");
 			ps.setInt(1, s.getId());
 			ResultSet r = ps.executeQuery();
-			while(r.next()) map.put("(" + r.getString(3) + ")" + r.getString(1) + r.getString(2), r.getInt(4));
+			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " + r.getString(2), r.getInt(4));
 			return map;
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -304,7 +304,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"        JOIN partito AS p ON p.id = v.candidato ORDER BY v.voti_ottenuti DESC LIMIT 7");
 			ps.setInt(1, s.getId());
 			ResultSet r = ps.executeQuery();
-			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " +  r.getString(2), r.getInt(4));
+			while(r.next()) map.put(r.getString(1), r.getInt(2));
 			return map;
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -347,7 +347,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         Map<String, Integer> map = new TreeMap<>();
 		try {
 			PreparedStatement ps = c.prepareStatement("WITH selezione_voti(candidato) AS (" + 
-					"SELECT v.preferenza_p" + 
+					"SELECT v.preferenza_p " + 
 					"FROM voto AS v JOIN sessione_voto AS s ON s.id = v.id_sessione WHERE v.id_sessione = ?" + 
 					"), conteggio_prima_pos(candidato, conteggio) AS (" + 
 					"SELECT s.candidato[1], COUNT(*) FROM selezione_voti AS s WHERE s.candidato[1] IS NOT NULL GROUP BY s.candidato[1]" + 
@@ -361,7 +361,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"SELECT s.candidato[5], COUNT(*) FROM selezione_voti AS s WHERE s.candidato[5] IS NOT NULL GROUP BY s.candidato[5]" + 
 					"), conteggio_tot(candidato, punti) AS (" + 
 					"SELECT candidato, 5*conteggio FROM conteggio_prima_pos UNION SELECT candidato, 4*conteggio FROM conteggio_seconda_pos UNION SELECT candidato, 3*conteggio FROM conteggio_terza_pos UNION SELECT candidato, 2*conteggio FROM conteggio_quarta_pos UNION SELECT candidato, conteggio FROM conteggio_quinta_pos" + 
-					") sum_points(candidato, punti) AS (" + 
+					"), sum_points(candidato, punti) AS (" + 
 					"SELECT candidato, SUM(punti) FROM conteggio_tot GROUP BY candidato" + 
 					") SELECT p.nome, v.punti FROM sum_points AS v JOIN partito AS p ON p.id = v.candidato"
 					);
@@ -384,7 +384,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         Map<String, Integer> map = new TreeMap<>();
 		try {
 			PreparedStatement ps = c.prepareStatement("WITH selezione_voti(candidato) AS (" + 
-					"SELECT v.preferenza_c" + 
+					"SELECT v.preferenza_c " + 
 					"FROM voto AS v JOIN sessione_voto AS s ON s.id = v.id_sessione WHERE v.id_sessione = ?" + 
 					"), conteggio_prima_pos(candidato, conteggio) AS (" + 
 					"SELECT s.candidato[1], COUNT(*) FROM selezione_voti AS s WHERE s.candidato[1] IS NOT NULL GROUP BY s.candidato[1]" + 
@@ -398,7 +398,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 					"SELECT s.candidato[5], COUNT(*) FROM selezione_voti AS s WHERE s.candidato[5] IS NOT NULL GROUP BY s.candidato[5]" + 
 					"), conteggio_tot(candidato, punti) AS (" + 
 					"SELECT candidato, 5*conteggio FROM conteggio_prima_pos UNION SELECT candidato, 4*conteggio FROM conteggio_seconda_pos UNION SELECT candidato, 3*conteggio FROM conteggio_terza_pos UNION SELECT candidato, 2*conteggio FROM conteggio_quarta_pos UNION SELECT candidato, conteggio FROM conteggio_quinta_pos" + 
-					") sum_points(candidato, punti) AS (" + 
+					"), sum_points(candidato, punti) AS (" + 
 					"SELECT candidato, SUM(punti) FROM conteggio_tot GROUP BY candidato" + 
 					") SELECT c.nome, c.cognome, p.nome, v.punti FROM sum_points AS v JOIN candidato_partito AS c ON c.id = v.candidato JOIN partito AS p ON p.id = c.id_partito"
 					);
