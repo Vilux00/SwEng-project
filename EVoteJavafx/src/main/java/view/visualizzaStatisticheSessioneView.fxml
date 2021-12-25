@@ -10,11 +10,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VisualizzaStatisticheSessioneController">
    <children>
-      <HBox layoutX="29.0" layoutY="29.0" prefHeight="328.0" prefWidth="541.0">
+      <HBox layoutX="23.0" layoutY="29.0" prefHeight="328.0" prefWidth="547.0">
          <children>
             <VBox prefHeight="325.0" prefWidth="542.0">
                <children>
-                  <PieChart fx:id="torta" prefHeight="339.0" prefWidth="542.0" />
+                  <PieChart fx:id="torta" prefHeight="466.0" prefWidth="542.0" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="bottoneSwitch" disable="true" mnemonicParsing="false" onAction="#switchPartitiCandidati" style="-fx-font-size: 12;" text="Mostra statistiche partiti" visible="false" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

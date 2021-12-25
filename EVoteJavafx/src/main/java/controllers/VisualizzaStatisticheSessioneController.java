@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +18,12 @@ public class VisualizzaStatisticheSessioneController extends DefaultSceneControl
 
 	@FXML
 	private PieChart torta;
-
+	@FXML 
+	private Button bottoneSwitch;
+	
+	private SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+	private SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
+	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
@@ -29,9 +35,18 @@ public class VisualizzaStatisticheSessioneController extends DefaultSceneControl
 	}
 
 	private void loadData() {
-		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		if(s.getModalitaVoto().equals("REF")) {
-			loadREFData(s);
+			loadREFData();
+		}else if (s.getModalitaVoto().equals("CAT")) {
+			bottoneSwitch.setVisible(true);
+			bottoneSwitch.setDisable(false);
+			loadCATData();
+		}else if (s.getModalitaVoto().equals("CATP")) {
+			loadCATPData();
+		}else {
+			bottoneSwitch.setVisible(true);
+			bottoneSwitch.setDisable(false);
+			loadORDData();
 		}
 		/*
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
@@ -41,7 +56,69 @@ public class VisualizzaStatisticheSessioneController extends DefaultSceneControl
 		*/
 	}
 	
-	private void loadREFData(SessioneDiVoto s) {
+	public void switchPartitiCandidati(ActionEvent event) {
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		if(s.getModalitaVoto().equals("CAT")) {
+			if (bottoneSwitch.getText().equals("Mostra statistiche partiti")) {		
+				pieChartData.clear();
+				for (String key : sd.getStatsPartiti(s).keySet()) {
+			        pieChartData.add(new PieChart.Data(key, sd.getStatsPartiti(s).get(key)));
+			    }
+				bottoneSwitch.setText("Mostra statistiche candidati");
+			}else {
+				pieChartData.clear();
+				for (String key : sd.getStatsCandidati(s).keySet()) {
+			        pieChartData.add(new PieChart.Data(key, sd.getStatsCandidati(s).get(key)));
+			    }
+				bottoneSwitch.setText("Mostra statistiche partiti");
+			}
+		}else{
+			if (bottoneSwitch.getText().equals("Mostra statistiche partiti")) {		
+				pieChartData.clear();
+				for (String key : sd.getStatsPartitiOrd(s).keySet()) {
+			        pieChartData.add(new PieChart.Data(key, sd.getStatsPartitiOrd(s).get(key)));
+			    }
+				bottoneSwitch.setText("Mostra statistiche candidati");
+			}else {
+				pieChartData.clear();
+				for (String key : sd.getStatsCandidatiOrd(s).keySet()) {
+			        pieChartData.add(new PieChart.Data(key, sd.getStatsCandidatiOrd(s).get(key)));
+			    }
+				bottoneSwitch.setText("Mostra statistiche partiti");
+			}
+		}
+		torta.setData(pieChartData);
+	}
+	
+	
+	private void loadCATData() {
+		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		for (String key : sd.getStatsCandidati(s).keySet()) {
+	        pieChartData.add(new PieChart.Data(key, sd.getStatsCandidati(s).get(key)));
+	    }
+		torta.setData(pieChartData);
+	}
+	
+	private void loadCATPData() {
+		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		for (String key : sd.getStatsCandidati(s).keySet()) {
+	        pieChartData.add(new PieChart.Data(key, sd.getStatsCandidati(s).get(key)));
+	    }
+		torta.setData(pieChartData);
+	}
+	
+	private void loadORDData() {
+		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		for (String key : sd.getStatsCandidatiOrd(s).keySet()) {
+			pieChartData.add(new PieChart.Data(key, sd.getStatsCandidatiOrd(s).get(key)));
+	    }
+		torta.setData(pieChartData);
+	}
+	
+	private void loadREFData() {
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
 				new PieChart.Data("Voti favorevoli", sd.getNumeroVotiFavorevoli(s)), 
