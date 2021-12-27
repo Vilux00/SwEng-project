@@ -3,15 +3,19 @@ package model;
 import java.time.LocalDate;
 
 public class NuovoUtente {
-	private String nome;
-    private String cognome;
-    private String codF;
-    private LocalDate dataNascita;
-    private String paeseNascita;
-    private String nazioneNascita;
+	private /*@ non_null @*/ String nome;
+    private /*@ non_null @*/ String cognome;
+    private /*@ non_null @*/ String codF;
+    private /*@ non_null @*/ LocalDate dataNascita;
+    private /*@ non_null @*/ String paeseNascita;
+    private /*@ non_null @*/ String nazioneNascita;
     private char sesso;
-    private String password;
+    private /*@ non_null @*/ String password;
     private char privilegio;
+    
+    /*@
+     * invariant: (sesso == 'M' || sesso == 'F') && (privilegio == 'E' || privilegio == 'S' || privilegio == 'G');
+     @*/
     
     public NuovoUtente(String nome, String cognome, String codF, LocalDate dataNascita, String paeseNascita, String nazioneNascita, char sesso, String password, char privilegio) {
 		this.nome = nome;
@@ -69,6 +73,9 @@ public class NuovoUtente {
 		return codF;
 	}
 	
+	/*@
+	 * requires: codF != null && checkCodF(codF) == true; 
+	 @*/
 	public void setCodF(String codF) {
 		this.codF = codF;
 	}

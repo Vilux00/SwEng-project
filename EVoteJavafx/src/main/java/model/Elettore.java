@@ -21,6 +21,9 @@ public class Elettore {
 		return password;
 	}
 
+	/*@
+	 * requires: Password.checkPassword(password) == true; 
+	 @*/
 	public void setPassword(String password) {
 		this.password = password;
 	}

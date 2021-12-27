@@ -9,6 +9,10 @@ public class Partito implements Iterable<Candidato>{
 	private String nome;
 	private List<Candidato> l;
 	
+	/*@
+	 * invariant: self.l == null || \forall int i; 0 <= i && i < l.length; !(\exists int j; 0 <= j && j < l.length && j != i; l.get(i).getId() == l.get(j).getId());
+	 @*/
+	
 	public Partito(String nome) {
 		this.nome = nome;
 	}
