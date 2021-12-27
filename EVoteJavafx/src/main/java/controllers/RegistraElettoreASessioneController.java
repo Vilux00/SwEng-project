@@ -28,7 +28,7 @@ public class RegistraElettoreASessioneController extends DefaultSceneController 
     @FXML private TextField TextFieldCodFisc;
 
     @FXML
-    void aggiungiElettoreASessione(ActionEvent event) {
+    public void aggiungiElettoreASessione(ActionEvent event) {
     	String codF = TextFieldCodFisc.getText().replace(" ", "");
     	String sessione = ComboBoxSessioni.getValue();
     	
