@@ -57,7 +57,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	}
 
 	@FXML
-	void avviaScrutinio(ActionEvent event) throws IOException {
+	public void avviaScrutinio(ActionEvent event) throws IOException {
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
 		if (s.getScrutinio().equals("Avviato")) {
@@ -83,7 +83,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	}
 
 	@FXML
-	void visualizzaInformazioni(ActionEvent event) {
+	public void visualizzaInformazioni(ActionEvent event) {
 		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		String modVoto, modVincitore;

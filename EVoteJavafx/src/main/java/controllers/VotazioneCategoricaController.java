@@ -33,8 +33,8 @@ public class VotazioneCategoricaController extends DefaultSceneController implem
 	
 	private ObservableList<String> candidati = FXCollections.observableArrayList();
 	private ObservableList<String> partiti = FXCollections.observableArrayList();
-	List<Candidato> candidatiL;
-	List<Partito> partitiL;
+	private List<Candidato> candidatiL;
+	private List<Partito> partitiL;
 	@FXML private ComboBox<String> comboBoxCandidatiPartiti;
     @FXML private Button buttonCandidati;
     @FXML private Button buttonPartiti;
