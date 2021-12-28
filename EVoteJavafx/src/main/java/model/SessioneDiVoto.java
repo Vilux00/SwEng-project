@@ -21,7 +21,8 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		this.nome = nome;
 		this.modalitaVoto = modalitaVoto;
 		this.quesito = null;
-		candidati = new ArrayList<>();
+		this.scrutinio = "Non avviato";
+		this.candidati = new ArrayList<>();
 	}
 	
 	public String getNome() {
@@ -61,6 +62,10 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 		this.scadenzaAsString = scadenza.toString();
 	}
 	
+	/*@
+	 * requires: l.isAfter(LocalDateTime.now())
+	 * ensures: this.scadenza = l 
+	 @*/
 	public void setScadenza(LocalDateTime l) {
 		this.scadenza = l;
 		this.scadenzaAsString = scadenza.toString();
