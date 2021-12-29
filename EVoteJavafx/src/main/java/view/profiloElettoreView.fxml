@@ -52,17 +52,17 @@
 				</Label>
 			</children>
 		</VBox>
-		<VBox alignment="CENTER" layoutY="131.0" prefHeight="155.0" prefWidth="600.0">
+		<VBox alignment="TOP_CENTER" layoutY="131.0" prefHeight="155.0" prefWidth="600.0">
 			<children>
 				<Label style="-fx-background-color: #4c5157;" text="Funzioni Elettore">
 					<VBox.margin>
-						<Insets bottom="30.0" left="30.0" />
+						<Insets bottom="20.0" left="30.0" top="30.0" />
 					</VBox.margin>
 					<font>
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<Button mnemonicParsing="false" onAction="#vota" prefHeight="32.0" prefWidth="245.0" text="Vota">
+				<Button mnemonicParsing="false" onAction="#vota" prefHeight="32.0" prefWidth="245.0" style="-fx-font-size: 14;" text="Vota">
 					<VBox.margin>
 						<Insets bottom="10.0" left="30.0" />
 					</VBox.margin>
