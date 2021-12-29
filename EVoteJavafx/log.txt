@@ -1,0 +1,2 @@
+user logged: RSVMRA65A01F839V - 2021-12-29T18:11:52.7982462 - class java.lang.IndexOutOfBoundsException - votaPerPartiti
+user logged: RSVMRA65A01F839V - 2021-12-29T18:11:53.6090941 - class java.lang.IndexOutOfBoundsException - votaPerPartiti

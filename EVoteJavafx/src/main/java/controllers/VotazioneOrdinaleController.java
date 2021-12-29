@@ -1,7 +1,11 @@
 package controllers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -188,7 +192,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		}
 	}
 
-	public void votaPerPartiti(ActionEvent event) {
+	public void votaPerPartiti(ActionEvent event) throws IOException{
 		tipoElenco = 'p';
 		setVisible();
 		resetVBox();
@@ -202,7 +206,17 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			label4.setText(partiti.get(3).getNome());
 			label5.setText(partiti.get(4).getNome());
 		}catch(IndexOutOfBoundsException e) {
-			//e.printStackTrace();
+			FileWriter w;
+		    w = new FileWriter("log.txt", true);
+		    
+		    BufferedWriter b;
+		    b = new BufferedWriter(w);
+
+		    b.append("user: " + ElettoreHolder.getInstance().getElettore().getCodF() 
+		    		+ " - " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+		    		+ " - " + e.getClass().toString() + " - " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+		    
+			b.close();
 		}
 		
 	}
