@@ -18,7 +18,7 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
-		<VBox prefHeight="389.0" prefWidth="600.0">
+		<VBox layoutX="17.0" prefHeight="389.0" prefWidth="583.0">
 			<children>
 				<HBox prefHeight="121.0" prefWidth="600.0">
 					<children>
@@ -62,9 +62,9 @@
 						<Insets bottom="15.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox prefHeight="77.0" prefWidth="600.0">
+				<HBox prefHeight="77.0" prefWidth="576.0">
 					<children>
-						<VBox alignment="TOP_CENTER" prefHeight="175.0" prefWidth="162.0">
+						<VBox alignment="TOP_CENTER" prefHeight="169.0" prefWidth="163.0">
 							<children>
 								<Label style="-fx-background-color: #4c5157;" text="Funzioni Elettore">
 									<VBox.margin>
@@ -74,7 +74,7 @@
 										<Font size="14.0" />
 									</font>
 								</Label>
-								<Button mnemonicParsing="false" onAction="#vota" style="-fx-font-size: 13;" text="Vota">
+								<Button mnemonicParsing="false" onAction="#vota" prefWidth="176.0" style="-fx-font-size: 13;" text="Vota">
 									<VBox.margin>
 										<Insets bottom="10.0" />
 									</VBox.margin>
@@ -94,12 +94,12 @@
 										<Font size="14.0" />
 									</font>
 								</Label>
-								<Button mnemonicParsing="false" onAction="#inserisciVoto" style="-fx-font-size: 13;" text="Inserisci voto cartaceo">
+								<Button mnemonicParsing="false" onAction="#inserisciVoto" prefWidth="176.0" style="-fx-font-size: 13;" text="Inserisci voto cartaceo">
 									<VBox.margin>
 										<Insets bottom="10.0" />
 									</VBox.margin>
 								</Button>
-								<Button mnemonicParsing="false" onAction="#registraElettoreASessione" style="-fx-font-size: 13;" text="Registra elettore a sessione" />
+								<Button mnemonicParsing="false" onAction="#registraElettoreASessione" prefHeight="27.0" prefWidth="176.0" style="-fx-font-size: 13;" text="Registra elettore a sessione" />
 							</children>
 							<opaqueInsets>
 								<Insets />
@@ -115,22 +115,22 @@
 										<Font size="14.0" />
 									</font>
 								</Label>
-								<Button mnemonicParsing="false" onAction="#registrazioneUtente" style="-fx-font-size: 13;" text="Crea Account">
+								<Button mnemonicParsing="false" onAction="#registrazioneUtente" prefWidth="176.0" style="-fx-font-size: 13;" text="Crea Account">
 									<VBox.margin>
 										<Insets bottom="10.0" />
 									</VBox.margin>
 								</Button>
-								<Button mnemonicParsing="false" onAction="#creaSessioneVoto" style="-fx-font-size: 13;" text="Crea sessione di voto">
+								<Button mnemonicParsing="false" onAction="#creaSessioneVoto" prefWidth="176.0" style="-fx-font-size: 13;" text="Crea sessione di voto">
 									<VBox.margin>
 										<Insets bottom="10.0" />
 									</VBox.margin>
 								</Button>
-								<Button mnemonicParsing="false" onAction="#visualizzaSessioni" style="-fx-font-size: 13;" text="Visualizza sessioni">
+								<Button mnemonicParsing="false" onAction="#visualizzaSessioni" prefWidth="176.0" style="-fx-font-size: 13;" text="Visualizza sessioni">
 									<VBox.margin>
 										<Insets bottom="10.0" />
 									</VBox.margin>
 								</Button>
-								<Button mnemonicParsing="false" onAction="#aggiungiCandidato" style="-fx-font-size: 13;" text="Aggiungi candidato" />
+								<Button mnemonicParsing="false" onAction="#aggiungiCandidato" prefWidth="176.0" style="-fx-font-size: 13;" text="Aggiungi candidato" />
 							</children>
 							<opaqueInsets>
 								<Insets />
