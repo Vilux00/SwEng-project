@@ -174,7 +174,7 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 		}
 	}
 
-	public void votaPerCandidati(ActionEvent event) {
+	public void votaPerCandidati(ActionEvent event){
 		tipoElenco = 'c';
 		setVisible();
 		resetVBox();
@@ -188,11 +188,23 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			label4.setText(candidati.get(3).toString());
 			label5.setText(candidati.get(4).toString());
 		}catch(IndexOutOfBoundsException e) {
-			//e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 		}
 	}
 
-	public void votaPerPartiti(ActionEvent event) throws IOException{
+	public void votaPerPartiti(ActionEvent event){
 		tipoElenco = 'p';
 		setVisible();
 		resetVBox();
@@ -206,17 +218,19 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 			label4.setText(partiti.get(3).getNome());
 			label5.setText(partiti.get(4).getNome());
 		}catch(IndexOutOfBoundsException e) {
-			FileWriter w;
-		    w = new FileWriter("log.txt", true);
-		    
-		    BufferedWriter b;
-		    b = new BufferedWriter(w);
-
-		    b.append("user: " + ElettoreHolder.getInstance().getElettore().getCodF() 
-		    		+ " - " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
-		    		+ " - " + e.getClass().toString() + " - " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
-		    
-			b.close();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 		}
 		
 	}

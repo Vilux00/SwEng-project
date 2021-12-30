@@ -1,8 +1,14 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import data.DbManager;
@@ -25,6 +31,19 @@ public class NuovoUtenteDaoImpl implements NuovoUtenteDao{
 			ps.setString(9, n.getPrivilegio() + "");
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		}finally {
 			dbM.close(c);

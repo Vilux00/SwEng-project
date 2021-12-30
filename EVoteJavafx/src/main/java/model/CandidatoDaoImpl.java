@@ -1,9 +1,14 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +17,7 @@ import data.DbManager;
 public class CandidatoDaoImpl implements CandidatoDao{
 
 	@Override
-	public boolean inserisciCandidato(Candidato c, Partito p) {
+	public boolean inserisciCandidato(Candidato c, Partito p){
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		PartitoDaoImpl pa = (PartitoDaoImpl) DaoFactory.getInstance().getDao("Partito");
@@ -24,7 +29,19 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			ps.setInt(3, pa.getId(p));
 			return ps.executeUpdate() > 0;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		}finally {
 			dbM.close(conn);
@@ -32,7 +49,7 @@ public class CandidatoDaoImpl implements CandidatoDao{
 	}
 	
 	@Override
-	public Candidato getCandidatoById(int id) {
+	public Candidato getCandidatoById(int id){
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
@@ -42,7 +59,19 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			if(r.next()) return new Candidato(r.getString(1), r.getString(2));
 			return null;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(conn);
@@ -50,7 +79,7 @@ public class CandidatoDaoImpl implements CandidatoDao{
 	}
 
 	@Override
-	public List<Candidato> getCandidati() {
+	public List<Candidato> getCandidati(){
 		List<Candidato> candidati = new ArrayList<>();
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
@@ -60,7 +89,19 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			while(r.next()) candidati.add(new Candidato(r.getString(2), r.getString(3)));
 			return candidati;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		} finally {
 			dbM.close(conn);
@@ -68,7 +109,7 @@ public class CandidatoDaoImpl implements CandidatoDao{
 	}
 
 	@Override
-	public boolean inserisciCandidatoSessione(Candidato c, int id) {
+	public boolean inserisciCandidatoSessione(Candidato c, int id){
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
@@ -77,7 +118,19 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			s.setInt(2, id);
 			return s.executeUpdate() > 0;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		} finally {
 			dbM.close(conn);
@@ -101,7 +154,19 @@ public class CandidatoDaoImpl implements CandidatoDao{
 			}
 			return l;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		} finally {
 			dbM.close(conn);

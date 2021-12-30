@@ -1,9 +1,14 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +28,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			if(ps.executeUpdate() == 0) return false;
 			return true;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		}finally {
 			dbM.close(conn);
@@ -39,7 +56,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			ps.setString(1, p.getNome());
 		    return ps.executeQuery().next();
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		}finally {
 			dbM.close(conn);
@@ -63,7 +92,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			}
 			return candidati;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(conn);
@@ -81,7 +122,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			if(r.next()) return r.getInt(1);
 			return null;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(conn);
@@ -103,7 +156,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			}
 			return l;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(conn);
@@ -127,7 +192,19 @@ public class PartitoDaoImpl implements PartitoDao{
 			}
 			return l;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(conn);

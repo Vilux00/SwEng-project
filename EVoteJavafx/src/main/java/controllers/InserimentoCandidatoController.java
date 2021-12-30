@@ -18,7 +18,7 @@ public class InserimentoCandidatoController  extends DefaultSceneController{
 	@FXML private TextField cognome;
 	@FXML private TextField partito;
 	
-	public void inserimentoCandidato(ActionEvent event) {
+	public void inserimentoCandidato(ActionEvent event) throws IOException{
 		String n = nome.getText();
 		String c = cognome.getText();
 		String p = partito.getText();

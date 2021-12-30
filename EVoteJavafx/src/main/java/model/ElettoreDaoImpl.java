@@ -1,9 +1,14 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +28,19 @@ public class ElettoreDaoImpl implements ElettoreDao{
 	        stm.setString(2, DigestUtils.sha256Hex(e.getPassword()));
 	        return stm.executeQuery().next();
 		} catch(SQLException ex){
-			ex.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		} finally {
 			dbM.close(conn);
@@ -40,7 +57,19 @@ public class ElettoreDaoImpl implements ElettoreDao{
 	        stm.setString(2, e.getCodF());
 			return stm.executeUpdate() > 0; 
 		} catch(SQLException ex){
-			ex.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		} finally {
 			dbM.close(conn);
@@ -66,7 +95,19 @@ public class ElettoreDaoImpl implements ElettoreDao{
 			}
 			return null;
 		} catch(SQLException ex){
-			ex.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		} finally {
 			dbM.close(conn);
@@ -84,7 +125,19 @@ public class ElettoreDaoImpl implements ElettoreDao{
 			if(r.next()) return r.getString(1);
 			return null;
 		} catch(SQLException ex){
-			ex.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		} finally {
 			dbM.close(conn);
@@ -102,7 +155,19 @@ public class ElettoreDaoImpl implements ElettoreDao{
 			if(r.next()) return r.getString(1);
 			return null;
 		} catch(SQLException ex){
-			ex.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		} finally {
 			dbM.close(conn);
@@ -117,8 +182,20 @@ public class ElettoreDaoImpl implements ElettoreDao{
 			PreparedStatement stm = conn.prepareStatement("SELECT * FROM evoting.elettore WHERE codice_fiscale = ?");
 			stm.setString(1, codF);
 			return stm.executeQuery().next();
-		} catch(SQLException ex){
-			ex.printStackTrace();
+		} catch(SQLException e){
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return false;
 		} finally {
 			dbM.close(conn);

@@ -1,11 +1,15 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +34,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             ps.setBoolean(7, false);
             return ps.executeUpdate() > 0;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return false;
         }finally {
             dbM.close(c);
@@ -60,7 +76,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
                 if(!ca.inserisciCandidatoSessione(cand, id)) return false;
             return true;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return false;
         }finally {
             dbM.close(c);
@@ -87,7 +115,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             }
             return l;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return null;
         }finally {
             dbM.close(c);
@@ -107,7 +147,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             ps.setInt(1, s.getId());
             ps.executeUpdate();
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
         }finally {
             dbM.close(c);
         }
@@ -124,7 +176,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getInt(1);
             return -1;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return -1;
         }finally {
             dbM.close(c);
@@ -152,7 +216,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 	            }
 	            return l;
 	        }catch(SQLException e) {
-	            e.printStackTrace();
+	        	try{
+					FileWriter w;
+				    w = new FileWriter("log.txt", true);
+				    
+				    BufferedWriter b;
+				    b = new BufferedWriter(w);
+		
+				    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+				    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+				    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+				    
+					b.close();
+				}catch(IOException i) {}
 	            return null;
 	        }finally {
 	            dbM.close(c);
@@ -170,7 +246,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getString(1);
             return null;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return null;
         }finally {
             dbM.close(c);
@@ -187,7 +275,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         	if(rs.next()) return rs.getString(1);
         	return null;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return null;
         }finally {
             dbM.close(c);
@@ -205,7 +305,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getBoolean(1);
             return false;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return false;
         }finally {
             dbM.close(c);
@@ -223,7 +335,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getInt(1);
             return 0;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return 0;
         }finally {
             dbM.close(c);
@@ -241,7 +365,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getInt(1);
             return 0;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return 0;
         }finally {
             dbM.close(c);
@@ -259,7 +395,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             if(r.next()) return r.getInt(1);
             return 0;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return 0;
         }finally {
             dbM.close(c);
@@ -285,7 +433,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " + r.getString(2), r.getInt(4));
 			return map;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(c);
@@ -311,7 +471,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			while(r.next()) map.put(r.getString(1), r.getInt(2));
 			return map;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(c);
@@ -337,7 +509,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
             }
             return l;
         }catch(SQLException e) {
-            e.printStackTrace();
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
             return null;
         }finally {
             dbM.close(c);
@@ -374,7 +558,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			while(r.next()) map.put(r.getString(1), r.getInt(2));
 			return map;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(c);
@@ -411,7 +607,19 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 			while(r.next()) map.put("(" + r.getString(3) + ") " + r.getString(1) + " " +  r.getString(2), r.getInt(4));
 			return map;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
 			return null;
 		}finally {
 			dbM.close(c);
