@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -126,18 +127,17 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	}
 
 	public void visualizzaStatistiche(ActionEvent event) throws IOException {
-		try {
-			SessioneDiVotoHolder.getInstance().setSessione(tabella.getSelectionModel().getSelectedItem());
-			setScenaPrecedente("visualizzaSessioniView.fxml", "Visualizza sessioni");
-			changeScene(event, "visualizzaStatisticheSessioneView.fxml", "Statistiche sessione");
-		} catch (NullPointerException e) {
+		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
+		SessioneDiVotoHolder.getInstance().setSessione(s);
+		if (Objects.isNull(s)) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Selezionare una sessione");
 			alert.show();
 			return;
 		}
-
+		setScenaPrecedente("visualizzaSessioniView.fxml", "Visualizza sessioni");
+		changeScene(event, "visualizzaStatisticheSessioneView.fxml", "Statistiche sessione");
 	}
 
 }
