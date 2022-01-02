@@ -58,13 +58,20 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 	}
 
 	@FXML
-	public void avviaScrutinio(ActionEvent event) throws IOException {
+	public void visualizzaRisultati(ActionEvent event) throws IOException {
 		SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 		SessioneDiVoto s = tabella.getSelectionModel().getSelectedItem();
-		if (s.getScrutinio().equals("Avviato")) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Scrutinio gia' avviato");
+		if (Objects.isNull(s)) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Errore");
+			alert.setHeaderText("Selezionare una sessione");
+			alert.show();
+			return;
+		}
+		if (s.getScrutinio().equals("Avviato")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText(sd.getRisultati(s));
+			alert.setTitle("Vincitore sessione");
 			alert.show();
 		} else {
 			if (s.getScadenza().isAfter(LocalDateTime.now())) {
@@ -78,7 +85,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 				alert.setHeaderText(sd.getRisultati(s));
 				alert.setTitle("Vincitore sessione");
 				alert.show();
-				changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni");
+				//changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni");
 			}
 		}
 	}
