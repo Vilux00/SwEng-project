@@ -76,7 +76,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 		} else {
 			if (s.getScadenza().isAfter(LocalDateTime.now())) {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("Non è ancora possibile avviare lo scrutinio, la sessione non è terminata");
+				alert.setHeaderText("Non e' ancora possibile avviare lo scrutinio, la sessione non e' terminata");
 				alert.setTitle("Errore");
 				alert.show();
 			} else {
@@ -121,8 +121,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 			alert.setHeaderText("Informazioni relative a:" + s.getNome());
 			alert.setContentText("Nome sessione: " + s.getNome() + "\nID: " + s.getId() + "\nModalita' voto: " + modVoto
 					+ "\nModalita' vincitore : " + modVincitore + "\nScadenza sessione: " + s.getScadenzaAsString()
-					+ "\nScrutinio: " + s.getScrutinio() + "\nNumero voti registrati: " + sd.getNumeroVoti(s)
-					+ (sd.getScrutinio(s) ? ("\n" + sd.getRisultati(s)) : ""));
+					+ "\nScrutinio: " + s.getScrutinio() + "\nNumero voti registrati: " + sd.getNumeroVoti(s));
 			alert.show();
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
