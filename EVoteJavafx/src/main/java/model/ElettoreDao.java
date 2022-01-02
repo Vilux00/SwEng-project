@@ -9,4 +9,5 @@ public interface ElettoreDao extends DaoInterface{
 	public String getCognomeByCodF(Elettore e);
 	public List<String> getInfoByCodF(Elettore e);
 	public boolean isIn(String codF);
+	public Boolean maggiorenne(Elettore e);
 }

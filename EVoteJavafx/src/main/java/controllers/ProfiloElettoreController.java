@@ -5,7 +5,9 @@ import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import model.DaoFactory;
 import model.Elettore;
@@ -26,6 +28,15 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	}
 	
 	public void vota(ActionEvent event) throws IOException {
+		Elettore e = ElettoreHolder.getInstance().getElettore();
+		ElettoreDao ed = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
+		if(ed.maggiorenne(e) == null || !ed.maggiorenne(e)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Età non valida, si deve essere maggiorenni per votare");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		setScenaPrecedente("profiloElettoreView.fxml", "Profilo elettore");
 		changeScene(event, "selezioneSessioneView.fxml", "Selezione sessione");
 	}

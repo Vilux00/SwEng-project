@@ -175,6 +175,36 @@ public class ElettoreDaoImpl implements ElettoreDao{
 	}
 
 	@Override
+	public Boolean maggiorenne(Elettore e) {
+		DbManager dbM = DbManager.getInstance();
+		Connection conn = dbM.open();
+		try {
+	        PreparedStatement stm = conn.prepareStatement("select EXTRACT(year from age(CURRENT_DATE, ?)) < 0 as result");
+	        stm.setObject(1, getInfoByCodF(e).get(2));
+	        ResultSet r = stm.executeQuery();
+			if(r.next()) r.getBoolean(1);
+			return null;
+		} catch(SQLException ex){
+			try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + ex.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
+			return null;
+		} finally {
+			dbM.close(conn);
+		}
+	}
+	
+	@Override
 	public boolean isIn(String codF) {
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
