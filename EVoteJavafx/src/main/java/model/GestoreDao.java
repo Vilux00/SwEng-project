@@ -1,5 +1,5 @@
 package model;
 
-public interface GestoreDao extends DaoInterface{
+public interface GestoreDao extends DaoInterface, ScrutatoreDao{
 
 }

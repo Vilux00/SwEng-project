@@ -19,7 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import model.DaoFactory;
 import model.SessioneDiVoto;
-import model.SessioneDiVotoDaoImpl;
+import model.SessioneDiVotoDao;
 import model.SessioneDiVotoHolder;
 import javafx.scene.control.Alert.AlertType;
 
@@ -46,7 +46,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 				SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 				s.setModVincitore(StringUtils.substringBetween(comboBoxVincitore.getValue(), "(", ")"));
 				s.setQuesito(quesito.getText());
-				SessioneDiVotoDaoImpl se = (SessioneDiVotoDaoImpl) DaoFactory.getInstance().getDao("SessioneDiVoto");
+				SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 				if(se.inserisciSessioneReferendum(s)) {
 					alert = new Alert(AlertType.CONFIRMATION);
 					alert.setHeaderText("Sessione di voto referendum creata con successo");
