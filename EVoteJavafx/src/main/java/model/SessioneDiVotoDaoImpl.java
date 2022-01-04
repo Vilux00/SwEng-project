@@ -170,7 +170,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		DbManager dbM = DbManager.getInstance();
         Connection c = dbM.open();
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM evoting.log_voto WHERE id_sessione = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM evoting.voto WHERE id_sessione = ?");
             ps.setInt(1, s.getId());
             ResultSet r = ps.executeQuery();
             if(r.next()) return r.getInt(1);
@@ -624,6 +624,36 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
 		}finally {
 			dbM.close(c);
 		}
+	}
+	
+	@Override
+	public int getNumeroVotanti(SessioneDiVoto s) {
+		DbManager dbM = DbManager.getInstance();
+        Connection c = dbM.open();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM log_voto WHERE id_sessione = ?");
+            ps.setInt(1, s.getId());
+            ResultSet r = ps.executeQuery();
+            if(r.next()) return r.getInt(1);
+            return -1;
+        }catch(SQLException e) {
+        	try{
+				FileWriter w;
+			    w = new FileWriter("log.txt", true);
+			    
+			    BufferedWriter b;
+			    b = new BufferedWriter(w);
+	
+			    b.append(ElettoreHolder.getInstance().getElettore().getCodF() 
+			    		+ " " + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME).toString() 
+			    		+ " " + e.getClass().toString() + " " + new Object(){}.getClass().getEnclosingMethod().getName() + "\n");
+			    
+				b.close();
+			}catch(IOException i) {}
+            	return -1;
+        }finally {
+            dbM.close(c);
+        }
 	}
 
 }
