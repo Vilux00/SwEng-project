@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import model.DaoFactory;
 import model.NuovoUtente;
 import model.Password;
-import model.NuovoUtenteDaoImpl;
+import model.NuovoUtenteDao;
 import model.NuovoUtenteHolder;
 
 public class RegistrazioneUtente2Controller extends DefaultSceneController{
@@ -33,7 +33,7 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 		NuovoUtente n = NuovoUtenteHolder.getInstance().getUtente();
 		n.setPassword(password);
 		btnGeneraPassword.setDisable(true);
-		NuovoUtenteDaoImpl nu = (NuovoUtenteDaoImpl)DaoFactory.getInstance().getDao("NuovoUtente");
+		NuovoUtenteDao nu = (NuovoUtenteDao)DaoFactory.getInstance().getDao("NuovoUtente");
 		if(!nu.register(n)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Utente gia' registrato");

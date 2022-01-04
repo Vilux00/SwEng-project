@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
 import model.DaoFactory;
 import model.Elettore;
-import model.ElettoreDaoImpl;
+import model.ElettoreDao;
 import model.ElettoreHolder;
 import model.Password;
 
@@ -77,7 +77,7 @@ public class ModificaPasswordController extends DefaultSceneController{
 	private boolean changePasswordDB() {
 		Elettore e = ElettoreHolder.getInstance().getElettore();
 		e.setPassword(nuovaPassword1.getText());
-		ElettoreDaoImpl el = (ElettoreDaoImpl)DaoFactory.getInstance().getDao("Elettore");
+		ElettoreDao el = (ElettoreDao)DaoFactory.getInstance().getDao("Elettore");
 		return(el.updatePassword(e));
 	}
 

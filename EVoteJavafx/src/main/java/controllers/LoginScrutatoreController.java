@@ -9,7 +9,7 @@ import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreHolder;
 import model.Scrutatore;
-import model.ScrutatoreDaoImpl;
+import model.ScrutatoreDao;
 
 public class LoginScrutatoreController extends DefaultSceneController{
 	@FXML private TextField codF;
@@ -27,7 +27,7 @@ public class LoginScrutatoreController extends DefaultSceneController{
 			return;
 		}
 		Elettore e = new Scrutatore(codFisc, pwd);
-		ScrutatoreDaoImpl sc = (ScrutatoreDaoImpl) DaoFactory.getInstance().getDao("Scrutatore");
+		ScrutatoreDao sc = (ScrutatoreDao) DaoFactory.getInstance().getDao("Scrutatore");
 		if(sc.login(e)){
 			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginScrutatoreView.fxml", "Login scrutatore"); 

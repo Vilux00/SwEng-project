@@ -10,7 +10,7 @@ import model.DaoFactory;
 import model.Elettore;
 import model.ElettoreHolder;
 import model.Gestore;
-import model.GestoreDaoImpl;
+import model.GestoreDao;
 
 public class LoginGestoreSistemaController extends DefaultSceneController{
 	@FXML private TextField codF;
@@ -28,7 +28,7 @@ public class LoginGestoreSistemaController extends DefaultSceneController{
 			return;
 		}
 		Elettore e = new Gestore(codFisc, pwd);
-		GestoreDaoImpl ge = (GestoreDaoImpl)DaoFactory.getInstance().getDao("Gestore");
+		GestoreDao ge = (GestoreDao)DaoFactory.getInstance().getDao("Gestore");
 		if(ge.login(e)){
 			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginGestoreSistemaView.fxml", "Login gestore"); 

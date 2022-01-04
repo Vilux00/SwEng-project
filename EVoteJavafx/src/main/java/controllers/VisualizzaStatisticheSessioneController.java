@@ -43,19 +43,21 @@ public class VisualizzaStatisticheSessioneController extends DefaultSceneControl
 		if(sd.getNumeroVoti(s) == 0) {
 			torta.setVisible(false);
 			label.setVisible(true);
-		}
-		if(s.getModalitaVoto().equals("REF")) {
-			loadREFData();
-		}else if (s.getModalitaVoto().equals("CAT")) {
-			bottoneSwitch.setVisible(true);
-			bottoneSwitch.setDisable(false);
-			loadCATData();
-		}else if (s.getModalitaVoto().equals("CATP")) {
-			loadCATPData();
 		}else {
-			bottoneSwitch.setVisible(true);
-			bottoneSwitch.setDisable(false);
-			loadORDData();
+			torta.setLabelsVisible(false);
+			if(s.getModalitaVoto().equals("REF")) {
+				loadREFData();
+			}else if (s.getModalitaVoto().equals("CAT")) {
+				bottoneSwitch.setVisible(true);
+				bottoneSwitch.setDisable(false);
+				loadCATData();
+			}else if (s.getModalitaVoto().equals("CATP")) {
+				loadCATPData();
+			}else {
+				bottoneSwitch.setVisible(true);
+				bottoneSwitch.setDisable(false);
+				loadORDData();
+			}
 		}
 	}
 	

@@ -1,4 +1,4 @@
 package model;
 
-public interface ScrutatoreDao extends DaoInterface{
+public interface ScrutatoreDao extends DaoInterface, ElettoreDao{
 }
