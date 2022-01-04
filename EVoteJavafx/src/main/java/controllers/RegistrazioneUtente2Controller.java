@@ -1,6 +1,11 @@
 package controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import model.DaoFactory;
+import model.ElettoreHolder;
 import model.NuovoUtente;
 import model.Password;
 import model.NuovoUtenteDao;
@@ -49,8 +55,16 @@ public class RegistrazioneUtente2Controller extends DefaultSceneController{
 	}
 	
 	public void stampaCredenzialiUtente(ActionEvent event) throws IOException{
+		
 		NuovoUtente n = NuovoUtenteHolder.getInstance().getUtente();
-		System.out.println("Codice fiscale: " + n.getCodF() + ", password: " + n.getPassword());
+		try{
+			File file = new File("credenziali.txt");
+			file.createNewFile();
+			FileWriter writer = new FileWriter(file);
+			writer.write("Codice fiscale: " + n.getCodF() + ", password: " + n.getPassword()); 
+		      writer.flush();
+		      writer.close();
+		}catch(IOException i) {}
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText("Registrazione avvenuta con successo");
 		alert.setTitle("");
