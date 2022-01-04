@@ -118,7 +118,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 			alert.setTitle("Informazioni sessione");
-			alert.setHeaderText("Informazioni relative a:" + s.getNome());
+			alert.setHeaderText("Informazioni relative a:\n" + s.getNome());
 			alert.setContentText("Nome sessione: " + s.getNome() + "\nID: " + s.getId() + "\nModalita' voto: " + modVoto
 					+ "\nModalita' vincitore : " + modVincitore + "\nScadenza sessione: " + s.getScadenzaAsString()
 					+ "\nScrutinio: " + s.getScrutinio() + "\nNumero voti registrati: " + sd.getNumeroVoti(s));
