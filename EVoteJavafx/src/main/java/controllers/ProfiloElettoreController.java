@@ -30,7 +30,7 @@ public class ProfiloElettoreController extends DefaultSceneController{
 	public void vota(ActionEvent event) throws IOException {
 		Elettore e = ElettoreHolder.getInstance().getElettore();
 		ElettoreDao ed = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
-		if(ed.maggiorenne(e) == null || !ed.maggiorenne(e)) {
+		if(!ed.maggiorenne(e)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Età non valida, si deve essere maggiorenni per votare");
 			alert.setTitle("Errore");

@@ -179,10 +179,10 @@ public class ElettoreDaoImpl implements ElettoreDao{
 		DbManager dbM = DbManager.getInstance();
 		Connection conn = dbM.open();
 		try {
-	        PreparedStatement stm = conn.prepareStatement("select EXTRACT(year from age(CURRENT_DATE, ?)) < 0 as result");
+	        PreparedStatement stm = conn.prepareStatement("select EXTRACT(year from age(CURRENT_DATE, CAST(? AS DATE)))");
 	        stm.setObject(1, getInfoByCodF(e).get(2));
 	        ResultSet r = stm.executeQuery();
-			if(r.next()) r.getBoolean(1);
+			if(r.next()) return r.getInt(1) >= 18;
 			return null;
 		} catch(SQLException ex){
 			try{
