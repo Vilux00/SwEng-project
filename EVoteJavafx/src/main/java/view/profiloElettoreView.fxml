@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,40 +19,6 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
-		<VBox layoutY="13.0" prefHeight="148.0" prefWidth="361.0">
-			<children>
-				<HBox prefHeight="34.0" prefWidth="350.0">
-					<children>
-						<Label text="Dati utente">
-							<font>
-								<Font size="21.0" />
-							</font>
-							<HBox.margin>
-								<Insets right="30.0" />
-							</HBox.margin>
-						</Label>
-					</children>
-					<VBox.margin>
-						<Insets left="30.0" top="10.0" />
-					</VBox.margin>
-				</HBox>
-				<Label fx:id="codF" text="Codice fiscale: ***************">
-					<VBox.margin>
-						<Insets left="30.0" top="5.0" />
-					</VBox.margin>
-				</Label>
-				<Label fx:id="nc" text="Nome, Cognome: ***************">
-					<VBox.margin>
-						<Insets left="30.0" top="5.0" />
-					</VBox.margin>
-				</Label>
-				<Label fx:id="nascita" text="Data di nascita, luogo: ***************">
-					<VBox.margin>
-						<Insets left="30.0" top="5.0" />
-					</VBox.margin>
-				</Label>
-			</children>
-		</VBox>
 		<VBox alignment="TOP_CENTER" layoutY="131.0" prefHeight="155.0" prefWidth="600.0">
 			<children>
 				<Label style="-fx-background-color: #4c5157;" text="Funzioni Elettore">
@@ -69,11 +36,11 @@
 				</Button>
 			</children>
 		</VBox>
-		<VBox alignment="CENTER_LEFT" layoutY="280.0" prefHeight="94.0" prefWidth="600.0">
+		<VBox alignment="CENTER" layoutX="11.0" layoutY="280.0" prefHeight="94.0" prefWidth="160.0">
 			<children>
 				<Label style="-fx-background-color: #4c5157;" text="Funzioni utente">
 					<VBox.margin>
-						<Insets bottom="10.0" left="30.0" />
+						<Insets bottom="10.0" />
 					</VBox.margin>
 					<font>
 						<Font size="14.0" />
@@ -81,7 +48,7 @@
 				</Label>
 				<Button mnemonicParsing="false" onAction="#cambiaPassword" style="-fx-font-size: 12;" text="Modifica password">
 					<VBox.margin>
-						<Insets left="30.0" />
+						<Insets />
 					</VBox.margin>
 				</Button>
 			</children>
@@ -93,16 +60,62 @@
 			</image>
 		</ImageView>
 		<Button layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0" prefWidth="17.0" text="Button" />
-      <ImageView fx:id="immagineOcchioChiuso" fitHeight="25.0" fitWidth="25.0" layoutX="544.0" layoutY="102.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../closed.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="immagineOcchioAperto" fitHeight="25.0" fitWidth="25.0" layoutX="544.0" layoutY="102.0" opacity="0.42" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../open.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="541.0" layoutY="94.0" mnemonicParsing="false" onAction="#mostraInfo" opacity="0.0" prefHeight="31.0" prefWidth="25.0" text="Button" />
+      <VBox layoutX="10.0" layoutY="10.0" prefHeight="148.0" prefWidth="361.0">
+         <children>
+            <HBox prefHeight="34.0" prefWidth="350.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="119.0" text="Dati utente">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="34.0" prefWidth="81.0">
+                     <children>
+                        <Pane layoutY="6.0" prefHeight="25.0" prefWidth="25.0">
+                           <children>
+                              <ImageView fx:id="immagineOcchioChiuso" fitHeight="25.0" fitWidth="25.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../closed.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="6.0" prefHeight="25.0" prefWidth="25.0">
+                           <children>
+                              <ImageView fx:id="immagineOcchioAperto" fitHeight="25.0" fitWidth="25.0" opacity="0.42" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@../open.png" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" onAction="#mostraInfo" opacity="0.0" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label fx:id="codF" text="Codice fiscale: ***************">
+               <VBox.margin>
+                  <Insets left="30.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="nc" text="Nome, Cognome: ***************">
+               <VBox.margin>
+                  <Insets left="30.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="nascita" text="Data di nascita, luogo: ***************">
+               <VBox.margin>
+                  <Insets left="30.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
 	</children>
 </AnchorPane>
