@@ -24,14 +24,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import model.Candidato;
-import model.CandidatoDaoImpl;
+import model.CandidatoDao;
 import model.DaoFactory;
 import model.ElettoreHolder;
 import model.LogVoto;
 import model.LogVotoDao;
 import model.Partito;
 import model.PartitoDao;
-import model.PartitoDaoImpl;
 import model.SessioneDiVoto;
 import model.SessioneDiVotoHolder;
 import model.Voto;
@@ -273,8 +272,8 @@ public class VotazioneOrdinaleController extends DefaultSceneController implemen
 	
 	private void loadData() {
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
-		CandidatoDaoImpl cDao = (CandidatoDaoImpl)DaoFactory.getInstance().getDao("Candidato");
-		PartitoDaoImpl pDao = (PartitoDaoImpl)DaoFactory.getInstance().getDao("Partito");
+		CandidatoDao cDao = (CandidatoDao)DaoFactory.getInstance().getDao("Candidato");
+		PartitoDao pDao = (PartitoDao)DaoFactory.getInstance().getDao("Partito");
 		candidati = cDao.getCandidatiSessione(s);
 		partiti = pDao.getPartiti(s);
 	}
