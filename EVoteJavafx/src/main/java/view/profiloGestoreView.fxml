@@ -19,6 +19,7 @@
 				<Image url="@../home-button.png" />
 			</image>
 		</ImageView>
+      
       <VBox prefHeight="148.0" prefWidth="361.0">
          <children>
             <HBox prefHeight="34.0" prefWidth="350.0">
@@ -154,7 +155,7 @@
 						</VBox>
 					</children>
 				</HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="83.0" prefWidth="499.0">
                <children>
       				<VBox alignment="CENTER" prefHeight="89.0" prefWidth="163.0">
       					<children>
@@ -182,5 +183,7 @@
 				<Image url="@../Back_Arrow.svg.png" />
 			</image>
 		</ImageView>
+      <Button layoutX="532.0" layoutY="358.0" mnemonicParsing="false" onAction="#goToScenaPrecedente" opacity="0.0" prefHeight="31.0" prefWidth="17.0" text="Button" />
+      <Button layoutX="558.0" layoutY="358.0" mnemonicParsing="false" onAction="#backToHomeScene" opacity="0.0" prefHeight="31.0" prefWidth="1.0" text="Button" />
 	</children>
 </AnchorPane>
