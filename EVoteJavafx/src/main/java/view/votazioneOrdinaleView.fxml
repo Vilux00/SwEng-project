@@ -46,7 +46,7 @@
                            <children>
                               <Label fx:id="label1">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </Label>
                            </children>
@@ -64,7 +64,7 @@
                            <children>
                               <Label fx:id="label2">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
@@ -82,7 +82,7 @@
                            <children>
                               <Label fx:id="label3">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
@@ -100,7 +100,7 @@
                            <children>
                               <Label fx:id="label4">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
@@ -118,7 +118,7 @@
                            <children>
                               <Label fx:id="label5">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>

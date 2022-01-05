@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -20,12 +19,11 @@
          </image>
       </ImageView>
    
-      <VBox layoutX="7.0" layoutY="-4.0" prefHeight="407.0" prefWidth="607.0">
+      <VBox alignment="CENTER" layoutX="7.0" layoutY="-4.0" prefHeight="407.0" prefWidth="607.0">
          <children>
-            <Pane prefHeight="175.0" prefWidth="607.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="643.0">
                <children>
-                  <Label text="Genera passoword random">
+                  <Label text="Genera password random">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -61,7 +59,7 @@
                </children></HBox>
             <HBox fx:id="stampaPdfAccount" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="577.0" visible="false">
                <children>
-                  <Label text="Crea documento PDF con i dati utente">
+                  <Label text="Crea documento con i dati utente">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -69,7 +67,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#stampaCredenzialiUtente" text="Crea PDF" />
+                  <Button mnemonicParsing="false" onAction="#stampaCredenzialiUtente" text="Crea documento" />
                </children>
                <VBox.margin>
                   <Insets left="30.0" />

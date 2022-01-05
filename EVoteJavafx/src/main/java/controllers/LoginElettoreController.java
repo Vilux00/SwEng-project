@@ -32,7 +32,7 @@ public class LoginElettoreController extends DefaultSceneController{
 		if(ed.login(e)){
 			ElettoreHolder.getInstance().setElettore(e);
 			setScenaPrecedente("loginElettoreView.fxml", "Login elettore"); 
-			changeScene(event, "profiloElettoreView.fxml", "Profilo scrutatore");
+			changeScene(event, "profiloElettoreView.fxml", "Profilo elettore");
 			DefaultSceneController.isLogged = true;
 		}else {
 			Alert alert = new Alert(AlertType.ERROR);

@@ -19,9 +19,9 @@
                   <Insets bottom="-20.0" />
                </VBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#switchToLoginElettoreScene" text="Login elettore" />
-            <Button mnemonicParsing="false" onAction="#switchToLoginScrutatoreScene" text="Login scrutatore" />
-            <Button mnemonicParsing="false" onAction="#switchToLoginAdminScene" text="Login admin" />
+            <Button mnemonicParsing="false" onAction="#switchToLoginElettoreScene" prefHeight="25.0" prefWidth="150.0" text="Login elettore" />
+            <Button mnemonicParsing="false" onAction="#switchToLoginScrutatoreScene" prefHeight="25.0" prefWidth="150.0" text="Login scrutatore" />
+            <Button mnemonicParsing="false" onAction="#switchToLoginAdminScene" prefHeight="25.0" prefWidth="150.0" text="Login gestore" />
          </children>
       </VBox>
    </children>
