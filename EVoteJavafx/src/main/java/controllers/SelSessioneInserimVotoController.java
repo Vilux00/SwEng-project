@@ -24,6 +24,7 @@ public class SelSessioneInserimVotoController extends DefaultSceneController imp
 	public void goToSessione(ActionEvent event) throws IOException{
 		setScenaPrecedente("selSessioneInserimVoto.fxml", "Selezione sessione");
 		if(Objects.isNull(comboBoxSessione.getValue()) == true) {
+			rimuoviScenaPrecedente();
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Selezionare la sessione");
 			alert.show();
@@ -33,6 +34,7 @@ public class SelSessioneInserimVotoController extends DefaultSceneController imp
 					SessioneDiVotoHolder.getInstance().setSessione(s);
 					SessioneDiVotoDao sd = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 					if(sd.getNumeroVoti(s) == sd.getNumeroVotanti(s)) {
+						rimuoviScenaPrecedente();
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setContentText("Il numero di voti per la sessione è uguale al numero di votanti,\nper inserire altri voti è necessario registrare altri elettori alla\nsessione");
 						alert.show();
@@ -65,7 +67,6 @@ public class SelSessioneInserimVotoController extends DefaultSceneController imp
 	
 	@Override
 	public void goToScenaPrecedente(ActionEvent event) throws IOException {
-		rimuoviScenaPrecedente();
 		changeScene(event, scenaPrecedente.pop(), scenaPrecedenteTitolo.pop());
 	}
 
