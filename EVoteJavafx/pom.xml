@@ -12,6 +12,7 @@
         <commons.version>3.4</commons.version>
         <commons.codec.version>1.11</commons.codec.version>
         <postgresql.version>42.3.1</postgresql.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,6 +40,11 @@
             <artifactId>commons-codec</artifactId>
             <version>${commons.codec.version}</version>
         </dependency>
+        <dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>${junit.version}</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
