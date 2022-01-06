@@ -22,6 +22,13 @@ public class InserimentoCandidatoController  extends DefaultSceneController{
 		String n = nome.getText();
 		String c = cognome.getText();
 		String p = partito.getText();
+		if(n.equals("") || c.equals("") || p.equals("")) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Alcuni campi sono vuoti");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		Candidato ca = new Candidato(n, c);
 		CandidatoDao cd = (CandidatoDaoImpl) DaoFactory.getInstance().getDao("Candidato");
 		if(cd.inserisciCandidato(ca, new Partito(p))) {
