@@ -143,6 +143,7 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
         DbManager dbM = DbManager.getInstance();
         Connection c = dbM.open();
         try {
+        	s.setScrutinio(true);
             PreparedStatement ps = c.prepareStatement("UPDATE evoting.sessione_voto SET scrutinio = true WHERE id = ?");
             ps.setInt(1, s.getId());
             ps.executeUpdate();
