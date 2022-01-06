@@ -182,8 +182,8 @@ public class ElettoreDaoImpl implements ElettoreDao{
 	        PreparedStatement stm = conn.prepareStatement("select EXTRACT(year from age(CURRENT_DATE, CAST(? AS DATE)))");
 	        stm.setObject(1, getInfoByCodF(e).get(2));
 	        ResultSet r = stm.executeQuery();
-			if(r.next()) return r.getInt(1) >= 18;
-			return null;
+			r.next();
+			return r.getInt(1) >= 18;
 		} catch(SQLException ex){
 			try{
 				FileWriter w;
