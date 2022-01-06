@@ -120,6 +120,7 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	
 	public void aggiungiCandidato(ActionEvent event) {
 		String candidato = comboBoxCandidati.getValue();
+		if(candidato == null) return;
 		Candidato candidatoAgg = null;
 		for(Candidato c : candidati) 
 			if(c.toString().equals(candidato)) candidatoAgg = c;
@@ -130,6 +131,7 @@ public class VotazioneCategoricaPreferenzaController extends DefaultSceneControl
 	
 	public void rimuoviCandidato(ActionEvent event) {
 		String candidato = comboBoxCandidatiScelti.getValue();
+		if(candidato == null) return;
 		Candidato candidatoRem = null;
 		for(Candidato c : candidatiScelti)
 			if(c.toString().equals(candidato)) candidatoRem = c;

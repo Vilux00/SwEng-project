@@ -42,9 +42,6 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 		String codF = this.codF.getText();	
 		String paese = this.paese.getText();
 		String nazione = this.nazione.getText();
-		int anno = comboBoxAnno.getValue();
-		int mese = comboBoxMese.getValue();
-		int giorno = comboBoxGiorno.getValue();
 		String privilegio = choiceBoxPrivilegio.getValue();
 		String sesso = choiceBoxSesso.getValue();
 		if(nome.equals("") || cognome.equals("") || codF.equals("") || paese.equals("") || nazione.equals("")) {
@@ -53,6 +50,9 @@ public class RegistrazioneUtente1Controller  extends DefaultSceneController impl
 			alert.setTitle("Campi mancanti");
 			alert.show();
 		} else {
+			int anno = comboBoxAnno.getValue();
+			int mese = comboBoxMese.getValue();
+			int giorno = comboBoxGiorno.getValue();
 			NuovoUtente n = new NuovoUtente(nome, cognome, codF, LocalDate.of(anno, mese, giorno), paese, nazione, sesso.charAt(0), null, privilegio.charAt(0));
 			if(!n.checkCodFisc()) {
 				Alert alert = new Alert(AlertType.ERROR);
