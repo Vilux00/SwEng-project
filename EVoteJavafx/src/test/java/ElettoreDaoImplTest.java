@@ -28,13 +28,13 @@ public class ElettoreDaoImplTest {
 	@Test
 	public void updatePasswordTrueTest() {
 		ElettoreDao ed = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
-		assertTrue(ed.login(new Elettore("LSBGNI00A01C352Z", "password_5")));
+		assertTrue(ed.updatePassword(new Elettore("LSBGNI00A01C352Z", "password_5")));
 	}
 	
 	@Test
 	public void updatePasswordFalseTest() {
 		ElettoreDao ed = (ElettoreDao) DaoFactory.getInstance().getDao("Elettore");
-		assertFalse(ed.login(new Elettore("test", "test")));
+		assertFalse(ed.updatePassword(new Elettore("test", "test")));
 	}
 	
 	/** Test getInfoByCodF method **/
