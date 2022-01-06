@@ -36,6 +36,13 @@ public class CreaVotazioneController extends DefaultSceneController implements I
 	@FXML private ComboBox<String> comboBoxCandidatiScelti;
 	
 	public void conferma(ActionEvent event) throws IOException{
+		if(comboBoxCandidatiScelti.getItems().size() == 0) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Non hai inserito alcun candidato alla sessione");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		s.setModVincitore(StringUtils.substringBetween(comboBoxVincitore.getValue(), "(", ")"));
 		s.addCandidati(candidatiScelti);
