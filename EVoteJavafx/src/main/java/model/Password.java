@@ -11,7 +11,7 @@ public class Password {
 	}
 	
 	public static boolean checkPassword(String pwd) {
-		if(pwd.length() > 8 && pwd.replaceAll("A-Za-z0-9", "").length() > 0 && pwd.replaceAll("A-Za-z/[^\\p{L}\\d\\s@#]/u", "").length() > 0) return true;
+		if(pwd.length() > 8 && pwd.replaceAll("[A-Za-z0-9]", "").length() > 0 && pwd.replaceAll("[A-Za-z/[^\\p{L}\\d\\s@#]/u]", "").length() > 0) return true;
 		return false;
 	}
 	//
