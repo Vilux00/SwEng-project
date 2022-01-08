@@ -135,9 +135,9 @@ public class SessioneDiVotoDaoImpl implements SessioneDiVotoDao{
     }
 
     /*@
-     * requires: s.getScrutinio.equals("Non avviato");
-     * ensures: s.getScrutinio.equals("Avviato");
-     @*/
+       requires s.getScrutinio.equals("Non avviato");
+       ensures s.getScrutinio.equals("Avviato");
+      @*/
     @Override
     public void avviaScrutinio(SessioneDiVoto s) {
         DbManager dbM = DbManager.getInstance();

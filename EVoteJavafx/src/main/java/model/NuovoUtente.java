@@ -14,9 +14,12 @@ public class NuovoUtente {
     private char privilegio;
     
     /*@
-     * invariant: (sesso == 'M' || sesso == 'F') && (privilegio == 'E' || privilegio == 'S' || privilegio == 'G');
+       invariant (sesso == 'M' || sesso == 'F') && (privilegio == 'E' || privilegio == 'S' || privilegio == 'G');
      @*/
     
+    /*@
+       requires checkCodF(codF) == true;
+      @*/
     public NuovoUtente(String nome, String cognome, String codF, LocalDate dataNascita, String paeseNascita, String nazioneNascita, char sesso, String password, char privilegio) {
 		this.nome = nome;
 		this.cognome = cognome;
@@ -74,7 +77,7 @@ public class NuovoUtente {
 	}
 	
 	/*@
-	 * requires: codF != null && checkCodF(codF) == true; 
+	  requires codF != null && checkCodF(codF) == true; 
 	 @*/
 	public void setCodF(String codF) {
 		this.codF = codF;
