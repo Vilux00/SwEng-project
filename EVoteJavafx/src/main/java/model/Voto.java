@@ -8,9 +8,9 @@ public class Voto {
 	private int []preferenze_candidato;
 	
 	/*@
-	 * invariant: (s.getModalitaVoto.equals("REF") ==> (r_quesito != null && preferenze_partito == null && preferenze_candidato == null)) &&
-	 * 		(!s.getModalitaVoto.equals("REF") ==> (r_quesito == null && preferenze_partito != null && preferenze_candidato != null));	
-	 @*/
+	   invariant(s.getModalitaVoto.equals("REF") ==> (r_quesito != null && preferenze_partito == null && preferenze_candidato == null)) &&
+	  		(!s.getModalitaVoto.equals("REF") ==> (r_quesito == null && preferenze_partito != null && preferenze_candidato != null));	
+	  @*/
 	
 	public Voto(SessioneDiVoto s) {
 		this.s = s;
@@ -45,8 +45,8 @@ public class Voto {
 	}
 
 	/*@
-	 * requires: \forall int i; 0 <= i && i < preferenze_partito.length; !(\exists int j; 0 <= j && j < preferenze_partito.length && i != j; i = j)
-	 @*/
+	   requires \forall int i; 0 <= i && i < preferenze_partito.length; !(\exists int j; 0 <= j && j < preferenze_partito.length && i != j; i = j)
+	  @*/
 	public void setPreferenze_partito(int[] preferenze_partito) {
 		this.preferenze_partito = preferenze_partito;
 	}
@@ -56,8 +56,8 @@ public class Voto {
 	}
 
 	/*@
-	 * requires: \forall int i; 0 <= i && i < preferenze_candidato.length; !(\exists int j; 0 <= j && j < preferenze_candidato.length && i != j; i = j)
-	 @*/
+	   requires: \forall int i; 0 <= i && i < preferenze_candidato.length; !(\exists int j; 0 <= j && j < preferenze_candidato.length && i != j; i = j)
+	  @*/
 	public void setPreferenze_candidato(int[] preferenze_candidato) {
 		this.preferenze_candidato = preferenze_candidato;
 	}

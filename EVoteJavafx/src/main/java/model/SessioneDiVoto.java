@@ -63,9 +63,9 @@ public class SessioneDiVoto implements Iterable<Candidato>{
 	}
 	
 	/*@
-	 * requires: l.isAfter(LocalDateTime.now())
-	 * ensures: this.scadenza = l 
-	 @*/
+	   requires l.isAfter(LocalDateTime.now())
+	   ensures this.scadenza = l 
+	  @*/
 	public void setScadenza(LocalDateTime l) {
 		this.scadenza = l;
 		this.scadenzaAsString = scadenza.toString();

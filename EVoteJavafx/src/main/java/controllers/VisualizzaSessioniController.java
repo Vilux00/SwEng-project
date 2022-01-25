@@ -70,7 +70,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 		}
 		if (s.getScrutinio().equals("Avviato")) {
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText(sd.getRisultati(s));
+			alert.setHeaderText(sd.getRisultati(s) != null ? sd.getRisultati(s) : "Impossibile stabilire un vincitore");
 			alert.setTitle("Vincitore sessione");
 			alert.show();
 		} else {
@@ -82,7 +82,7 @@ public class VisualizzaSessioniController extends DefaultSceneController impleme
 			} else {
 				sd.avviaScrutinio(s);
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText(sd.getRisultati(s));
+				alert.setHeaderText(sd.getRisultati(s) != null ? sd.getRisultati(s) : "Impossibile stabilire un vincitore");
 				alert.setTitle("Vincitore sessione");
 				alert.show();
 				//changeScene(event, "visualizzaSessioniView.fxml", "Visualizza sessioni");
