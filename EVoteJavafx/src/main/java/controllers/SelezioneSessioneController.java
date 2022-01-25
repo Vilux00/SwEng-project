@@ -24,6 +24,7 @@ public class SelezioneSessioneController extends DefaultSceneController implemen
 	public void goToSessione(ActionEvent event) throws IOException{
 		setScenaPrecedente("selezioneSessioneView.fxml", "Selezione sessione");
 		if(Objects.isNull(comboBoxSessione.getValue()) == true) {
+			rimuoviScenaPrecedente();
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Selezionare la sessione");
 			alert.show();

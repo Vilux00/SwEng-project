@@ -48,11 +48,11 @@ public class CreaReferendumController extends DefaultSceneController implements 
 				s.setQuesito(quesito.getText());
 				SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
 				if(se.inserisciSessioneReferendum(s)) {
+					rimuoviScenaPrecedente();
 					alert = new Alert(AlertType.CONFIRMATION);
 					alert.setHeaderText("Sessione di voto referendum creata con successo");
 					alert.setTitle("Sessione creata");
 					alert.show();
-					rimuoviScenaPrecedente(2);
 					changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema");
 				}
 				else {
