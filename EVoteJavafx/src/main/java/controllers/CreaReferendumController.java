@@ -30,7 +30,7 @@ public class CreaReferendumController extends DefaultSceneController implements 
 	@FXML private ComboBox<String> comboBoxVincitore;
 	
 	public void conferma(ActionEvent event) throws IOException{
-		if(quesito.getText() == null || comboBoxVincitore.getValue() == null) {
+		if(quesito.getText().equals("") || comboBoxVincitore.getValue() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Alcuni campi non sono stati compilati");
 			alert.setTitle("Campi non completati");

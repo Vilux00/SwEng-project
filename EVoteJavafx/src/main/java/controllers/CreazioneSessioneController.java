@@ -63,7 +63,7 @@ public class CreazioneSessioneController extends DefaultSceneController implemen
 		Integer yy = comboBoxAnno.getValue();
 		Integer hh = comboBoxOrario.getValue();
 		setScenaPrecedente("creazioneSessioneView.fxml", "Creazione sessione di voto");
-		if(v == null || n == null || gg == null || mm == null || yy == null || hh == null) {
+		if(v == null || n.equals("") || gg == null || mm == null || yy == null || hh == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Campi mancanti");
 			alert.setHeaderText("Alcuni campi non sono stati compilati");

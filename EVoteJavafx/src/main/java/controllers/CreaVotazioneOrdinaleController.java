@@ -35,6 +35,13 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 	private ComboBox<String> comboBoxCandidatiScelti;
 
 	public void conferma(ActionEvent event) throws IOException {
+		if(comboBoxCandidatiScelti.getItems().size() == 0) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Non hai inserito alcun candidato alla sessione");
+			alert.setTitle("Errore");
+			alert.show();
+			return;
+		}
 		SessioneDiVoto s = SessioneDiVotoHolder.getInstance().getSessione();
 		s.addCandidati(candidatiScelti);
 		SessioneDiVotoDao se = (SessioneDiVotoDao) DaoFactory.getInstance().getDao("SessioneDiVoto");
@@ -50,6 +57,10 @@ public class CreaVotazioneOrdinaleController extends DefaultSceneController impl
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				rimuoviScenaPrecedente(2);
+				alert = new Alert(AlertType.CONFIRMATION);
+				alert.setHeaderText("Sessione di voto creata con successo");
+				alert.setTitle("Sessione creata");
+				alert.show();
 				changeScene(event, "profiloGestoreView.fxml", "Profilo gestore di sistema");
 			}
 		}
