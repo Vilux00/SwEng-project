@@ -8,7 +8,11 @@ public class Password {
 	
 	public static String generateRandomPassword() {
 		char[] usableCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*-_=+?")).toCharArray();
-		String randomPassword = RandomStringUtils.random(10, 0, usableCharacters.length-1, false, false, usableCharacters, new SecureRandom());
+		String randomPassword;
+		while(true) {
+			randomPassword = RandomStringUtils.random(10, 0, usableCharacters.length-1, false, false, usableCharacters, new SecureRandom());
+			if (checkPassword(randomPassword)) break;
+		}
 		return randomPassword;
 	}
 	

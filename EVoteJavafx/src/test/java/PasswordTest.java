@@ -28,6 +28,8 @@ public class PasswordTest {
 	
 	@Test
 	public void generateRandomPasswordTest() {
-		assertTrue(Password.checkPassword(Password.generateRandomPassword()));
+		for (int i = 0; i < 50; i++) {
+			assertTrue(Password.checkPassword(Password.generateRandomPassword()));
+		}
 	}
 }
